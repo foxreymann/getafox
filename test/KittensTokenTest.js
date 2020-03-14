@@ -13,12 +13,12 @@ contract("Kittens token", accounts => {
       let owner = await instance.owner();
 
       await instance.mint("#ff00dd", "#ddddff");
-console.log(instance)
-console.log(instance.methods)
 
       let token = await instance.tokenOfOwnerByIndex(owner, 0);
       let gradients = await instance.getGradient(token);
-      assert.deepEqual(gradients, ["#ff00dd", "#ddddff"]);
+
+      assert.equal(gradients.outer, "#ff00dd");
+      assert.equal(gradients.inner, "#ddddff");
     });
   });
 
