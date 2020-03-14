@@ -6,18 +6,20 @@ contract("Kittens token", accounts => {
     let owner = await instance.owner();
     assert.equal(owner, accounts[0]);
   });
-});
-/*
-describe("mint", () => {
-  it("creates token with specified outer and inner colors", async () => {
-    let instance = await GradientToken.deployed();
-    let owner = await instance.owner();
 
-    let token = await instance.mint("#ff00dd", "#ddddff");
+  describe("mint", () => {
+    it("creates token with specified outer and inner colors", async () => {
+      let instance = await KittensToken.deployed();
+      let owner = await instance.owner();
 
-    let tokens = await instance.tokensOf(owner);
-    let gradients = await instance.getGradient(tokens[0]);
-    assert.deepEqual(gradients, ["#ff00dd", "#ddddff"]);
+      await instance.mint("#ff00dd", "#ddddff");
+console.log(instance)
+console.log(instance.methods)
+
+      let token = await instance.tokenOfOwnerByIndex(owner, 0);
+      let gradients = await instance.getGradient(token);
+      assert.deepEqual(gradients, ["#ff00dd", "#ddddff"]);
+    });
   });
+
 });
-*/
