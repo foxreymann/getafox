@@ -1,11 +1,11 @@
-const KittensToken = artifacts.require("KittensToken");
-const KittensAuction = artifacts.require("KittensAuction");
+const Token = artifacts.require("Token");
+const Auction = artifacts.require("Auction");
 
 contract("Auction", accounts => {
   it("Should accept nft on creation", async () => {
-    let nft = await KittensToken.new();
-    let auction = await KittensAuction.new(nft.address);
-    const nftAddr = await auction.KittensTokenContract();
+    let nft = await Token.new();
+    let auction = await Auction.new(nft.address);
+    const nftAddr = await auction.TokenContract();
     assert.equal(nftAddr, nft.address);
   });
 
@@ -13,8 +13,8 @@ contract("Auction", accounts => {
     let nft, auctionContract, token;
 
     before(async () => {
-      nft = await KittensToken.new();
-      auctionContract = await KittensAuction.new(nft.address);
+      nft = await Token.new();
+      auctionContract = await Auction.new(nft.address);
 
       await nft.mint("#ff00dd", "#ddddff");
       token = await nft.tokenOfOwnerByIndex(accounts[0], 0);

@@ -1,6 +1,6 @@
 const ComplexStorage = artifacts.require("ComplexStorage");
-const KittensToken = artifacts.require("KittensToken");
-const KittensAuction = artifacts.require("KittensAuction");
+const Token = artifacts.require("Token");
+const Auction = artifacts.require("Auction");
 
 const util = require("util");
 const fs = require("fs");
@@ -9,17 +9,17 @@ const writeFile = util.promisify(fs.writeFile);
 
 module.exports = async function(deployer) {
   await deployer.deploy(ComplexStorage);
-  const kittensToken = await deployer.deploy(KittensToken);
+  const token = await deployer.deploy(Token);
 console.log('DEPLOYED:')
-console.log(kittensToken)
-  const kittensAuction = await deployer.deploy(
-    KittensAuction,
-    kittensToken.address
+console.log(Token)
+  const auction = await deployer.deploy(
+    Auction,
+    token.address
   );
 
   const addresses = {
-    tokenAddress: kittensToken.address,
-    auctionAddress: kittensAuction.address
+    tokenAddress: token.address,
+    auctionAddress: auction.address
   };
 
   await writeFile(
