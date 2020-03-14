@@ -47,5 +47,14 @@ contract KittensAuction is IERC721Receiver {
     KittensTokenContract.safeTransferFrom(address(this), msg.sender, _tokenId);
   }
 
+  function cancel( uint256 _tokenId ) public {
+    Auction memory auction = tokenIdToAuction[_tokenId];
+    require(auction.seller == msg.sender);
+
+    delete tokenIdToAuction[_tokenId];
+
+    KittensTokenContract.safeTransferFrom(address(this), msg.sender, _tokenId);
+  }
+
 
 }
