@@ -8,7 +8,7 @@ contract KittensAuction is IERC721Receiver {
   ERC721Full public KittensTokenContract;
 
   struct Auction {
-    address seller;
+    address payable seller;
     uint128 price;
   }
 
@@ -33,6 +33,19 @@ contract KittensAuction is IERC721Receiver {
     //return ERC721_RECEIVED;
   }
 
+  function bid( uint256 _tokenId ) public payable {
+    Auction memory auction = tokenIdToAuction[_tokenId];
+    require(auction.seller != address(0));
+    require(msg.value >= auction.price);
+
+    address payable seller = auction.seller;
+    uint128 price = auction.price;
+
+    delete tokenIdToAuction[_tokenId];
+
+    seller.transfer(price);
+    KittensTokenContract.safeTransferFrom(address(this), msg.sender, _tokenId);
+  }
 
 
 }
