@@ -1,4 +1,5 @@
 const KittensToken = artifacts.require("KittensToken");
+const truffleAssert = require('truffle-assertions');
 
 contract("Kittens token", accounts => {
   it("Should make first account an owner", async () => {
@@ -19,6 +20,14 @@ contract("Kittens token", accounts => {
 
       assert.equal(gradients.outer, "#ff00dd");
       assert.equal(gradients.inner, "#ddddff");
+    });
+
+    it("allows to mint only to owner", async () => {
+      let instance = await KittensToken.deployed();
+      let other = accounts[1];
+
+      await instance.transferOwnership(other);
+      await truffleAssert.reverts(instance.mint("#ff00dd", "#ddddff"));
     });
   });
 
