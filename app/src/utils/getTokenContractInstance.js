@@ -1,4 +1,4 @@
-import contract from "truffle-contract";
+import contract from "@truffle/contract";
 import getProvider from "utils/getProvider";
 import TokenArtifact from "contracts/Token.json";
 import addresses from "../addresses.json";
