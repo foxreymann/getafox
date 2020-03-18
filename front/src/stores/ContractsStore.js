@@ -2,18 +2,18 @@ import { observable, decorate, action } from "mobx";
 import getGradientContractInstance from "utils/getGradientContractInstance";
 
 class ContractsStore {
-  gradientTokenInstance = null;
+  tokenInstance = null;
 
   async setup() {
-    this.setGradientTokenInstance(await getGradientContractInstance());
+    this.setTokenInstance(await getGradientContractInstance());
   }
 
-  setGradientTokenInstance(gradientTokenInstance) {
-    this.gradientTokenInstance = gradientTokenInstance;
+  setTokenInstance(tokenInstance) {
+    this.tokenInstance = tokenInstance;
   }
 }
 
 export default decorate(ContractsStore, {
-  gradientTokenInstance: observable,
-  setGradientTokenInstance: action
+  tokenInstance: observable,
+  setTokenInstance: action
 });

@@ -8,7 +8,7 @@ import TokenView from "./TokenView";
 import "./TokensList.css";
 
 const TokensList = ({
-  gradientTokenStore: { tokens },
+  tokenStore: { tokens },
   modalStore: { showModal }
 }) => {
   return (
@@ -31,7 +31,7 @@ const TokensList = ({
 };
 
 TokensList.propTypes = {
-  gradientTokenStore: PropTypes.shape({
+  tokenStore: PropTypes.shape({
     tokens: MobxPropTypes.arrayOrObservableArrayOf(PropTypes.object)
   }),
   modalStore: PropTypes.shape({
@@ -39,4 +39,4 @@ TokensList.propTypes = {
   })
 };
 
-export default inject("gradientTokenStore", "modalStore")(observer(TokensList));
+export default inject("tokenStore", "modalStore")(observer(TokensList));

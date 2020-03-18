@@ -6,7 +6,7 @@ import TokensList from "./TokensList";
 import { inject, observer } from "mobx-react";
 import "./TokensPage.css";
 
-const TokensPage = ({ gradientTokenStore: { mintToken, isLoading } }) => {
+const TokensPage = ({ tokenStore: { mintToken, isLoading } }) => {
   return (
     <div className="TokensPage">
       <h1>Gradient Tokens</h1>
@@ -21,9 +21,9 @@ const TokensPage = ({ gradientTokenStore: { mintToken, isLoading } }) => {
 };
 
 TokensPage.propTypes = {
-  gradientTokenStore: PropTypes.shape({
+  tokenStore: PropTypes.shape({
     mintToken: PropTypes.func
   }).isRequired
 };
 
-export default inject("gradientTokenStore")(observer(TokensPage));
+export default inject("tokenStore")(observer(TokensPage));

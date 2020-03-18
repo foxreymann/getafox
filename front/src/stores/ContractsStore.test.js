@@ -9,10 +9,10 @@ jest.mock("utils/getGradientContractInstance", () => {
 
 describe.only("ContractsStore", () => {
   describe("setup", () => {
-    it("initializes gradientToken contract instance", async () => {
+    it("initializes token contract instance", async () => {
       const contractsStore = new ContractsStore();
       await contractsStore.setup();
-      expect(contractsStore.gradientTokenInstance).toBeTruthy();
+      expect(contractsStore.tokenInstance).toBeTruthy();
     });
   });
 });

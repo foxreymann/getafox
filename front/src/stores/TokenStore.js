@@ -1,7 +1,7 @@
 import { observable, action, decorate, when } from "mobx";
 import randomColor from "utils/randomColor";
 
-class GradientTokenStore {
+class TokenStore {
   tokens = [];
   owner = null;
   isLoading = true;
@@ -9,22 +9,22 @@ class GradientTokenStore {
 
   constructor(contractsStore) {
     this.contractsStore = contractsStore;
-    when(() => this.contractsStore.gradientTokenInstance, this.setup);
+    when(() => this.contractsStore.tokenInstance, this.setup);
   }
 
   setup = async () => {
-    const { gradientTokenInstance } = this.contractsStore;
-    const owner = await gradientTokenInstance.owner();
+    const { tokenInstance } = this.contractsStore;
+    const owner = await tokenInstance.owner();
     this.setOwner(owner);
     this.fetchTokens();
   };
 
   fetchTokens = async () => {
-    const { gradientTokenInstance } = this.contractsStore;
-    const tokens = await gradientTokenInstance.tokensOf(this.owner);
+    const { tokenInstance } = this.contractsStore;
+    const tokens = await tokenInstance.tokensOf(this.owner);
     const gradients = await Promise.all(
       tokens.map(async token => {
-        return gradientTokenInstance.getGradient(token);
+        return tokenInstance.getGradient(token);
       })
     );
     this.setIsLoading(false);
@@ -44,9 +44,9 @@ class GradientTokenStore {
   }
 
   mintToken = async () => {
-    const { gradientTokenInstance } = this.contractsStore;
+    const { tokenInstance } = this.contractsStore;
     const gradient = [randomColor(), randomColor()];
-    await gradientTokenInstance.mint(gradient[0], gradient[1], {
+    await tokenInstance.mint(gradient[0], gradient[1], {
       from: this.owner,
       gas: 170000
     });
@@ -70,7 +70,7 @@ class GradientTokenStore {
   }
 }
 
-export default decorate(GradientTokenStore, {
+export default decorate(TokenStore, {
   owner: observable,
   tokens: observable,
   isLoading: observable,

@@ -1,5 +1,5 @@
 import ContractsStore from "./ContractsStore";
-import GradientTokenStore from "./GradientTokenStore";
+import TokenStore from "./TokenStore";
 import ModalStore from "./ModalStore";
 
 const modalStore = new ModalStore();
@@ -7,10 +7,10 @@ const modalStore = new ModalStore();
 const contractsStore = new ContractsStore();
 contractsStore.setup();
 
-const gradientTokenStore = new GradientTokenStore(contractsStore);
+const tokenStore = new TokenStore(contractsStore);
 
 export default {
   modalStore,
   contractsStore,
-  gradientTokenStore
+  tokenStore
 };
