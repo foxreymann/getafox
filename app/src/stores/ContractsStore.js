@@ -1,5 +1,5 @@
-mport { observable, decorate, action } from "mobx";
-import getContractInstance from "utils/getTokenContractInstance";
+import { observable, decorate, action } from "mobx";
+import getTokenContractInstance from "utils/getTokenContractInstance";
 
 class ContractsStore {
   tokenInstance = null;
