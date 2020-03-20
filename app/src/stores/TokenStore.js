@@ -30,7 +30,7 @@ class TokenStore {
       })
     );
 */
-    await tokenInstance.mint('#a00', '#b33', { from: this.owner })
+    await tokenInstance.mint('#f00', '#00f', { from: this.owner })
 
     const noOfTokens = (await tokenInstance.balanceOf(this.owner)).valueOf().words[0]
 
@@ -42,6 +42,7 @@ class TokenStore {
     )
 
     this.setIsLoading(false);
+
     if (!gradients.length) {
       return;
     }
@@ -50,6 +51,7 @@ class TokenStore {
 
   indexedTokens(gradients) {
     return gradients.map(gradient => {
+      gradient = [ gradient.outer, gradient.inner ]
       return {
         gradient,
         index: this.tokenIndex++
