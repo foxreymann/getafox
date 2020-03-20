@@ -10,8 +10,7 @@ const writeFile = util.promisify(fs.writeFile);
 module.exports = async function(deployer) {
   await deployer.deploy(ComplexStorage);
   const token = await deployer.deploy(Token);
-console.log('DEPLOYED:')
-console.log(Token)
+
   const auction = await deployer.deploy(
     Auction,
     token.address

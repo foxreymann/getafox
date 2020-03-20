@@ -7,6 +7,8 @@ const { tokenAddress } = addresses;
 
 export default async function getGradientContractInstance() {
   const tokenContract = contract(TokenArtifact);
+console.log('PROV')
+console.log(getProvider())
   tokenContract.setProvider(getProvider());
   const tokenInstance = await tokenContract.at(tokenAddress);
   return tokenInstance;
