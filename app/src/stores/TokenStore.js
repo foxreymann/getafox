@@ -29,8 +29,8 @@ class TokenStore {
         return tokenInstance.getGradient(token);
       })
     );
-*/
     await tokenInstance.mint('#f00', '#00f', { from: this.owner })
+*/
 
     const noOfTokens = (await tokenInstance.balanceOf(this.owner)).valueOf().words[0]
 
@@ -64,7 +64,7 @@ class TokenStore {
     const gradient = [randomColor(), randomColor()];
     await tokenInstance.mint(gradient[0], gradient[1], {
       from: this.owner,
-      gas: 170000
+      gas: 300000
     });
     this.appendToken({ gradient, index: this.tokenIndex++ });
   };
