@@ -33,9 +33,13 @@ class TokenStore {
     await tokenInstance.mint('#a00', '#b33', { from: this.owner })
 
     const noOfTokens = (await tokenInstance.balanceOf(this.owner)).valueOf().words[0]
-console.log(noOfTokens)
 
-    const gradients = []
+    const gradients = await Promise.all(
+      [...Array(noOfTokens).keys()].map(async idx => {
+        const token = await tokenInstance.tokenOfOwnerByIndex(this.owner, idx)
+        return tokenInstance.getGradient(token);
+      })
+    )
 
     this.setIsLoading(false);
     if (!gradients.length) {
