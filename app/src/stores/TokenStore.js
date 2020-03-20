@@ -21,12 +21,22 @@ class TokenStore {
 
   fetchTokens = async () => {
     const { tokenInstance } = this.contractsStore;
+
+/*
     const tokens = await tokenInstance.tokensOf(this.owner);
     const gradients = await Promise.all(
       tokens.map(async token => {
         return tokenInstance.getGradient(token);
       })
     );
+*/
+    await tokenInstance.mint('#a00', '#b33', { from: this.owner })
+
+    const noOfTokens = (await tokenInstance.balanceOf(this.owner)).valueOf().words[0]
+console.log(noOfTokens)
+
+    const gradients = []
+
     this.setIsLoading(false);
     if (!gradients.length) {
       return;
