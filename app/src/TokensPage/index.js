@@ -12,7 +12,7 @@ const TokensPage = ({ tokenStore: { mintToken, isLoading, owner, user } }) => {
       <h1>{owner}</h1>
       <h1>{user}</h1>
       <h1>Gradient Tokens</h1>
-      <Button onClick={mintToken} label="Mint token" />
+      { owner === user && <Button onClick={mintToken} label="Mint token" /> }
       <div className="TokensPage-tokens">
         <WithLoader isLoading={isLoading}>
           <TokensList />
