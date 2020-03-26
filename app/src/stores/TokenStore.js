@@ -53,7 +53,10 @@ class TokenStore {
     const gradients = await Promise.all(
       [...Array(noOfTokens).keys()].map(async idx => {
         const token = await tokenInstance.tokenOfOwnerByIndex(this.user, idx)
-        return tokenInstance.getGradient(token);
+        return {
+          gradient: await tokenInstance.getGradient(token),
+          tokenId: token
+        }
       })
     )
 
@@ -67,11 +70,14 @@ class TokenStore {
 
   indexedTokens(gradients) {
     return gradients.map(gradient => {
-      gradient = [ gradient.outer, gradient.inner ]
+console.log(gradient)
+      const tokenId = gradient.tokenId
+      gradient = [ gradient.gradient.outer, gradient.gradient.inner ]
       return {
         gradient,
+        tokenId,
         owner: this.user,
-        index: this.tokenIndex++
+        index: this.tokenIndex++ // just for React
       };
     });
   }
@@ -85,6 +91,10 @@ class TokenStore {
     });
     this.appendToken({ gradient, index: this.tokenIndex++ });
   };
+
+  putOnAcution = async () => {
+
+  }
 
   setTokens(tokens) {
     this.tokens.replace(tokens);
