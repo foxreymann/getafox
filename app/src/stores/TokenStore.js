@@ -28,7 +28,7 @@ class TokenStore {
       const web3 = new Web3(window.ethereum)
       const defaultAccount = account[0]
       web3.eth.defaultAccount = defaultAccount
-      this.user = defaultAccount
+      this.user = web3.utils.toChecksumAddress(defaultAccount)
     } catch (err) {
       console.error(err)
     }

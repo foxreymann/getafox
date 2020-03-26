@@ -6,9 +6,11 @@ import TokensList from "./TokensList";
 import { inject, observer } from "mobx-react";
 import "./TokensPage.css";
 
-const TokensPage = ({ tokenStore: { mintToken, isLoading } }) => {
+const TokensPage = ({ tokenStore: { mintToken, isLoading, owner, user } }) => {
   return (
     <div className="TokensPage">
+      <h1>{owner}</h1>
+      <h1>{user}</h1>
       <h1>Gradient Tokens</h1>
       <Button onClick={mintToken} label="Mint token" />
       <div className="TokensPage-tokens">
