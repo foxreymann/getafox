@@ -8,7 +8,7 @@ import TokenView from "./TokenView";
 import "./TokensList.css";
 
 const TokensList = ({
-  tokenStore: { tokens },
+  tokenStore: { tokens, user },
   modalStore: { showModal }
 }) => {
   return (
@@ -19,7 +19,7 @@ const TokensList = ({
             <TokenItem
               key={token.index}
               token={token.gradient}
-              onClick={() => showModal(<TokenView token={token.gradient} />)}
+              onClick={() => showModal(<TokenView gradient={token.gradient} user={user} owner={token.owner} />)}
             />
           ))}
         </div>
