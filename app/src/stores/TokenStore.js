@@ -1,15 +1,18 @@
 import { observable, action, decorate, when } from "mobx";
 import randomColor from "utils/randomColor";
+import Web3 from "web3";
 
 class TokenStore {
   tokens = [];
   owner = null;
+  user = null
   isLoading = true;
   tokenIndex = 0;
 
   constructor(contractsStore) {
     this.contractsStore = contractsStore;
     when(() => this.contractsStore.tokenInstance, this.setup);
+    this.userSetup()
   }
 
   setup = async () => {
@@ -18,6 +21,19 @@ class TokenStore {
     this.setOwner(owner);
     this.fetchTokens();
   };
+
+  async userSetup() {
+    try {
+      const account = await window.ethereum.enable()
+      const web3 = new Web3(window.ethereum)
+      const defaultAccount = account[0]
+      web3.eth.defaultAccount = defaultAccount
+      this.user = defaultAccount
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
 
   fetchTokens = async () => {
     const { tokenInstance } = this.contractsStore;
@@ -90,6 +106,7 @@ export default decorate(TokenStore, {
   owner: observable,
   tokens: observable,
   isLoading: observable,
+  user: observable,
   setOwner: action,
   setTokens: action,
   setIsLoading: action,
