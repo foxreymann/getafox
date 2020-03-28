@@ -92,7 +92,7 @@ console.log(gradient)
     this.appendToken({ gradient, index: this.tokenIndex++ });
   };
 
-  putOnAcution = async ({ tokenId, price }) => {
+  putOnAuction = async ({ tokenId, price }) => {
 console.log(tokenId, price)
   }
 
