@@ -19,7 +19,9 @@ const TokensList = ({
             <TokenItem
               key={token.index}
               token={token.gradient}
-              onClick={() => showModal(<TokenView gradient={token.gradient} user={user} owner={token.owner} />)}
+              onClick={() => showModal(<TokenView
+                gradient={token.gradient} user={user} owner={token.owner} tokenId={token.tokenId}/>
+              )}
             />
           ))}
         </div>

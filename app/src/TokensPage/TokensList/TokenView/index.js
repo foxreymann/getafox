@@ -4,7 +4,7 @@ import TokenImage from "components/TokenImage";
 import Button from "components/Button";
 import "./TokenView.css";
 
-const TokenView = ({ gradient, user, owner }) => (
+const TokenView = ({ gradient, user, owner, tokenId }) => (
   <div>
     <div className="TokenView-image_wrapper">
       <TokenImage size={200} outer={gradient[0]} inner={gradient[1]} />
