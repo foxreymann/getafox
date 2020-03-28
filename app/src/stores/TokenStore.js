@@ -93,8 +93,14 @@ console.log(gradient)
   };
 
   putOnAuction = async ({ tokenId, price }) => {
-    const { auctionInstance } = this.contractsStore
-    await auctionInstance.createAuction(tokenId, price, {
+    const { auctionInstance, tokenInstance } = this.contractsStore
+
+    await tokenInstance.approve(auctionInstance.address, tokenId.toNumber(), {
+      from: this.user
+    });
+
+    // wait for event
+    await auctionInstance.createAuction(tokenId.toNumber(), price, {
       from: this.user
     });
     // make sure token is removed from the list
