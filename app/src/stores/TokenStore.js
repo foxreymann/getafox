@@ -89,7 +89,8 @@ console.log(gradient)
       from: this.owner,
       gas: 300000
     });
-    this.appendToken({ gradient, index: this.tokenIndex++ });
+    // wait for minted event
+    this.fetchTokens();
   };
 
   putOnAuction = async ({ tokenId, price }) => {
@@ -99,19 +100,34 @@ console.log(gradient)
       from: this.user
     });
 
+console.log(tokenInstance)
+
+tokenInstance.contract.events.Approval({
+    filter: {}
+}, function(error, event){ console.log(event); })
+.on("connected", function(subscriptionId){
+    console.log(subscriptionId);
+})
+.on('data', function(event){
+    console.log(event);
+})
+.on('changed', function(event){
+    console.log(event);
+})
+.on('error', function(error, receipt) {
+    console.log(error);
+});
+
     // wait for event
     await auctionInstance.createAuction(tokenId.toNumber(), price, {
       from: this.user
     });
-    // make sure token is removed from the list
+
+    this.fetchTokens();
   }
 
   setTokens(tokens) {
     this.tokens.replace(tokens);
-  }
-
-  appendToken(token) {
-    this.tokens.push(token);
   }
 
   setOwner(owner) {
@@ -130,6 +146,5 @@ export default decorate(TokenStore, {
   user: observable,
   setOwner: action,
   setTokens: action,
-  setIsLoading: action,
-  appendToken: action
+  setIsLoading: action
 });
