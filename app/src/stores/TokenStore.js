@@ -70,7 +70,6 @@ class TokenStore {
 
   indexedTokens(gradients) {
     return gradients.map(gradient => {
-console.log(gradient)
       const tokenId = gradient.tokenId
       gradient = [ gradient.gradient.outer, gradient.gradient.inner ]
       return {
@@ -100,28 +99,32 @@ console.log(gradient)
       from: this.user
     });
 
-console.log(tokenInstance)
 
-tokenInstance.contract.events.Approval({
-    filter: {}
-}, function(error, event){ console.log(event); })
-.on("connected", function(subscriptionId){
-    console.log(subscriptionId);
-})
-.on('data', function(event){
-    console.log(event);
-})
-.on('changed', function(event){
-    console.log(event);
-})
-.on('error', function(error, receipt) {
-    console.log(error);
-});
-
+console.log(auctionInstance.address)
+    // https://web3js.readthedocs.io/en/v1.2.0/web3-eth-contract.html
+    tokenInstance.contract.events.Approval({
+//        filter: {
+//          owner: this.user,
+//          tokenId: tokenId.toString()
+//          approved: auctionInstance.address
+//        }
+    }, function(error, event){ console.log(event); })
+    .on("connected", function(subscriptionId){
+        console.log(`subscribed to Approval event: ${subscriptionId}`);
+    })
+    .on('data', function(event){
+        console.log(event);
+    })
+    .on('error', function(error, receipt) {
+        console.log(error);
+        console.log(receipt)
+    });
+/*
     // wait for event
     await auctionInstance.createAuction(tokenId.toNumber(), price, {
       from: this.user
     });
+*/
 
     this.fetchTokens();
   }
