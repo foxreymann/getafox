@@ -9,7 +9,6 @@ class ContractsStore {
   async setup() {
     this.setTokenInstance(await getTokenContractInstance());
     this.setAuctionInstance(await getAuctionContractInstance());
-console.log(this.auctionInstance)
   }
 
   setTokenInstance(tokenInstance) {
