@@ -94,41 +94,31 @@ class TokenStore {
   };
 
   putOnAuction = async ({ tokenId, price }) => {
-    const { auctionInstance, tokenInstance } = this.contractsStore
-    const subscription = this.web3.eth.subscribe('logs', {}, (error, result) => {})
-    let transferApproved = false
+    try {
+      const { auctionInstance, tokenInstance } = this.contractsStore
+      const subscription = this.web3.eth.subscribe('logs', {}, (error, result) => {})
+      let transferApproved = false
 
-    await tokenInstance.approve(auctionInstance.address, tokenId.toNumber(), {
-      from: this.user
-    });
+      await tokenInstance.approve(auctionInstance.address, tokenId.toNumber(), {
+        from: this.user
+      });
 
-    // https://web3js.readthedocs.io/en/v1.2.0/web3-eth-contract.html
-    tokenInstance.contract.events.Approval({
-      filter: {
-        owner: this.user,
-        tokenId: tokenId.toString(),
-        approved: auctionInstance.address
-      }
-    }, (error, event) => {})
-    .on('data', async event => {
-      console.log(event);
-      transferApproved = true
-    })
-    .on('error', function(error, receipt) {
-        console.log(error);
-        console.log(receipt)
-    });
+      let approvedCheckInterval = setInterval(async () => {
+        console.log(approvedCheckInterval)
 
-    let approvedCheckInterval = setInterval(async () => {
-console.log(approvedCheckInterval)
-      if(transferApproved) {
-        clearInterval(approvedCheckInterval)
-        await auctionInstance.createAuction(tokenId.toNumber(), price, {
-          from: this.user
-        });
-        await this.fetchTokens();
-      }
-    }, 2000)
+        let approvedFor = await tokenInstance.getApproved(tokenId.toNumber())
+
+        if(approvedFor === auctionInstance.address) {
+          clearInterval(approvedCheckInterval)
+          await auctionInstance.createAuction(tokenId.toNumber(), price, {
+            from: this.user
+          });
+          await this.fetchTokens();
+        }
+      }, 2000)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   setTokens(tokens) {
