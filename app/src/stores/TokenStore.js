@@ -9,6 +9,8 @@ class TokenStore {
   isLoading = true;
   tokenIndex = 0;
   web3 = null;
+  tokensForSale = [];
+  tokensForSaleLoading = true;
 
   constructor(contractsStore) {
     this.contractsStore = contractsStore;
@@ -39,16 +41,6 @@ class TokenStore {
   fetchTokens = async () => {
     const { tokenInstance } = this.contractsStore;
 
-/*
-    const tokens = await tokenInstance.tokensOf(this.owner);
-    const gradients = await Promise.all(
-      tokens.map(async token => {
-        return tokenInstance.getGradient(token);
-      })
-    );
-    await tokenInstance.mint('#f00', '#00f', { from: this.owner })
-*/
-
     const noOfTokens = (await tokenInstance.balanceOf(this.user)).valueOf().words[0]
 
     const gradients = await Promise.all(
@@ -68,6 +60,11 @@ class TokenStore {
     }
     this.setTokens(this.indexedTokens(gradients));
   };
+
+  fetchTokensForSale = async () => {
+    const { tokenInstance } = this.contractsStore;
+
+  }
 
   indexedTokens(gradients) {
     return gradients.map(gradient => {

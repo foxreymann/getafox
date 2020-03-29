@@ -14,6 +14,8 @@ contract Auction is IERC721Receiver {
 
   mapping (uint256 => Auction) public tokenIdToAuction;
 
+  uint256[] public tokenIds;
+
   constructor(address _nftAddress) public {
     TokenContract = ERC721Full(_nftAddress);
   }
@@ -25,6 +27,7 @@ contract Auction is IERC721Receiver {
        price: uint128(_price)
     });
     tokenIdToAuction[_tokenId] = auction;
+    tokenIds.push(_tokenId);
   }
 
   function onERC721Received(address, address, uint256, bytes memory) public override returns (bytes4) {
@@ -43,6 +46,17 @@ contract Auction is IERC721Receiver {
 
     delete tokenIdToAuction[_tokenId];
 
+    for(uint256 i = 0; i < tokenIds.length; i++) {
+      if(_tokenId == tokenIds[i]) {
+        if(tokenIds.length == 1) {
+          delete tokenIds[i];
+        } else {
+          tokenIds[i] = tokenIds[tokenIds.length - 1];
+          tokenIds.pop();
+        }
+      }
+    }
+
     seller.transfer(price);
     TokenContract.safeTransferFrom(address(this), msg.sender, _tokenId);
   }
@@ -56,5 +70,8 @@ contract Auction is IERC721Receiver {
     TokenContract.safeTransferFrom(address(this), msg.sender, _tokenId);
   }
 
+  function getTokenIds() public view returns (uint256[] memory) {
+    return tokenIds;
+  }
 
 }

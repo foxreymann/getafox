@@ -34,4 +34,29 @@ contract("Auction", accounts => {
       assert.equal(auction[1].toNumber(), 100);
     });
   });
+
+  describe("should return tokens for sale", () => {
+    before(async () => {
+      nft = await Token.new();
+      auctionContract = await Auction.new(nft.address);
+
+      await nft.mint("#aaa", "#bbb");
+      token = await nft.tokenOfOwnerByIndex(accounts[0], 0);
+      await nft.approve(auctionContract.address, token);
+      await auctionContract.createAuction(token, 200);
+
+      await nft.mint("#eaa", "#fox");
+      token = await nft.tokenOfOwnerByIndex(accounts[0], 0);
+      await nft.approve(auctionContract.address, token);
+      await auctionContract.createAuction(token, 300);
+    });
+
+    it("Should return all tokens", async () => {
+      const tokensForSale = await auctionContract.getTokenIds()
+      assert.equal(tokensForSale.length, 2)
+      assert.equal(tokensForSale[0], 0)
+      assert.equal(tokensForSale[1], 1)
+    });
+
+  });
 });
