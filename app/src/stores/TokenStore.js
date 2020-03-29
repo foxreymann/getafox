@@ -90,51 +90,45 @@ class TokenStore {
       gas: 300000
     });
     // wait for minted event
-    this.fetchTokens();
+    await this.fetchTokens();
   };
 
   putOnAuction = async ({ tokenId, price }) => {
     const { auctionInstance, tokenInstance } = this.contractsStore
+    const subscription = this.web3.eth.subscribe('logs', {}, (error, result) => {})
+    let transferApproved = false
 
     await tokenInstance.approve(auctionInstance.address, tokenId.toNumber(), {
       from: this.user
     });
 
-    let subscription = this.web3.eth.subscribe('logs', {}, function(error, result){
-    //    if (!error)
-    //        console.log(result);
-    })
-
-
-console.log(auctionInstance.address)
     // https://web3js.readthedocs.io/en/v1.2.0/web3-eth-contract.html
     tokenInstance.contract.events.Approval({
-        filter: {
-          owner: this.user,
-          tokenId: tokenId.toString(),
-          approved: auctionInstance.address
-          },
-          fromBlock: 0
-    }, function(error, event){ })
-    .on("connected", function(subscriptionId){
-        console.log(`subscribed to Approval event: ${subscriptionId}`);
-    })
+      filter: {
+        owner: this.user,
+        tokenId: tokenId.toString(),
+        approved: auctionInstance.address
+      }
+    }, (error, event) => {})
     .on('data', async event => {
       console.log(event);
-console.log(tokenId.toNumber())
-console.log(price)
-console.log(this.user)
-console.log(auctionInstance)
-      await auctionInstance.createAuction(tokenId.toNumber(), price, {
-        from: this.user
-      });
+      transferApproved = true
     })
     .on('error', function(error, receipt) {
         console.log(error);
         console.log(receipt)
     });
 
-//    this.fetchTokens();
+    let approvedCheckInterval = setInterval(async () => {
+console.log(approvedCheckInterval)
+      if(transferApproved) {
+        clearInterval(approvedCheckInterval)
+        await auctionInstance.createAuction(tokenId.toNumber(), price, {
+          from: this.user
+        });
+        await this.fetchTokens();
+      }
+    }, 2000)
   }
 
   setTokens(tokens) {
