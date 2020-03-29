@@ -104,9 +104,6 @@ class TokenStore {
     //    if (!error)
     //        console.log(result);
     })
-    .on("data", function(transaction){
-    //    console.log(transaction);
-    });
 
 
 console.log(auctionInstance.address)
@@ -124,6 +121,10 @@ console.log(auctionInstance.address)
     })
     .on('data', async event => {
       console.log(event);
+console.log(tokenId.toNumber())
+console.log(price)
+console.log(this.user)
+console.log(auctionInstance)
       await auctionInstance.createAuction(tokenId.toNumber(), price, {
         from: this.user
       });
@@ -133,7 +134,7 @@ console.log(auctionInstance.address)
         console.log(receipt)
     });
 
-    this.fetchTokens();
+//    this.fetchTokens();
   }
 
   setTokens(tokens) {
