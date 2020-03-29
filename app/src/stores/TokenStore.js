@@ -8,10 +8,12 @@ class TokenStore {
   user = null
   isLoading = true;
   tokenIndex = 0;
+  web3 = null;
 
   constructor(contractsStore) {
     this.contractsStore = contractsStore;
     when(() => this.contractsStore.tokenInstance, this.setup);
+    this.web3 = new Web3(window.ethereum)
     this.userSetup()
   }
 
@@ -25,10 +27,9 @@ class TokenStore {
   async userSetup() {
     try {
       const account = await window.ethereum.enable()
-      const web3 = new Web3(window.ethereum)
       const defaultAccount = account[0]
-      web3.eth.defaultAccount = defaultAccount
-      this.user = web3.utils.toChecksumAddress(defaultAccount)
+      this.web3.eth.defaultAccount = defaultAccount
+      this.user = this.web3.utils.toChecksumAddress(defaultAccount)
     } catch (err) {
       console.error(err)
     }
@@ -99,32 +100,38 @@ class TokenStore {
       from: this.user
     });
 
+    let subscription = this.web3.eth.subscribe('logs', {}, function(error, result){
+    //    if (!error)
+    //        console.log(result);
+    })
+    .on("data", function(transaction){
+    //    console.log(transaction);
+    });
+
 
 console.log(auctionInstance.address)
     // https://web3js.readthedocs.io/en/v1.2.0/web3-eth-contract.html
     tokenInstance.contract.events.Approval({
-//        filter: {
-//          owner: this.user,
-//          tokenId: tokenId.toString()
-//          approved: auctionInstance.address
-//        }
-    }, function(error, event){ console.log(event); })
+        filter: {
+          owner: this.user,
+          tokenId: tokenId.toString(),
+          approved: auctionInstance.address
+          },
+          fromBlock: 0
+    }, function(error, event){ })
     .on("connected", function(subscriptionId){
         console.log(`subscribed to Approval event: ${subscriptionId}`);
     })
-    .on('data', function(event){
-        console.log(event);
+    .on('data', async event => {
+      console.log(event);
+      await auctionInstance.createAuction(tokenId.toNumber(), price, {
+        from: this.user
+      });
     })
     .on('error', function(error, receipt) {
         console.log(error);
         console.log(receipt)
     });
-/*
-    // wait for event
-    await auctionInstance.createAuction(tokenId.toNumber(), price, {
-      from: this.user
-    });
-*/
 
     this.fetchTokens();
   }
