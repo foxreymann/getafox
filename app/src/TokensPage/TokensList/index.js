@@ -8,9 +8,15 @@ import TokenView from "./TokenView";
 import "./TokensList.css";
 
 const TokensList = ({
-  tokenStore: { tokens, user },
-  modalStore: { showModal }
+  tokenStore: { tokens, user, tokensForSale },
+  modalStore: { showModal },
+  display
 }) => {
+console.log(tokensForSale)
+console.log(display)
+  if ( display === 'forSale' ) {
+    tokens = tokensForSale
+  }
   return (
     <Fragment>
       {tokens.length ? (

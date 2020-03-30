@@ -6,7 +6,7 @@ import TokensList from "./TokensList";
 import { inject, observer } from "mobx-react";
 import "./TokensPage.css";
 
-const TokensPage = ({ tokenStore: { mintToken, isLoading, owner, user } }) => {
+const TokensPage = ({ tokenStore: { mintToken, isLoading, owner, user, tokensForSaleIsLoading } }) => {
   return (
     <div className="TokensPage">
       <div>current user: {user}, owner: {owner}</div>
@@ -14,7 +14,12 @@ const TokensPage = ({ tokenStore: { mintToken, isLoading, owner, user } }) => {
       { owner === user && <Button onClick={mintToken} label="Mint token" /> }
       <div className="TokensPage-tokens">
         <WithLoader isLoading={isLoading}>
-          <TokensList />
+          <TokensList display="user" />
+        </WithLoader>
+      </div>
+      <div className="TokensPage-tokens">
+        <WithLoader isLoading={tokensForSaleIsLoading}>
+          <TokensList display="forSale" />
         </WithLoader>
       </div>
     </div>

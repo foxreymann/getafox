@@ -11,6 +11,7 @@ class TokenStore {
   web3 = null;
   tokensForSale = [];
   tokensForSaleLoading = true;
+  tokenForSaleIndex = 0;
 
   constructor(contractsStore) {
     this.contractsStore = contractsStore;
@@ -85,7 +86,23 @@ class TokenStore {
 
     this.tokensForSaleLoading = false;
 
-    this.tokensForSale = tokens;
+    this.tokensForSale = this.indexedTokensForSale(tokens);
+  }
+
+  indexedTokensForSale(tokens) {
+    const { auctionInstance } = this.contractsStore;
+
+    return tokens.map(token => {
+      const tokenId = token.tokenId
+      const gradient = [ token.gradient.outer, token.gradient.inner ]
+      return {
+        gradient,
+        tokenId,
+        owner: auctionInstance.address,
+        index: this.tokenIndex++,
+        price: token.price
+      };
+    });
   }
 
   indexedTokens(gradients) {
@@ -96,7 +113,7 @@ class TokenStore {
         gradient,
         tokenId,
         owner: this.user,
-        index: this.tokenIndex++ // just for React
+        index: this.tokenIndex++, // just for React
       };
     });
   }
@@ -157,6 +174,8 @@ export default decorate(TokenStore, {
   owner: observable,
   tokens: observable,
   isLoading: observable,
+  tokensForSale: observable,
+  tokensForSaleLoading: observable,
   user: observable,
   setOwner: action,
   setTokens: action,
