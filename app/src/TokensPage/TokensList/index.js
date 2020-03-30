@@ -27,7 +27,7 @@ console.log(display)
               token={token.gradient}
               price={token.price}
               onClick={() => showModal(<TokenView
-                gradient={token.gradient} user={user} owner={token.owner} tokenId={token.tokenId} />
+                price={token.price} gradient={token.gradient} user={user} owner={token.owner} tokenId={token.tokenId} />
               )}
             />
           ))}

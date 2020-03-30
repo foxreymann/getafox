@@ -12,7 +12,7 @@ const TokenItem = ({ token, onClick, price }) => {
         <TokenImage outer={token[0]} inner={token[1]} />
       </div>
       <div className="TokenItem-label">{`${token[0]} – ${token[1]}`}</div>
-      {price ? <div className="TokenItem-label">price: {price}</div> : <span /> }
+      {price && <div className="TokenItem-label">price: {price}</div>}
     </div>
   );
 };
