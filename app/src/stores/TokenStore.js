@@ -129,6 +129,22 @@ class TokenStore {
     await this.fetchTokens();
   };
 
+  buy = async({ tokenId, price }) => {
+    try {
+      const { auctionInstance } = this.contractsStore
+
+      await auctionInstance.bid(tokenId, {
+        from: this.user,
+        value: this.web3.utils.toWei('' + price, 'wei')
+      });
+
+      await this.fetchTokens();
+      await this.fetchTokensForSale();
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   putOnAuction = async ({ tokenId, price }) => {
     try {
       const { auctionInstance, tokenInstance } = this.contractsStore
