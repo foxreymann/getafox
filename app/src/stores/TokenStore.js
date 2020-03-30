@@ -15,6 +15,7 @@ class TokenStore {
   constructor(contractsStore) {
     this.contractsStore = contractsStore;
     when(() => this.contractsStore.tokenInstance, this.setup);
+    when(() => this.contractsStore.auctionInstance, this.auctionSetup);
     this.web3 = new Web3(window.ethereum)
     this.userSetup()
   }
@@ -24,6 +25,10 @@ class TokenStore {
     const owner = await tokenInstance.owner();
     this.setOwner(owner);
     this.fetchTokens();
+  };
+
+  auctionSetup = async () => {
+    this.fetchTokensForSale();
   };
 
   async userSetup() {
@@ -55,15 +60,32 @@ class TokenStore {
 
     this.setIsLoading(false);
 
-    if (!gradients.length) {
-      return;
-    }
     this.setTokens(this.indexedTokens(gradients));
   };
 
   fetchTokensForSale = async () => {
-    const { tokenInstance } = this.contractsStore;
+    const { auctionInstance, tokenInstance } = this.contractsStore;
 
+    const tokenIds = (await auctionInstance.getTokenIds())
+
+    const tokens = await Promise.all(
+      tokenIds.map(async tokenId => {
+        tokenId = tokenId.toNumber()
+        const [gradient, auction] = await Promise.all([
+          await tokenInstance.getGradient(tokenId),
+          await auctionInstance.tokenIdToAuction(tokenId)
+        ])
+        return {
+          gradient: gradient,
+          tokenId: tokenId,
+          price: auction.price.toNumber()
+        }
+      })
+    )
+
+    this.tokensForSaleLoading = false;
+
+    this.tokensForSale = tokens;
   }
 
   indexedTokens(gradients) {
