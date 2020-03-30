@@ -12,11 +12,13 @@ const TokensPage = ({ tokenStore: { mintToken, isLoading, owner, user, tokensFor
       <div>current user: {user}, owner: {owner}</div>
       <h1>Crypto Zorros</h1>
       { owner === user && <Button onClick={mintToken} label="Mint token" /> }
+      <h2>Your tokens</h2>
       <div className="TokensPage-tokens">
         <WithLoader isLoading={isLoading}>
           <TokensList display="user" />
         </WithLoader>
       </div>
+      <h2>Tokens for sale</h2>
       <div className="TokensPage-tokens">
         <WithLoader isLoading={tokensForSaleIsLoading}>
           <TokensList display="forSale" />
