@@ -46,16 +46,16 @@ contract Auction is IERC721Receiver {
 
     delete tokenIdToAuction[_tokenId];
 
-    for(uint256 i = 0; i < tokenIds.length; i++) {
-      if(_tokenId == tokenIds[i]) {
-        if(tokenIds.length == 1) {
-          delete tokenIds[i];
-        } else {
+    if(tokenIds.length == 1) {
+      delete tokenIds[0];
+    } else {
+      for(uint256 i = 0; i < tokenIds.length; i++) {
+        if(_tokenId == tokenIds[i]) {
           tokenIds[i] = tokenIds[tokenIds.length - 1];
-          tokenIds.pop();
         }
       }
     }
+    tokenIds.pop();
 
     seller.transfer(price);
     TokenContract.safeTransferFrom(address(this), msg.sender, _tokenId);

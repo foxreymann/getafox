@@ -58,5 +58,20 @@ contract("Auction", accounts => {
       assert.equal(tokensForSale[1], 1)
     });
 
+    it("Should retrun no tokens for sale when all tokens have been sold", async () => {
+      await auctionContract.bid(0, {
+        from: accounts[0],
+        value: 200
+      })
+
+      await auctionContract.bid(1, {
+        from: accounts[0],
+        value: 300
+      })
+
+      const tokensForSale = await auctionContract.getTokenIds()
+      assert.equal(tokensForSale.length, 0)
+    });
+
   });
 });
