@@ -1,5 +1,7 @@
 const Token = artifacts.require("Token");
 const Auction = artifacts.require("Auction");
+const truffleAssert = require('truffle-assertions');
+
 
 contract("Auction", accounts => {
   it("Should accept nft on creation", async () => {
@@ -33,6 +35,19 @@ contract("Auction", accounts => {
       assert.equal(auction[0], accounts[0]);
       assert.equal(auction[1].toNumber(), 100);
     });
+  });
+
+  it('should throw error when bidding for non existing token', async () => {
+    let nft = await Token.new();
+    let auctionContract = await Auction.new(nft.address);
+
+    await truffleAssert.reverts(
+      auctionContract.bid(777, {
+        from: accounts[0],
+        value: 200
+      }),
+      "auction doesn't exists"
+    );
   });
 
   describe("should return tokens for sale", () => {

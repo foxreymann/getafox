@@ -38,7 +38,7 @@ contract Auction is IERC721Receiver {
 
   function bid( uint256 _tokenId ) public payable {
     Auction memory auction = tokenIdToAuction[_tokenId];
-    require(auction.seller != address(0));
+    require(auction.seller != address(0), "auction doesn't exists");
     require(msg.value >= auction.price);
 
     address payable seller = auction.seller;
