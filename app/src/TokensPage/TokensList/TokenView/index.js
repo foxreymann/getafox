@@ -16,7 +16,10 @@ const TokenView = ({ gradient, user, owner, tokenId, price, tokenStore: { putOnA
         await putOnAuction({ tokenId, price: 999999999999999})
         hideModal()
       }} label="Put on auction" /> :
-      <Button onClick={() => buy({ tokenId, price })} label="Buy" />
+      <Button onClick={async () => {
+        await buy({ tokenId, price })
+        hideModal()
+      }} label="Buy" />
     }
   </div>
 );

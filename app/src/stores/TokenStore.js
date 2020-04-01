@@ -166,6 +166,7 @@ class TokenStore {
             from: this.user
           });
           await this.fetchTokens();
+          await this.fetchTokensForSale();
         }
       }, 2000)
     } catch (err) {
