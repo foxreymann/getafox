@@ -1,6 +1,7 @@
 import React from "react";
 import { observer, inject, PropTypes as MobxPropTypes } from "mobx-react";
 import TokenImage from "components/TokenImage";
+import Fox from "components/Fox";
 import Button from "components/Button";
 import Web3 from "web3";
 
@@ -23,7 +24,7 @@ const TokenView = ({ gradient, user, owner, tokenId, price, tokenStore: { putOnA
   return (
     <div>
       <div className="TokenView-image_wrapper">
-        <TokenImage size={200} outer={gradient[0]} inner={gradient[1]} />
+        <Fox size={200} outer={gradient[0]} inner={gradient[1]} />
       </div>
       <div className="TokenView-label">{`${gradient[0]} – ${gradient[1]}`}</div>
       {price && <div className="TokenItem-label">price: {Web3.utils.fromWei(price)} ether</div>}
