@@ -79,7 +79,7 @@ class TokenStore {
         return {
           gradient: gradient,
           tokenId: tokenId,
-          price: auction.price.toNumber()
+          price: auction.price.toString()
         }
       })
     )
@@ -135,7 +135,7 @@ class TokenStore {
 
       await auctionInstance.bid(tokenId, {
         from: this.user,
-        value: this.web3.utils.toWei('' + price, 'wei')
+        value: this.web3.utils.toWei('1','ether')
       });
 
       await this.fetchTokens();
@@ -162,7 +162,7 @@ class TokenStore {
 
         if(approvedFor === auctionInstance.address) {
           clearInterval(approvedCheckInterval)
-          await auctionInstance.createAuction(tokenId.toNumber(), price, {
+          await auctionInstance.createAuction(tokenId.toNumber(), 50000, {
             from: this.user
           });
           await this.fetchTokens();
