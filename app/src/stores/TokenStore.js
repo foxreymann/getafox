@@ -1,4 +1,4 @@
-import { observable, action, decorate, when } from "mobx";
+import { observable, action, decorate, when, toJS } from "mobx";
 import randomColor from "utils/randomColor";
 import Web3 from "web3";
 
@@ -135,7 +135,7 @@ class TokenStore {
 
       await auctionInstance.bid(tokenId, {
         from: this.user,
-        value: this.web3.utils.toWei('1','ether')
+        value: (toJS(this.tokensForSale).filter(token => token.tokenId === tokenId))[0].price
       });
 
       await this.fetchTokens();
@@ -162,7 +162,7 @@ class TokenStore {
 
         if(approvedFor === auctionInstance.address) {
           clearInterval(approvedCheckInterval)
-          await auctionInstance.createAuction(tokenId.toNumber(), 50000, {
+          await auctionInstance.createAuction(tokenId.toNumber(), this.web3.utils.toWei('2','ether'), {
             from: this.user
           });
           await this.fetchTokens();
