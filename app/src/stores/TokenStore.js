@@ -129,7 +129,7 @@ class TokenStore {
     await this.fetchTokens();
   };
 
-  buy = async({ tokenId, price }) => {
+  buy = async({ tokenId }) => {
     try {
       const { auctionInstance } = this.contractsStore
 
@@ -146,6 +146,7 @@ class TokenStore {
   }
 
   putOnAuction = async ({ tokenId, price }) => {
+console.log(price)
     try {
       const { auctionInstance, tokenInstance } = this.contractsStore
       const subscription = this.web3.eth.subscribe('logs', {}, (error, result) => {})
