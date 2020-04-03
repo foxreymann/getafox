@@ -145,8 +145,8 @@ class TokenStore {
     }
   }
 
-  putOnAuction = async ({ tokenId, price }) => {
-console.log(price)
+  putOnAuction = async ({ tokenId, price, unit }) => {
+console.log(typeof price)
     try {
       const { auctionInstance, tokenInstance } = this.contractsStore
       const subscription = this.web3.eth.subscribe('logs', {}, (error, result) => {})
@@ -163,7 +163,7 @@ console.log(price)
 
         if(approvedFor === auctionInstance.address) {
           clearInterval(approvedCheckInterval)
-          await auctionInstance.createAuction(tokenId.toNumber(), this.web3.utils.toWei('2','ether'), {
+          await auctionInstance.createAuction(tokenId.toNumber(), this.web3.utils.toWei(price,unit), {
             from: this.user
           });
           await this.fetchTokens();

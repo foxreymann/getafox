@@ -7,9 +7,14 @@ import "./TokenView.css";
 const TokenView = ({ gradient, user, owner, tokenId, price, tokenStore: { putOnAuction, buy }, modalStore: { hideModal } }) => {
 
   let priceInput = React.createRef();
+  let unitEtherRadio = React.createRef();
 
   async function putOnActionClick() {
-    await putOnAuction({ tokenId, price: priceInput.current.value })
+    if(!priceInput.current.value) {
+      alert('Enter a value')
+      return
+    }
+    await putOnAuction({ tokenId, price: priceInput.current.value, unit: unitEtherRadio.current.checked ? 'ether' : 'gwei' })
     hideModal()
   }
 
@@ -22,7 +27,17 @@ const TokenView = ({ gradient, user, owner, tokenId, price, tokenStore: { putOnA
       {price && <div className="TokenItem-label">price: {price}</div>}
       { owner === user ?
         <span>
-          <input ref={priceInput} placeholder="Type an amout..." type="number" />
+          <div>
+            <input ref={priceInput} placeholder="Type an amout..." type="number" />
+          </div>
+          <div>
+            <input ref={unitEtherRadio} type="radio" id="ether" name="unit" value="ether" defaultChecked />
+            <label htmlFor="ether">ether</label>
+          </div>
+          <div>
+            <input type="radio" id="gwei" name="unit" value="gwei" />
+            <label htmlFor="gwei">Gwei</label>
+          </div>
           <Button onClick={putOnActionClick} label="Put on auction" />
         </span> :
         <Button onClick={async () => {
