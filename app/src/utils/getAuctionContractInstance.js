@@ -1,7 +1,7 @@
 import contract from "@truffle/contract";
 import getProvider from "utils/getProvider";
 import AuctionArtifact from "contracts/Auction.json";
-import addresses from "../addresses.json";
+import addresses from "../addresses.js";
 
 const { auctionAddress } = addresses;
 
