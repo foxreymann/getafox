@@ -1,17 +1,18 @@
 import React from 'react';
 
-const divStyle = {
-  margin: '40px',
-  border: '5px solid pink'
-};
-const pStyle = {
-  fontSize: '15px',
-  textAlign: 'center'
-};
+import "./Fox.css";
 
 const Fox = () => (
-  <div style={divStyle}>
-    <p style={pStyle}>Get started with inline style</p>
+  <div class="fox">
+    <div class="head">
+      <div class="eye"></div>
+      <div class="eye"></div>
+    </div>
+    <div class="ear"></div>
+    <div class="ear"></div>
+    <div class="nose"></div>
+    <div class="body"></div>
+    <div class="tail"></div>
   </div>
 );
 
