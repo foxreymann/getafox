@@ -9923,6 +9923,18 @@ rxjs@^6.5.3:
   dependencies:
     tslib "^1.9.0"
 
+ryb-color-mixer@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/ryb-color-mixer/-/ryb-color-mixer-0.6.1.tgz#ab98fc3d8c882d623a27dc18404535fa4c6ea7f1"
+  integrity sha1-q5j8PYyILWI6J9wYQEU1+kxup/E=
+  dependencies:
+    ryb2rgb "0.0.0"
+
+ryb2rgb@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/ryb2rgb/-/ryb2rgb-0.0.0.tgz#e44e07c030039b9af6abd746a9b15097796e8e7d"
+  integrity sha1-5E4HwDADm5r2q9dGqbFQl3lujn0=
+
 safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
