@@ -3,17 +3,17 @@ import React from 'react';
 import "./Fox.css";
 
 const Fox = () => (
-  <div class="fox-wrapper">
-    <div class="fox">
-      <div class="head">
-        <div class="eye"></div>
-        <div class="eye"></div>
+  <div className="fox-wrapper">
+    <div className="fox">
+      <div className="head">
+        <div className="eye"></div>
+        <div className="eye"></div>
       </div>
-      <div class="ear"></div>
-      <div class="ear"></div>
-      <div class="nose"></div>
-      <div class="body"></div>
-      <div class="tail"></div>
+      <div className="ear"></div>
+      <div className="ear"></div>
+      <div className="nose"></div>
+      <div className="body"></div>
+      <div className="tail"></div>
     </div>
   </div>
 );
