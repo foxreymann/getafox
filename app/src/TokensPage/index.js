@@ -9,7 +9,6 @@ import "./TokensPage.css";
 const TokensPage = ({ tokenStore: { mintToken, isLoading, owner, user, tokensForSaleIsLoading } }) => {
   return (
     <div className="TokensPage">
-      <div>current user: {user}, owner: {owner}</div>
       <h1>Crypto Zorros</h1>
       { owner === user && <Button onClick={mintToken} label="Mint token" /> }
       <h2>Your tokens</h2>
