@@ -33,7 +33,6 @@ contract Auction is IERC721Receiver {
   function onERC721Received(address, address, uint256, bytes memory) public override returns (bytes4) {
     // confirm reception of the token
     return this.onERC721Received.selector;
-    //return ERC721_RECEIVED;
   }
 
   function bid( uint256 _tokenId ) public payable {

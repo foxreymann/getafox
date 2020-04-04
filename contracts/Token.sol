@@ -1,7 +1,7 @@
 pragma solidity >=0.6.4 <0.7.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
 import '@openzeppelin/contracts/ownership/Ownable.sol';
+import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
 
 contract Token is ERC721Full('Token', 'TKN'), Ownable {
 
