@@ -8,7 +8,7 @@ const path = require("path");
 const writeFile = util.promisify(fs.writeFile);
 
 module.exports = async function(deployer) {
-  const complexStorage = await deployer.deploy(ComplexStorage);
+  await deployer.deploy(ComplexStorage);
   const token = await deployer.deploy(Token);
 
   const auction = await deployer.deploy(
