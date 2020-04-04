@@ -5,11 +5,15 @@
   -webkit-transition: all 100ms ease-in;
   transition: all 100ms ease-in;
 }
+.fox-wrapper {
+  width: 215px;
+  height: 275px;
+}
 .fox{
   width: 215px;
   height: 275px;
   display: block;
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%,-50%);

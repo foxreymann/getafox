@@ -12,7 +12,6 @@ const TokenItem = ({ token, onClick, price }) => {
   return (
     <div className="TokenItem" onClick={onClick}>
       <div className="TokenItem-image_wrapper">
-        <TokenImage outer={token[0]} inner={token[1]} />
         <Fox size={200} outer={token[0]} inner={token[1]} />
       </div>
       <div className="TokenItem-label">{`${token[0]} – ${token[1]}`}</div>
