@@ -1,0 +1,15 @@
+{
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-etherfoxes-prod-182340-authRole",
+            "UnauthRoleArn": "arn:aws:iam::004451551644:role/amplify-etherfoxes-prod-182340-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::004451551644:role/amplify-etherfoxes-prod-182340-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "amplify-etherfoxes-prod-182340-deployment",
+            "UnauthRoleName": "amplify-etherfoxes-prod-182340-unauthRole",
+            "StackName": "amplify-etherfoxes-prod-182340",
+            "StackId": "arn:aws:cloudformation:eu-west-1:004451551644:stack/amplify-etherfoxes-prod-182340/8799ac10-78f4-11ea-8fe3-06310ddbba8e",
+            "AmplifyAppId": "dsx63f22wzdam"
+        }
+    }
+}
