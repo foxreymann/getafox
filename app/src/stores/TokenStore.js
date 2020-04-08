@@ -53,7 +53,7 @@ class TokenStore {
       [...Array(noOfTokens).keys()].map(async idx => {
         const token = await tokenInstance.tokenOfOwnerByIndex(this.user, idx)
         return {
-          gradient: await tokenInstance.getGradient(token),
+          gradient: await tokenInstance.getGradient(token.toString()),
           tokenId: token
         }
       })
@@ -71,7 +71,7 @@ class TokenStore {
 
     const tokens = await Promise.all(
       tokenIds.map(async tokenId => {
-        tokenId = tokenId.toNumber()
+        tokenId = tokenId.toString()
         const [gradient, auction] = await Promise.all([
           await tokenInstance.getGradient(tokenId),
           await auctionInstance.tokenIdToAuction(tokenId)
