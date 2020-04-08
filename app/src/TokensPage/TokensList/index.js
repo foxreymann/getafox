@@ -12,8 +12,6 @@ const TokensList = ({
   modalStore: { showModal },
   display
 }) => {
-console.log(tokensForSale)
-console.log(display)
   if ( display === 'forSale' ) {
     tokens = tokensForSale
   }
