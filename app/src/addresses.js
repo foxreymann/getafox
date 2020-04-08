@@ -1,12 +1,14 @@
-import addressesTruffle from "./addresses.json";
-import addressesRopsten from "./addresses.ropsten.json";
+import Web3 from "web3";
 
-let addresses
-
-if(window.location.href.includes('etherfoxes.com')) {
-  addresses = addressesRopsten
-} else {
-  addresses = addressesTruffle
+const addresses = {
+  private: require('./addresses.json'),
+  ropsten: require('./addresses.ropsten.json'),
+  rinkeby: require('./addresses.rinkeby.json'),
+  mainnet: require('./addresses.mainnet.json')
 }
 
-export default addresses
+export default async () => {
+  const web3 = new Web3(window.ethereum)
+  const networkType = await web3.eth.net.getNetworkType()
+  return addresses[networkType]
+}
