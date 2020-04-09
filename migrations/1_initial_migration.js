@@ -9,13 +9,9 @@ const writeFile = util.promisify(fs.writeFile);
 
 module.exports = async function(deployer) {
 
-console.log(deployer)
-
   await deployer.deploy(Migrations);
 
   const token = await deployer.deploy(Token);
-
-console.log(token.address)
 
   const auction = await deployer.deploy(
     Auction,
@@ -26,6 +22,8 @@ console.log(token.address)
     tokenAddress: token.address,
     auctionAddress: auction.address
   };
+
+  console.log(addresses)
 
   let addressesFilename
 
