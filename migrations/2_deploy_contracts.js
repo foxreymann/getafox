@@ -21,8 +21,26 @@ module.exports = async function(deployer) {
     auctionAddress: auction.address
   };
 
+  let addressesFilename
+
+console.log(deployer.network_id)
+console.log(typeof deployer.network_id)
+
+  switch (deployer.network_id) {
+    case 3:
+console.log(3)
+      addressesFilename = 'addresses.ropsten.json'
+      break;
+    case 5777:
+console.log(4)
+      addressesFilename = 'addresses.json'
+      break;
+    default:
+      throw 'unknown network'
+  }
+
   await writeFile(
-    path.join(__dirname, "..", "app", "src", "addresses.json"),
+    path.join(__dirname, "..", "app", "src", addressesFilename),
     JSON.stringify(addresses)
   );
 };
