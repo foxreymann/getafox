@@ -8,6 +8,9 @@ const path = require("path");
 const writeFile = util.promisify(fs.writeFile);
 
 module.exports = async function(deployer) {
+
+console.log(deployer)
+
   await deployer.deploy(Migrations);
 
   const token = await deployer.deploy(Token);
@@ -26,23 +29,17 @@ console.log(token.address)
 
   let addressesFilename
 
-console.log(deployer.network_id)
-console.log(typeof deployer.network_id)
-
   switch (deployer.network_id) {
     case 3:
-console.log(3)
+      if (deployer.network !== 'ropsten') { return }
       addressesFilename = 'addresses.ropsten.json'
       break;
     case 5777:
-console.log(4)
       addressesFilename = 'addresses.json'
       break;
     default:
       throw 'unknown network'
   }
-
-console.log(addresses)
 
   await writeFile(
     path.join(__dirname, "..", "app", "src", addressesFilename),
