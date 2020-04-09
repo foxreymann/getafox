@@ -14,7 +14,8 @@ module.exports = {
       provider: function() {
         return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/a72989064dba446e833e67c44f566420")
       },
-      network_id: 3
+      network_id: 3,
+      gasPrice: 100000000000 // 100 gwei
     }
   }
 };
