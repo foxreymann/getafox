@@ -1,29 +1,18 @@
 pragma solidity >=0.6.4 <0.7.0;
 
-import '@openzeppelin/contracts/ownership/Ownable.sol';
-import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
+import '@openzeppelin/contracts/access/Ownable.sol';
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract Token is ERC721Full('Token', 'TKN'), Ownable {
+contract Token is ERC721('GetAFox', 'GETAFOX'), Ownable {
+  string[] tokens;
 
-  struct Gradient {
-    string outer;
-    string inner;
+  function mint(string memory _genes) public onlyOwner {
+    tokens.push(_genes);
+    uint _tokenId = tokens.length -1;
+    _mint(msg.sender, _tokenId);
   }
 
-  Gradient[] gradients;
-
-  function mint(string memory _outer, string memory _inner) public onlyOwner {
-    Gradient memory _gradient = Gradient({ outer: _outer, inner: _inner });
-
-    gradients.push(_gradient);
-    uint _gradientId = gradients.length - 1;
-    _mint(msg.sender, _gradientId);
-  }
-
-  function getGradient( uint _gradientId ) public view returns(string memory outer, string memory inner) {
-    Gradient memory _grad = gradients[_gradientId];
-
-    outer = _grad.outer;
-    inner = _grad.inner;
+  function getGenes( uint _tokenId ) public view returns(string memory genes) {
+    genes = tokens[_tokenId];
   }
 }
