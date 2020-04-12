@@ -51,10 +51,10 @@ class TokenStore {
 
     const tokens = await Promise.all(
       [...Array(noOfTokens).keys()].map(async idx => {
-        const token = await tokenInstance.tokenOfOwnerByIndex(this.user, idx)
+        const tokenId = (await tokenInstance.tokenOfOwnerByIndex(this.user, idx)).toString()
         return {
-          genes : await tokenInstance.getGenes(token.toString()),
-          tokenId: token
+          genes : await this.getGenes(tokenId),
+          tokenId
         }
       })
     )
@@ -63,6 +63,17 @@ class TokenStore {
 
     this.setTokens(this.indexedTokens(tokens));
   };
+
+  getGenes = async (tokenId) => {
+    const { tokenInstance } = this.contractsStore
+    let zero = '0'
+    let genes = (await tokenInstance.getGenes(tokenId)).toString()
+    let tooShort = 77 - genes.length
+    if(tooShort) {
+      genes = zero.repeat(tooShort) + genes
+    }
+    return genes
+  }
 
   fetchTokensForSale = async () => {
     const { auctionInstance, tokenInstance } = this.contractsStore;
@@ -73,7 +84,7 @@ class TokenStore {
       tokenIds.map(async tokenId => {
         tokenId = tokenId.toString()
         const [genes, auction] = await Promise.all([
-          await tokenInstance.getGenes(tokenId),
+          await this.getGenes(tokenId),
           await auctionInstance.tokenIdToAuction(tokenId)
         ])
         return {

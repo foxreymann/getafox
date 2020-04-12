@@ -4,7 +4,7 @@ import ColorMixer from 'ryb-color-mixer';
 import "./Fox.css";
 
 const getOuterInnerFromGenes = genes => {
-  console.log(genes)
+//  console.log(genes)
 
 //  const outer = genes.slice(0,3)
 // console.log(outer)
