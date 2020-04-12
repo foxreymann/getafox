@@ -2,8 +2,9 @@ pragma solidity >=0.6.4 <0.7.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
+import '@openzeppelin/contracts/access/Ownable.sol';
 
-contract Auction is IERC721Receiver {
+contract Auction is IERC721Receiver, Ownable {
 
   ERC721 public TokenContract;
 
@@ -25,7 +26,7 @@ contract Auction is IERC721Receiver {
     AuctionDetails memory auction = AuctionDetails({
        seller: msg.sender,
        price: uint128(_price)
-    });
+    }); 
     tokenIdToAuctionDetails[_tokenId] = auction;
     tokenIds.push(_tokenId);
   }
@@ -33,6 +34,19 @@ contract Auction is IERC721Receiver {
   function onERC721Received(address, address, uint256, bytes memory) public override returns (bytes4) {
     // confirm reception of the token
     return this.onERC721Received.selector;
+  }
+
+  function _updateTokenIds(uint _tokenId) internal {
+    if(tokenIds.length == 1) {
+      delete tokenIds[0];
+    } else {
+      for(uint256 i = 0; i < tokenIds.length; i++) {
+        if(_tokenId == tokenIds[i]) {
+          tokenIds[i] = tokenIds[tokenIds.length - 1];
+        }
+      }
+    }
+    tokenIds.pop();
   }
 
   function bid( uint256 _tokenId ) public payable {
@@ -44,17 +58,7 @@ contract Auction is IERC721Receiver {
     uint128 price = auction.price;
 
     delete tokenIdToAuctionDetails[_tokenId];
-
-    if(tokenIds.length == 1) {
-      delete tokenIds[0];
-    } else {
-      for(uint256 i = 0; i < tokenIds.length; i++) {
-        if(_tokenId == tokenIds[i]) {
-          tokenIds[i] = tokenIds[tokenIds.length - 1];
-        }
-      }
-    }
-    tokenIds.pop();
+    _updateTokenIds(_tokenId);
 
     seller.transfer(price);
     TokenContract.safeTransferFrom(address(this), msg.sender, _tokenId);
@@ -64,16 +68,24 @@ contract Auction is IERC721Receiver {
     return tokenIds;
   }
 
-  function cancel( uint256 _tokenId ) public {
+  function cancel( uint256 _tokenId) public {
     AuctionDetails memory auction = tokenIdToAuctionDetails[_tokenId];
-    require(auction.seller == msg.sender);
+
+    if(msg.sender != owner()) {
+      require(auction.seller == msg.sender);
+    }
 
     delete tokenIdToAuctionDetails[_tokenId];
+    _updateTokenIds(_tokenId);
 
-    TokenContract.safeTransferFrom(address(this), msg.sender, _tokenId);
+    TokenContract.safeTransferFrom(address(this), auction.seller, _tokenId);
   }
 
-//  function cancelAll() publi
+  function cancelAll() public onlyOwner {
+    for(uint256 i = 0; i < tokenIds.length; i++) {
+      cancel(tokenIds[i]);
+    }
+  }
 
 
 }

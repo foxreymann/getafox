@@ -130,34 +130,31 @@ contract("Auction", accounts => {
       await auctionContract.createAuction(token, 400, {
         from: accounts[1]
       })
+
+      await nft.mint("55444");
+      token = await nft.tokenOfOwnerByIndex(accounts[0], 0);
+      await nft.transferFrom(accounts[0], accounts[1], token);
+      await nft.approve(auctionContract.address, token, {
+        from: accounts[1]
+      })
+      await auctionContract.createAuction(token, 500, {
+        from: accounts[1]
+      })
     });
 
     it("Cancel all auctions", async () => {
-//      const tokensForSale = await auctionContract.cancelAll()
-//      assert.equal(tokensForSale.length, 0)
+      await auctionContract.cancelAll() // cancel all auctions
+      const tokensForSale = await auctionContract.getTokenIds()
+console.log(tokensForSale)
+      assert.equal(tokensForSale.length, 0)
     });
 
     it("Cancel all auctions should still work if there were no auctions", async () => {
-//      const tokensForSale = await auctionContract.cancelAll()
-//      assert.equal(tokensForSale.length, 0)
-    });
-/*
-    it("Should retrun no tokens for sale when all tokens have been sold", async () => {
-      await auctionContract.bid(0, {
-        from: accounts[0],
-        value: 200
-      })
-
-      await auctionContract.bid(1, {
-        from: accounts[0],
-        value: 300
-      })
-
+      await auctionContract.cancelAll() // not fail when there are no auctions
       const tokensForSale = await auctionContract.getTokenIds()
+console.log(tokensForSale)
       assert.equal(tokensForSale.length, 0)
     });
-*/
-
   });
 
 });
