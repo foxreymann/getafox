@@ -16,6 +16,21 @@ contract("Token", accounts => {
 
   describe("mint", () => {
     it("creates token with specified genes", async () => {
+      const arg = 123456
+
+      let instance = await Token.deployed();
+      let owner = await instance.owner();
+
+      await instance.mint(arg.toString());
+
+      let token = await instance.tokenOfOwnerByIndex(owner, 0);
+      let genes = await instance.getGenes(token);
+
+      assert.equal(genes, arg.toString());
+    });
+
+/*
+    it("creates token with specified genes that ", async () => {
       let instance = await Token.deployed();
       let owner = await instance.owner();
 
@@ -26,13 +41,14 @@ contract("Token", accounts => {
 
       assert.equal(genes, "#ff00dd,#ddddff");
     });
+*/
 
     it("allows to mint only to owner", async () => {
       let instance = await Token.deployed();
       let other = accounts[1];
 
       await instance.transferOwnership(other);
-      await expectRevert(instance.mint("#ff00dd,#ddddff"), 'Ownable: caller is not the owner -- Reason given: Ownable: caller is not the owner.');
+      await expectRevert(instance.mint('22222'), 'Ownable: caller is not the owner -- Reason given: Ownable: caller is not the owner.');
     });
   });
 

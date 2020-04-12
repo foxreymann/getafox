@@ -89,4 +89,45 @@ contract("Auction", accounts => {
     });
 
   });
+
+  describe("allow to cancel auctions", () => {
+    before(async () => {
+      nft = await Token.new();
+      auctionContract = await Auction.new(nft.address);
+
+      await nft.mint("#aaa", "#bbb");
+      token = await nft.tokenOfOwnerByIndex(accounts[0], 0);
+      await nft.approve(auctionContract.address, token);
+      await auctionContract.createAuction(token, 200);
+
+      await nft.mint("#eaa", "#fox");
+      token = await nft.tokenOfOwnerByIndex(accounts[0], 0);
+      await nft.approve(auctionContract.address, token);
+      await auctionContract.createAuction(token, 300);
+    });
+
+    it("Cancel all auctions", async () => {
+      const tokensForSale = await auctionContract.cancelAll()
+      assert.equal(tokensForSale.length, 2)
+      assert.equal(tokensForSale[0], 0)
+      assert.equal(tokensForSale[1], 1)
+    });
+
+    it("Should retrun no tokens for sale when all tokens have been sold", async () => {
+      await auctionContract.bid(0, {
+        from: accounts[0],
+        value: 200
+      })
+
+      await auctionContract.bid(1, {
+        from: accounts[0],
+        value: 300
+      })
+
+      const tokensForSale = await auctionContract.getTokenIds()
+      assert.equal(tokensForSale.length, 0)
+    });
+
+  });
+
 });

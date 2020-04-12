@@ -7,12 +7,12 @@ contract Auction is IERC721Receiver {
 
   ERC721 public TokenContract;
 
-  struct Auction {
+  struct AuctionDetails {
     address payable seller;
     uint128 price;
   }
 
-  mapping (uint256 => Auction) public tokenIdToAuction;
+  mapping (uint256 => AuctionDetails) public tokenIdToAuctionDetails;
 
   uint256[] public tokenIds;
 
@@ -20,13 +20,13 @@ contract Auction is IERC721Receiver {
     TokenContract = ERC721(_nftAddress);
   }
 
-  function createAuction( uint256 _tokenId, uint128 _price ) public {
+  function createAuctionDetails( uint256 _tokenId, uint128 _price ) public {
     TokenContract.safeTransferFrom(msg.sender, address(this), _tokenId);
-    Auction memory auction = Auction({
+    AuctionDetails memory auction = AuctionDetails({
        seller: msg.sender,
        price: uint128(_price)
     });
-    tokenIdToAuction[_tokenId] = auction;
+    tokenIdToAuctionDetails[_tokenId] = auction;
     tokenIds.push(_tokenId);
   }
 
@@ -36,14 +36,14 @@ contract Auction is IERC721Receiver {
   }
 
   function bid( uint256 _tokenId ) public payable {
-    Auction memory auction = tokenIdToAuction[_tokenId];
+    AuctionDetails memory auction = tokenIdToAuctionDetails[_tokenId];
     require(auction.seller != address(0), "auction doesn't exists");
     require(msg.value >= auction.price);
 
     address payable seller = auction.seller;
     uint128 price = auction.price;
 
-    delete tokenIdToAuction[_tokenId];
+    delete tokenIdToAuctionDetails[_tokenId];
 
     if(tokenIds.length == 1) {
       delete tokenIds[0];
@@ -60,17 +60,18 @@ contract Auction is IERC721Receiver {
     TokenContract.safeTransferFrom(address(this), msg.sender, _tokenId);
   }
 
+  function getTokenIds() public view returns (uint256[] memory) {
+    return tokenIds;
+  }
+
   function cancel( uint256 _tokenId ) public {
-    Auction memory auction = tokenIdToAuction[_tokenId];
+    AuctionDetails memory auction = tokenIdToAuctionDetails[_tokenId];
     require(auction.seller == msg.sender);
 
-    delete tokenIdToAuction[_tokenId];
+    delete tokenIdToAuctionDetails[_tokenId];
 
     TokenContract.safeTransferFrom(address(this), msg.sender, _tokenId);
   }
 
-  function getTokenIds() public view returns (uint256[] memory) {
-    return tokenIds;
-  }
 
 }
