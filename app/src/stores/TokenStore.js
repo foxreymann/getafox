@@ -1,5 +1,5 @@
 import { observable, action, decorate, when, toJS } from "mobx";
-import randomColor from "utils/randomColor";
+import randomGenes from "utils/randomGenes";
 import Web3 from "web3";
 
 class TokenStore {
@@ -120,12 +120,11 @@ class TokenStore {
 
   mintToken = async () => {
     const { tokenInstance } = this.contractsStore;
-    const gradient = [randomColor(), randomColor()];
-    await tokenInstance.mint(gradient[0], gradient[1], {
+    await tokenInstance.mint(randomGenes(), {
       from: this.owner,
       gas: 300000
     });
-    // wait for minted event
+    // TODO: wait for minted event
     await this.fetchTokens();
   };
 
