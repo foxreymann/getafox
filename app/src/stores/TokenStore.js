@@ -120,9 +120,9 @@ class TokenStore {
 
   mintToken = async () => {
     const { tokenInstance } = this.contractsStore;
-    await tokenInstance.mint(randomGenes(), {
-      from: this.owner,
-      gas: 300000
+    const genes = randomGenes()
+    await tokenInstance.mint(genes, {
+      from: this.owner
     });
     // TODO: wait for minted event
     await this.fetchTokens();
