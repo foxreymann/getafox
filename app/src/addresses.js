@@ -4,7 +4,7 @@ const addresses = {
   private: require('./addresses.json'),
   ropsten: require('./addresses.ropsten.json'),
   rinkeby: require('./addresses.rinkeby.json'),
-  mainnet: require('./addresses.mainnet.json')
+  main: require('./addresses.mainnet.json')
 }
 
 export default async () => {
