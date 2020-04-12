@@ -1,6 +1,6 @@
 import React from 'react';
 import ColorMixer from 'ryb-color-mixer';
-import prefillWithZeros from '../../utils/prefillWithZeros'
+import prefillWithZeros from 'utils/prefillWithZeros'
 
 import "./Fox.css";
 

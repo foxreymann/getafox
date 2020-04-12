@@ -1,6 +1,7 @@
 import { observable, action, decorate, when, toJS } from "mobx";
 import randomGenes from "utils/randomGenes";
 import Web3 from "web3";
+import prefillWithZeros from "utils/prefillWithZeros";
 
 class TokenStore {
   tokens = [];
@@ -67,11 +68,10 @@ class TokenStore {
   getGenes = async (tokenId) => {
     const { tokenInstance } = this.contractsStore
     let zero = '0'
-    let genes = (await tokenInstance.getGenes(tokenId)).toString()
-    let tooShort = 77 - genes.length
-    if(tooShort) {
-      genes = zero.repeat(tooShort) + genes
-    }
+    let genes = prefillWithZeros({
+      desiredLength: 77,
+      str: (await tokenInstance.getGenes(tokenId)).toString()
+    })
     return genes
   }
 
