@@ -8,9 +8,6 @@ contract Auction is IERC721Receiver, Ownable {
 
   ERC721 public TokenContract;
 
-  event tokenIdsEvent (uint[]);
-  event iEvent (uint);
-
   struct AuctionDetails {
     address payable seller;
     uint128 price;
@@ -82,8 +79,6 @@ contract Auction is IERC721Receiver, Ownable {
 
     delete tokenIdToAuctionDetails[_tokenId];
     _updateTokenIds(_tokenId);
-
-    emit tokenIdsEvent (tokenIds);
 
     TokenContract.safeTransferFrom(address(this), auction.seller, _tokenId);
   }

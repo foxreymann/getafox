@@ -125,7 +125,6 @@ class TokenStore {
   mintToken = async () => {
     const { tokenInstance } = this.contractsStore;
     const genes = randomGenes()
-console.log(genes.length)
     await tokenInstance.mint(genes, {
       from: this.owner
     });
@@ -154,8 +153,6 @@ console.log(genes.length)
       const { auctionInstance, tokenInstance } = this.contractsStore
       const subscription = this.web3.eth.subscribe('logs', {}, (error, result) => {})
       let transferApproved = false
-
-console.log(tokenId)
 
       await tokenInstance.approve(auctionInstance.address, tokenId, {
         from: this.user
