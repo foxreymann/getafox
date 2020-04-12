@@ -1,17 +1,23 @@
 import React from 'react';
 import ColorMixer from 'ryb-color-mixer';
+import prefillWithZeros from '../../utils/prefillWithZeros'
 
 import "./Fox.css";
 
-const getOuterInnerFromGenes = genes => {
-//  console.log(genes)
+const getColorFrom8Digits = digits => {
+  return prefillWithZeros({
+    desiredLength: 6,
+    str: (digits.slice(0,8) % 16**6).toString(16)
+  })
+}
 
-//  const outer = genes.slice(0,3)
-// console.log(outer)
+const getOuterInnerFromGenes = genes => {
+  const outer = '#' + getColorFrom8Digits(genes.slice(0,8))
+  const inner = '#' + getColorFrom8Digits(genes.slice(8,16))
 
   return {
-    outer: '#ff0000',
-    inner: '#00ff00'
+    outer,
+    inner
   }
 }
 
