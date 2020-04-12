@@ -16,32 +16,35 @@ contract("Token", accounts => {
 
   describe("mint", () => {
     it("creates token with specified genes", async () => {
-      const arg = 123456
+      const arg = '123456'
 
       let instance = await Token.deployed();
       let owner = await instance.owner();
 
-      await instance.mint(arg.toString());
+      await instance.mint(arg);
 
       let token = await instance.tokenOfOwnerByIndex(owner, 0);
       let genes = await instance.getGenes(token);
 
-      assert.equal(genes, arg.toString());
+      assert.equal(genes, arg);
     });
 
-/*
-    it("creates token with specified genes that ", async () => {
+    it("creates token with specified genes when number is 77 9 digits", async () => {
+      const arg = '9'.repeat(77)
+
       let instance = await Token.deployed();
       let owner = await instance.owner();
 
-      await instance.mint("#ff00dd,#ddddff");
+      await instance.mint(arg);
 
-      let token = await instance.tokenOfOwnerByIndex(owner, 0);
+      let token = await instance.tokenOfOwnerByIndex(owner, 1);
       let genes = await instance.getGenes(token);
 
-      assert.equal(genes, "#ff00dd,#ddddff");
+      genes = (new BN(genes)).toString()
+
+      assert.equal(genes, arg);
     });
-*/
+
 
     it("allows to mint only to owner", async () => {
       let instance = await Token.deployed();
