@@ -20,7 +20,7 @@ contract Auction is IERC721Receiver {
     TokenContract = ERC721(_nftAddress);
   }
 
-  function createAuctionDetails( uint256 _tokenId, uint128 _price ) public {
+  function createAuction( uint256 _tokenId, uint128 _price ) public {
     TokenContract.safeTransferFrom(msg.sender, address(this), _tokenId);
     AuctionDetails memory auction = AuctionDetails({
        seller: msg.sender,
@@ -72,6 +72,8 @@ contract Auction is IERC721Receiver {
 
     TokenContract.safeTransferFrom(address(this), msg.sender, _tokenId);
   }
+
+//  function cancelAll() publi
 
 
 }
