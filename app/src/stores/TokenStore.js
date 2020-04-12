@@ -85,7 +85,7 @@ class TokenStore {
         tokenId = tokenId.toString()
         const [genes, auction] = await Promise.all([
           await this.getGenes(tokenId),
-          await auctionInstance.tokenIdToAuction(tokenId)
+          await auctionInstance.tokenIdToAuctionDetails(tokenId)
         ])
         return {
           genes,
@@ -150,24 +150,25 @@ console.log(genes.length)
   }
 
   putOnAuction = async ({ tokenId, price, unit }) => {
-console.log(typeof price)
     try {
       const { auctionInstance, tokenInstance } = this.contractsStore
       const subscription = this.web3.eth.subscribe('logs', {}, (error, result) => {})
       let transferApproved = false
 
-      await tokenInstance.approve(auctionInstance.address, tokenId.toNumber(), {
+console.log(tokenId)
+
+      await tokenInstance.approve(auctionInstance.address, tokenId, {
         from: this.user
       });
 
       let approvedCheckInterval = setInterval(async () => {
         console.log(approvedCheckInterval)
 
-        let approvedFor = await tokenInstance.getApproved(tokenId.toNumber())
+        let approvedFor = await tokenInstance.getApproved(tokenId)
 
         if(approvedFor === auctionInstance.address) {
           clearInterval(approvedCheckInterval)
-          await auctionInstance.createAuction(tokenId.toNumber(), this.web3.utils.toWei(price,unit), {
+          await auctionInstance.createAuction(tokenId, this.web3.utils.toWei(price,unit), {
             from: this.user
           });
           await this.fetchTokens();
