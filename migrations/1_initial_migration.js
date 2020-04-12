@@ -28,6 +28,10 @@ module.exports = async function(deployer) {
   let addressesFilename
 
   switch (deployer.network_id) {
+    case 1:
+      if (deployer.network !== 'mainnet') { return }
+      addressesFilename = 'addresses.mainnet.json'
+      break;
     case 3:
       if (deployer.network !== 'ropsten') { return }
       addressesFilename = 'addresses.ropsten.json'
