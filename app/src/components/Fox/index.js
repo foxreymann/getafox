@@ -3,7 +3,21 @@ import ColorMixer from 'ryb-color-mixer';
 
 import "./Fox.css";
 
-const Fox = ({ outer, inner }) => {
+const getOuterInnerFromGenes = genes => {
+  console.log(genes)
+
+//  const outer = genes.slice(0,3)
+// console.log(outer)
+
+  return {
+    outer: '#ff0000',
+    inner: '#00ff00'
+  }
+}
+
+const Fox = ({ genes }) => {
+
+  const { outer, inner } = getOuterInnerFromGenes(genes)
   const ears = '#' + ColorMixer.mix(outer, inner)
 
   return (

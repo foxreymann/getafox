@@ -22,10 +22,10 @@ const TokensList = ({
           {tokens.map(token => (
             <TokenItem
               key={token.index}
-              token={token.gradient}
+              genes={token.genes}
               price={token.price}
               onClick={() => showModal(<TokenView
-                price={token.price} gradient={token.gradient} user={user} owner={token.owner} tokenId={token.tokenId} />
+                price={token.price} genes={token.genes} user={user} owner={token.owner} tokenId={token.tokenId} />
               )}
             />
           ))}

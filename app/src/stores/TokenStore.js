@@ -49,11 +49,11 @@ class TokenStore {
 
     const noOfTokens = (await tokenInstance.balanceOf(this.user)).valueOf().words[0]
 
-    const gradients = await Promise.all(
+    const tokens = await Promise.all(
       [...Array(noOfTokens).keys()].map(async idx => {
         const token = await tokenInstance.tokenOfOwnerByIndex(this.user, idx)
         return {
-          gradient: await tokenInstance.getGradient(token.toString()),
+          genes : await tokenInstance.getGenes(token.toString()),
           tokenId: token
         }
       })
@@ -61,7 +61,7 @@ class TokenStore {
 
     this.setIsLoading(false);
 
-    this.setTokens(this.indexedTokens(gradients));
+    this.setTokens(this.indexedTokens(tokens));
   };
 
   fetchTokensForSale = async () => {
@@ -72,13 +72,13 @@ class TokenStore {
     const tokens = await Promise.all(
       tokenIds.map(async tokenId => {
         tokenId = tokenId.toString()
-        const [gradient, auction] = await Promise.all([
-          await tokenInstance.getGradient(tokenId),
+        const [genes, auction] = await Promise.all([
+          await tokenInstance.getGenes(tokenId),
           await auctionInstance.tokenIdToAuction(tokenId)
         ])
         return {
-          gradient: gradient,
-          tokenId: tokenId,
+          genes,
+          tokenId,
           price: auction.price.toString()
         }
       })
@@ -93,34 +93,28 @@ class TokenStore {
     const { auctionInstance } = this.contractsStore;
 
     return tokens.map(token => {
-      const tokenId = token.tokenId
-      const gradient = [ token.gradient.outer, token.gradient.inner ]
       return {
-        gradient,
-        tokenId,
+        ...token,
         owner: auctionInstance.address,
-        index: this.tokenIndex++,
-        price: token.price
+        index: this.tokenIndex++
       };
     });
   }
 
-  indexedTokens(gradients) {
-    return gradients.map(gradient => {
-      const tokenId = gradient.tokenId
-      gradient = [ gradient.gradient.outer, gradient.gradient.inner ]
+  indexedTokens(tokens) {
+    return tokens.map(token => {
       return {
-        gradient,
-        tokenId,
+        ...token,
         owner: this.user,
-        index: this.tokenIndex++, // just for React
-      };
-    });
+        index: this.tokenIndex++
+      }
+    })
   }
 
   mintToken = async () => {
     const { tokenInstance } = this.contractsStore;
     const genes = randomGenes()
+console.log(genes.length)
     await tokenInstance.mint(genes, {
       from: this.owner
     });
