@@ -81,6 +81,7 @@ contract("Auction", accounts => {
       assert.equal(tokensForSale.length, 3)
       assert.equal(tokensForSale[0], 0)
       assert.equal(tokensForSale[1], 1)
+      assert.equal(tokensForSale[2], 2)
     });
 
     it("Should retrun no tokens for sale when all tokens have been sold", async () => {

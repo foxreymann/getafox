@@ -8,6 +8,9 @@ contract Auction is IERC721Receiver, Ownable {
 
   ERC721 public TokenContract;
 
+  event tokenIdsEvent (uint[]);
+  event iEvent (uint);
+
   struct AuctionDetails {
     address payable seller;
     uint128 price;
@@ -26,7 +29,7 @@ contract Auction is IERC721Receiver, Ownable {
     AuctionDetails memory auction = AuctionDetails({
        seller: msg.sender,
        price: uint128(_price)
-    }); 
+    });
     tokenIdToAuctionDetails[_tokenId] = auction;
     tokenIds.push(_tokenId);
   }
@@ -37,12 +40,14 @@ contract Auction is IERC721Receiver, Ownable {
   }
 
   function _updateTokenIds(uint _tokenId) internal {
-    if(tokenIds.length == 1) {
+    uint len = tokenIds.length;
+    if(len == 1) {
       delete tokenIds[0];
     } else {
-      for(uint256 i = 0; i < tokenIds.length; i++) {
+      for(uint256 i = 0; i < len; i++) {
         if(_tokenId == tokenIds[i]) {
-          tokenIds[i] = tokenIds[tokenIds.length - 1];
+          tokenIds[i] = tokenIds[len - 1];
+          break;
         }
       }
     }
@@ -78,12 +83,14 @@ contract Auction is IERC721Receiver, Ownable {
     delete tokenIdToAuctionDetails[_tokenId];
     _updateTokenIds(_tokenId);
 
+    emit tokenIdsEvent (tokenIds);
+
     TokenContract.safeTransferFrom(address(this), auction.seller, _tokenId);
   }
 
   function cancelAll() public onlyOwner {
-    for(uint256 i = 0; i < tokenIds.length; i++) {
-      cancel(tokenIds[i]);
+    while(tokenIds.length > 0) {
+      cancel(tokenIds[0]);
     }
   }
 
