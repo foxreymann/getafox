@@ -7,13 +7,13 @@ import "./Fox.css";
 const getColorFrom8Digits = digits => {
   return prefillWithZeros({
     desiredLength: 6,
-    str: (digits.slice(0,8) % 16**6).toString(16)
+    str: (digits % 16**6).toString(16)
   })
 }
 
 const getOuterInnerFromGenes = genes => {
   const outer = '#' + getColorFrom8Digits(genes.slice(0,8))
-  const inner = '#' + getColorFrom8Digits(genes.slice(8,16))
+  const inner = '#' + getColorFrom8Digits(genes.slice(1,9))
 
   return {
     outer,
