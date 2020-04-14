@@ -1,6 +1,7 @@
 import { observable, action, decorate, when, toJS } from "mobx";
 import randomGenes from "utils/randomGenes";
 import Web3 from "web3";
+import getWeb3 from "utils/getWeb3";
 import prefillWithZeros from "utils/prefillWithZeros";
 
 class TokenStore {
@@ -18,7 +19,7 @@ class TokenStore {
     this.contractsStore = contractsStore;
     when(() => this.contractsStore.tokenInstance, this.setup);
     when(() => this.contractsStore.auctionInstance, this.auctionSetup);
-    this.web3 = new Web3(window.ethereum)
+    this.web3 = getWeb3()
     this.userSetup()
   }
 
