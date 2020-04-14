@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from "mobx-react";
+import 'mobx-react/batchingForReactDom'
 import stores from "./stores";
 import './App.css';
 

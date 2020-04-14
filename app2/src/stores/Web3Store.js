@@ -6,15 +6,21 @@ import { observable, action, decorate, when, toJS } from "mobx";
 class Web3Store {
   tokens = [1,2,3]
   tokensLoading = true
+
   web3
   web3Type
 
-  constructor() {
+  tokenInstance
 
+  constructor() {
+    this.setWeb3()
+    this.setTokenInstance()
+    when(() => this.tokenInstance, this.setTokens);
   }
 
-  getWeb3 = () => {
+  setWeb3 = () => {
     if (window.ethereum) {
+      window.ethereum.autoRefreshOnNetworkChange = false
       window.ethereum.enable()
       this.web3 = new Web3(window.ethereum)
     } else {
@@ -22,6 +28,14 @@ class Web3Store {
       // const wsProvider = 'wss://mainnet.infura.io/ws/v3/a72989064dba446e833e67c44f566420'
       this.web3 = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
     }
+  }
+
+  setTokenInstance = async () => {
+
+  }
+
+  setTokens = async () => {
+
   }
 }
 
