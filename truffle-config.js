@@ -10,6 +10,12 @@ module.exports = {
     }
   },
   networks: {
+    develop: {
+      host: "127.0.0.1",
+      port: 8545,
+      network_id: "*",
+      websockets: true
+    },
     ropsten: {
       provider: function() {
         return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/a72989064dba446e833e67c44f566420")
