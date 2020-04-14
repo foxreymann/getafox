@@ -1,4 +1,4 @@
-import Web3 from "web3";
+import getWeb3 from "utils/getWeb3";
 
 const addresses = {
   private: require('./addresses.json'),
@@ -8,7 +8,11 @@ const addresses = {
 }
 
 export default async () => {
-  const web3 = new Web3(window.ethereum)
-  const networkType = await web3.eth.net.getNetworkType()
-  return addresses[networkType]
+  try {
+    const web3 = getWeb3()
+    const networkType = await web3.eth.net.getNetworkType()
+    return addresses[networkType]
+  } catch (err) {
+    console.log(err)
+  }
 }

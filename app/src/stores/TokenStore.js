@@ -35,13 +35,15 @@ class TokenStore {
   };
 
   async userSetup() {
-    try {
-      const account = await window.ethereum.enable()
-      const defaultAccount = account[0]
-      this.web3.eth.defaultAccount = defaultAccount
-      this.user = this.web3.utils.toChecksumAddress(defaultAccount)
-    } catch (err) {
-      console.error(err)
+    if(window.ethereum) {
+      try {
+        const account = await window.ethereum.enable()
+        const defaultAccount = account[0]
+        this.web3.eth.defaultAccount = defaultAccount
+        this.user = this.web3.utils.toChecksumAddress(defaultAccount)
+      } catch (err) {
+        console.error(err)
+      }
     }
   }
 
