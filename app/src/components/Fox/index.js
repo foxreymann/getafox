@@ -7,7 +7,7 @@ import "./Fox.css";
 const getColorFrom8Digits = digits => {
   return prefillWithZeros({
     desiredLength: 6,
-    str: (digits % 16**6).toString(16)
+    str: (digits % 0x1000000).toString(16)
   })
 }
 
