@@ -60,7 +60,7 @@ class Web3Store {
     const noOfTokens = (await this.tokenInstance.balanceOf(this.web3User)).toNumber()
 
     this.tokens = await Promise.all(
-      [...Array(noOfTokens).keys()].map(async idx => {
+     [...Array(noOfTokens).keys()].map(async idx => {
         const tokenId = (await this.tokenInstance.tokenOfOwnerByIndex(this.web3User, idx)).toString()
         return {
           genes: await this.getGenes(tokenId),
