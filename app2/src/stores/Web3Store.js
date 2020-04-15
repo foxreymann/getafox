@@ -1,5 +1,7 @@
 import Web3 from "web3";
 import { observable, action, decorate, when, toJS } from "mobx";
+import contract from "@truffle/contract";
+import TokenArtifact from "../contracts/Token.json";
 // import prefillWithZeros from "utils/prefillWithZeros";
 // import randomGenes from "utils/randomGenes";
 
@@ -11,13 +13,14 @@ class Web3Store {
   web3User
   web3NetworkType = null
 
-  contactAddresses
+  contractAddresses
   tokenInstance
+  auctionInstance
 
   constructor() {
     this.setWeb3()
     when(() => this.web3NetworkType, () => this.setAddresses())
-    this.setTokenInstance()
+    when(() => this.contractAddresses, () => this.setTokenInstance())
     when(() => this.tokenInstance, () => this.setTokens());
   }
 
@@ -33,7 +36,6 @@ class Web3Store {
         this.web3 = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
       }
       this.web3NetworkType = await this.web3.eth.net.getNetworkType()
-console.log(this.web3NetworkType)
     } catch (err) {
       console.error(err)
       throw err
@@ -41,16 +43,17 @@ console.log(this.web3NetworkType)
   }
 
   setAddresses = () => {
-console.log(this.web3NetworkType)
-    this.contactAddresses = require(`../addresses/addresses.${this.web3NetworkType}`)
-console.log(this.contactAddresses)
+    this.contractAddresses = require(`../addresses/addresses.${this.web3NetworkType}`)
   }
 
   setTokenInstance = async () => {
-
+    const tokenContract = contract(TokenArtifact);
+    tokenContract.setProvider(this.web3.currentProvider);
+    this.tokenInstance = await tokenContract.at(this.contractAddresses.tokenAddress);
   }
 
   setTokens = async () => {
+console.log(this.tokenInstance)
 
   }
 }
@@ -58,7 +61,9 @@ console.log(this.contactAddresses)
 export default decorate(Web3Store, {
   tokens: observable,
   tokensLoading: observable,
-  web3NetworkType: observable
+  web3NetworkType: observable,
+  contractAddresses: observable,
+  tokenInstance: observable,
 
 /*
   owner: observable,
