@@ -8,26 +8,42 @@ class Web3Store {
   tokensLoading = true
 
   web3
-  web3Type
+  web3User
+  web3NetworkType = null
 
+  contactAddresses
   tokenInstance
 
   constructor() {
     this.setWeb3()
+    when(() => this.web3NetworkType, () => this.setAddresses())
     this.setTokenInstance()
-    when(() => this.tokenInstance, this.setTokens);
+    when(() => this.tokenInstance, () => this.setTokens());
   }
 
-  setWeb3 = () => {
-    if (window.ethereum) {
-      window.ethereum.autoRefreshOnNetworkChange = false
-      window.ethereum.enable()
-      this.web3 = new Web3(window.ethereum)
-    } else {
-      const wsProvider = 'ws://localhost:8545'
-      // const wsProvider = 'wss://mainnet.infura.io/ws/v3/a72989064dba446e833e67c44f566420'
-      this.web3 = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
+  setWeb3 = async () => {
+    try {
+      if (window.ethereum) {
+        window.ethereum.autoRefreshOnNetworkChange = false
+        this.web3User = await window.ethereum.enable()
+        this.web3 = new Web3(window.ethereum)
+      } else {
+        const wsProvider = 'ws://localhost:8545'
+        // const wsProvider = 'wss://mainnet.infura.io/ws/v3/a72989064dba446e833e67c44f566420'
+        this.web3 = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
+      }
+      this.web3NetworkType = await this.web3.eth.net.getNetworkType()
+console.log(this.web3NetworkType)
+    } catch (err) {
+      console.error(err)
+      throw err
     }
+  }
+
+  setAddresses = () => {
+console.log(this.web3NetworkType)
+    this.contactAddresses = require(`../addresses/addresses.${this.web3NetworkType}`)
+console.log(this.contactAddresses)
   }
 
   setTokenInstance = async () => {
@@ -41,7 +57,8 @@ class Web3Store {
 
 export default decorate(Web3Store, {
   tokens: observable,
-  tokensLoading: observable
+  tokensLoading: observable,
+  web3NetworkType: observable
 
 /*
   owner: observable,
