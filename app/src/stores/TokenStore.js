@@ -70,7 +70,6 @@ class TokenStore {
 
   getGenes = async (tokenId) => {
     const { tokenInstance } = this.contractsStore
-    let zero = '0'
     let genes = prefillWithZeros({
       desiredLength: 77,
       str: (await tokenInstance.getGenes(tokenId)).toString()
@@ -117,10 +116,11 @@ class TokenStore {
 
   indexedTokens(tokens) {
     return tokens.map(token => {
+console.log(token.tokenId)
       return {
         ...token,
         owner: this.user,
-        index: this.tokenIndex++
+        index: token.tokenId
       }
     })
   }

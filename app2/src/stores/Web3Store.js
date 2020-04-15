@@ -2,11 +2,15 @@ import Web3 from "web3";
 import { observable, action, decorate, when, toJS } from "mobx";
 import contract from "@truffle/contract";
 import TokenArtifact from "../contracts/Token.json";
-// import prefillWithZeros from "utils/prefillWithZeros";
+import prefillWithZeros from "../utils/prefillWithZeros";
 // import randomGenes from "utils/randomGenes";
 
+const config = {
+  genesLength: 77
+}
+
 class Web3Store {
-  tokens = [1,2,3]
+  tokens
   tokensLoading = true
 
   web3
@@ -28,7 +32,7 @@ class Web3Store {
     try {
       if (window.ethereum) {
         window.ethereum.autoRefreshOnNetworkChange = false
-        this.web3User = await window.ethereum.enable()
+        this.web3User = (await window.ethereum.enable())[0]
         this.web3 = new Web3(window.ethereum)
       } else {
         const wsProvider = 'ws://localhost:8545'
@@ -53,9 +57,26 @@ class Web3Store {
   }
 
   setTokens = async () => {
-console.log(this.tokenInstance)
+    const noOfTokens = (await this.tokenInstance.balanceOf(this.web3User)).toNumber()
 
+    this.tokens = await Promise.all(
+      [...Array(noOfTokens).keys()].map(async idx => {
+        const tokenId = (await this.tokenInstance.tokenOfOwnerByIndex(this.web3User, idx)).toString()
+        return {
+          genes: await this.getGenes(tokenId),
+          tokenId,
+          owner: this.web3User
+        }
+      })
+    )
+
+    this.tokensLoading = false
   }
+
+  getGenes = async (tokenId) => prefillWithZeros({
+    desiredLength: config.genesLength,
+    str: (await this.tokenInstance.getGenes(tokenId)).toString()
+  })
 }
 
 export default decorate(Web3Store, {
