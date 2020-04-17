@@ -34,6 +34,15 @@ class Web3Store {
     when(() => this.tokenInstance && this.auctionInstance, () => this.setTokensForSale());
   }
 
+  mint = async () => {
+    try {
+      console.log('mining')
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  }
+
   setWeb3 = async () => {
     try {
       if (window.ethereum) {
@@ -105,7 +114,6 @@ class Web3Store {
     )
 
     this.tokensForSaleLoading = false
-console.log(this.tokensForSale)
   }
 
   getGenes = async (tokenId) => prefillWithZeros({

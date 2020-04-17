@@ -5,7 +5,6 @@ import stores from "./stores";
 import './App.css';
 
 import TokensList from './components/TokensList'
-import OwnerTools from './components/OwnerTools'
 
 function App() {
   return (
@@ -15,8 +14,8 @@ function App() {
           <h1>Get A Fox</h1>
         </header>
         <div className="App-box">
-          <h2>Owner tools</h2>
-          <OwnerTools />
+          <h2>Owner tools:</h2>
+          <TokensList listType='tokens' />
         </div>
         <div className="App-box">
           <h2>Your Foxes</h2>
