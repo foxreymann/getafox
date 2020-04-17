@@ -4,7 +4,7 @@ import contract from "@truffle/contract";
 import TokenArtifact from "../contracts/Token.json";
 import AuctionArtifact from "../contracts/Auction.json";
 import prefillWithZeros from "../utils/prefillWithZeros";
-// import randomGenes from "utils/randomGenes";
+import randomGenes from "../utils/randomGenes";
 
 const config = {
   genesLength: 77
@@ -25,18 +25,38 @@ class Web3Store {
   tokenInstance
   auctionInstance
 
+  owner
+
   constructor() {
     this.setWeb3()
     when(() => this.web3NetworkType, () => this.setAddresses())
     when(() => this.contractAddresses, () => this.setTokenInstance())
     when(() => this.contractAddresses, () => this.setAuctionInstance())
-    when(() => this.tokenInstance, () => this.setTokens());
+    when(() => this.tokenInstance, () => {
+      this.setTokens()
+      this.setOwner()
+    });
     when(() => this.tokenInstance && this.auctionInstance, () => this.setTokensForSale());
   }
 
+  setOwner = async () => {
+    try {
+      this.owner = await this.tokenInstance.owner()
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  }
+
+
   mint = async () => {
     try {
-      console.log('mining')
+      const genes = randomGenes()
+      await this.tokenInstance.mint(genes, {
+        from: this.owner
+      });
+      // TODO: wait for minted event
+      await this.fetchTokens();
     } catch (err) {
       console.error(err)
       throw err
@@ -47,8 +67,10 @@ class Web3Store {
     try {
       if (window.ethereum) {
         window.ethereum.autoRefreshOnNetworkChange = false
-        this.web3User = (await window.ethereum.enable())[0]
         this.web3 = new Web3(window.ethereum)
+        this.web3User = this.web3.utils.toChecksumAddress(
+          (await window.ethereum.enable())[0]
+        )
       } else {
         const wsProvider = 'ws://localhost:8545'
         // const wsProvider = 'wss://mainnet.infura.io/ws/v3/a72989064dba446e833e67c44f566420'
@@ -131,6 +153,8 @@ export default decorate(Web3Store, {
   contractAddresses: observable,
   tokenInstance: observable,
   auctionInstance: observable,
+  web3User: observable,
+  owner: observable,
 
 /*
   owner: observable,

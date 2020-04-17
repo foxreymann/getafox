@@ -14,10 +14,7 @@ function App() {
         <header className="App-header">
           <h1>Get A Fox</h1>
         </header>
-        <div className="App-box">
-          <h2>Owner tools</h2>
-          <OwnerTools />
-        </div>
+        <OwnerTools />
         <div className="App-box">
           <h2>Your Foxes</h2>
           <TokensList listType='tokens' />
