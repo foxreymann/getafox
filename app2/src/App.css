@@ -1,3 +1,8 @@
 * {
   text-align: center;
 }
+
+.App-box {
+  border: 5px #dd0 solid;
+  border-radius: 5%;
+}

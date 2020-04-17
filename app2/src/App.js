@@ -13,7 +13,14 @@ function App() {
         <header className="App-header">
           <h1>Get A Fox</h1>
         </header>
-        <TokensList listType='tokens' />
+        <div className="App-box">
+          <h2>Your Foxes</h2>
+          <TokensList listType='tokens' />
+        </div>
+        <div className="App-box">
+          <h2>Foxes For Sale</h2>
+          <TokensList listType='tokensForSale' />
+        </div>
       </div>
     </Provider>
   );

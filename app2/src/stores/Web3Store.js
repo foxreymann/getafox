@@ -117,6 +117,8 @@ console.log(this.tokensForSale)
 export default decorate(Web3Store, {
   tokens: observable,
   tokensLoading: observable,
+  tokensForSale: observable,
+  tokensForSaleLoading: observable,
   web3NetworkType: observable,
   contractAddresses: observable,
   tokenInstance: observable,

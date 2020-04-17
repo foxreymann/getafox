@@ -4,7 +4,12 @@ import TokenItem from './TokenItem'
 import { inject, observer } from "mobx-react";
 import { Container, Row, Col } from 'react-bootstrap';
 
-const TokensList = ({ web3Store: { tokens, tokensLoading }, listType }) => {
+const TokensList = ({ web3Store: { tokens, tokensLoading, tokensForSale, tokensForSaleLoading }, listType }) => {
+
+  if (listType === 'tokensForSale') {
+    tokens = tokensForSale
+    tokensLoading = tokensForSaleLoading
+  }
 
   return (
     <Container>
