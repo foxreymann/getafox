@@ -14,7 +14,7 @@ const TokenItem = ({ token }) => {
     <>
       <Button variant="light" onClick={() => setModalShow(true)}>
         <Fox genes={token.genes} />
-        <Button variant="info">Sell</Button>
+        <div className="btn btn-info">Sell</div>
       </Button>
 
       <MyVerticallyCenteredModal
