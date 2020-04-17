@@ -12,9 +12,8 @@ const TokensList = ({ web3Store: { tokens, tokensLoading }, listType }) => {
         {tokens && tokens.length ? (
           <Row>
             {tokens.map(token => (
-              <Col xl={3} lg={4} md={6} sm={6} xs={12} >
+              <Col key={token.tokenId} xl={3} lg={4} md={6} sm={6} xs={12} >
                 <TokenItem
-                  key={token.tokenId}
                   token={{token}}
                 />
               </Col>

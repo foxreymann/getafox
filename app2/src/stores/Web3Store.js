@@ -2,6 +2,7 @@ import Web3 from "web3";
 import { observable, action, decorate, when, toJS } from "mobx";
 import contract from "@truffle/contract";
 import TokenArtifact from "../contracts/Token.json";
+import AuctionArtifact from "../contracts/Auction.json";
 import prefillWithZeros from "../utils/prefillWithZeros";
 // import randomGenes from "utils/randomGenes";
 
@@ -12,6 +13,9 @@ const config = {
 class Web3Store {
   tokens
   tokensLoading = true
+
+  tokensForSale
+  tokensForSaleLoading = true
 
   web3
   web3User
@@ -25,7 +29,9 @@ class Web3Store {
     this.setWeb3()
     when(() => this.web3NetworkType, () => this.setAddresses())
     when(() => this.contractAddresses, () => this.setTokenInstance())
+    when(() => this.contractAddresses, () => this.setAuctionInstance())
     when(() => this.tokenInstance, () => this.setTokens());
+    when(() => this.tokenInstance && this.auctionInstance, () => this.setTokensForSale());
   }
 
   setWeb3 = async () => {
@@ -56,6 +62,12 @@ class Web3Store {
     this.tokenInstance = await tokenContract.at(this.contractAddresses.tokenAddress);
   }
 
+  setAuctionInstance = async () => {
+    const auctionContract = contract(AuctionArtifact);
+    auctionContract.setProvider(this.web3.currentProvider);
+    this.auctionInstance = await auctionContract.at(this.contractAddresses.auctionAddress);
+  }
+
   setTokens = async () => {
     const noOfTokens = (await this.tokenInstance.balanceOf(this.web3User)).toNumber()
 
@@ -73,6 +85,29 @@ class Web3Store {
     this.tokensLoading = false
   }
 
+  setTokensForSale = async () => {
+    const tokenIds = (await this.auctionInstance.getTokenIds())
+
+    this.tokensForSale = await Promise.all(
+     tokenIds.map(async tokenId => {
+        tokenId = tokenId.toString()
+        const [genes, auction] = await Promise.all([
+          await this.getGenes(tokenId),
+          await this.auctionInstance.tokenIdToAuctionDetails(tokenId)
+        ])
+        return {
+          genes: await this.getGenes(tokenId),
+          tokenId,
+          owner: this.auctionInstance.address,
+          price: auction.price.toString()
+        }
+      })
+    )
+
+    this.tokensForSaleLoading = false
+console.log(this.tokensForSale)
+  }
+
   getGenes = async (tokenId) => prefillWithZeros({
     desiredLength: config.genesLength,
     str: (await this.tokenInstance.getGenes(tokenId)).toString()
@@ -85,6 +120,7 @@ export default decorate(Web3Store, {
   web3NetworkType: observable,
   contractAddresses: observable,
   tokenInstance: observable,
+  auctionInstance: observable,
 
 /*
   owner: observable,
