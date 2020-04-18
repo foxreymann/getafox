@@ -17,9 +17,10 @@ const TokenItem = ({ token }) => {
         <div className="btn btn-info">Sell</div>
       </Button>
 
-      <MyVerticallyCenteredModal
+      <FoxModal
         show={modalShow}
         onHide={() => setModalShow(false)}
+        token={token}
       />
     </>
   )
@@ -27,26 +28,22 @@ const TokenItem = ({ token }) => {
 
 export default inject("web3Store")(observer(TokenItem));
 
-function MyVerticallyCenteredModal(props) {
+function FoxModal(props) {
   return (
     <Modal
       {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      className="text-center"
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+        <Modal.Title className="w-100" id="contained-modal-title-vcenter">
+          Fox #{props.token.tokenId}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+        <Fox genes={props.token.genes} className="w-100" />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
