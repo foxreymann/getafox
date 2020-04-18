@@ -26,4 +26,5 @@ const TokenItem = ({ token }) => {
   )
 }
 
+// todo: do we need this inject?
 export default inject("web3Store")(observer(TokenItem));

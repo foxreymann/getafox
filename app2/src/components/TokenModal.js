@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import Web3 from "web3";
 import Fox from './Fox'
 import { inject, observer } from "mobx-react";
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Container, Row, Col, InputGroup, FormControl, Form } from 'react-bootstrap';
 
-const TokenModal = ({ show, onHide, token }) => {
+const TokenModal = ({ show, onHide, token, web3Store: { web3User} }) => {
   const [modalShow, setModalShow] = React.useState(false);
+
+  let priceInput = React.createRef();
+  let unitEtherRadio = React.createRef();
+
   return (
     <Modal
       show={show}
@@ -24,6 +28,22 @@ const TokenModal = ({ show, onHide, token }) => {
         <Fox genes={token.genes} className="w-100" />
       </Modal.Body>
       <Modal.Footer>
+        { token.owner === web3User &&
+          <Container>
+            <Row>
+              <Col lg={4}>
+                <FormControl ref={priceInput} placeholder="Type a price..." type="number" className="pull-right"/>
+              </Col>
+              <Col lg={4}>
+                <Form.Check ref={unitEtherRadio} label='ether' type="radio" name="unit" defaultChecked />
+                <Form.Check type="radio" label="Gwei" name="unit" />
+              </Col>
+              <Col lg={4}>
+                button
+              </Col>
+            </Row>
+          </Container>
+        }
         <Button onClick={onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
