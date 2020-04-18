@@ -28,10 +28,11 @@ const TokenItem = ({ token }) => {
 
 export default inject("web3Store")(observer(TokenItem));
 
-function FoxModal(props) {
+function FoxModal({ show, onHide, token}) {
   return (
     <Modal
-      {...props}
+      show={show}
+      onHide={onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -39,14 +40,14 @@ function FoxModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title className="w-100" id="contained-modal-title-vcenter">
-          Fox #{props.token.tokenId}
+          Fox #{token.tokenId}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Fox genes={props.token.genes} className="w-100" />
+        <Fox genes={token.genes} className="w-100" />
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
