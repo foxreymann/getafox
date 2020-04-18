@@ -75,6 +75,7 @@ class Web3Store {
         const wsProvider = 'ws://localhost:8545'
         // const wsProvider = 'wss://mainnet.infura.io/ws/v3/a72989064dba446e833e67c44f566420'
         this.web3 = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
+        this.tokensLoading = false
       }
       this.web3NetworkType = await this.web3.eth.net.getNetworkType()
     } catch (err) {
