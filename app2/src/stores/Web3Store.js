@@ -35,8 +35,41 @@ class Web3Store {
     when(() => this.tokenInstance, () => {
       this.setTokens()
       this.setOwner()
+      this.tokenInstanceHandleEvents()
     });
     when(() => this.tokenInstance && this.auctionInstance, () => this.setTokensForSale());
+  }
+
+  tokenInstanceHandleEvents = async () => {
+    try {
+      console.log(this.tokenInstance.Transfer)
+      this.tokenInstance.Transfer({}, (error, event) => {
+        console.log(event)
+
+        if(event.args.from === '0x0000000000000000000000000000000000000000') {
+          console.log('token minted')
+          this.setTokens()
+        }
+
+      })
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  }
+
+  tokenInstanceHandleTransfer = async (error, event) => {
+    try {
+      console.log(event)
+
+      if(event.args.from === '0x0000000000000000000000000000000000000000') {
+        console.log('token minted')
+        this.setTokens()
+      }
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
   }
 
   setOwner = async () => {
@@ -54,9 +87,9 @@ class Web3Store {
       const genes = randomGenes()
       await this.tokenInstance.mint(genes, {
         from: this.owner
-      });
+      })
       // TODO: wait for minted event
-      await this.fetchTokens();
+      // await this.fetchTokens();
     } catch (err) {
       console.error(err)
       throw err
