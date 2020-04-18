@@ -58,6 +58,8 @@ class Web3Store {
 
       if(event.args.from === '0x0000000000000000000000000000000000000000') {
         console.log('token minted')
+        await this.setTokenInstance()
+        await this.setTokens()
       }
     } catch (err) {
       console.error(err)
@@ -81,8 +83,6 @@ class Web3Store {
       await this.tokenInstance.mint(genes, {
         from: this.owner
       })
-      // TODO: wait for minted event
-      // await this.fetchTokens();
     } catch (err) {
       console.error(err)
       throw err
