@@ -44,13 +44,7 @@ class Web3Store {
     try {
       console.log(this.tokenInstance.Transfer)
       this.tokenInstance.Transfer({}, (error, event) => {
-        console.log(event)
-
-        if(event.args.from === '0x0000000000000000000000000000000000000000') {
-          console.log('token minted')
-          this.setTokens()
-        }
-
+        this.tokenInstanceHandleTransfer(error, event)
       })
     } catch (err) {
       console.error(err)
@@ -64,7 +58,6 @@ class Web3Store {
 
       if(event.args.from === '0x0000000000000000000000000000000000000000') {
         console.log('token minted')
-        this.setTokens()
       }
     } catch (err) {
       console.error(err)
@@ -134,20 +127,25 @@ class Web3Store {
   }
 
   setTokens = async () => {
-    const noOfTokens = (await this.tokenInstance.balanceOf(this.web3User)).toNumber()
+    try {
+      const noOfTokens = (await this.tokenInstance.balanceOf(this.web3User)).toNumber()
 
-    this.tokens = await Promise.all(
-     [...Array(noOfTokens).keys()].map(async idx => {
-        const tokenId = (await this.tokenInstance.tokenOfOwnerByIndex(this.web3User, idx)).toString()
-        return {
-          genes: await this.getGenes(tokenId),
-          tokenId,
-          owner: this.web3User
-        }
-      })
-    )
+      this.tokens = await Promise.all(
+       [...Array(noOfTokens).keys()].map(async idx => {
+          const tokenId = (await this.tokenInstance.tokenOfOwnerByIndex(this.web3User, idx)).toString()
+          return {
+            genes: await this.getGenes(tokenId),
+            tokenId,
+            owner: this.web3User
+          }
+        })
+      )
 
-    this.tokensLoading = false
+      this.tokensLoading = false
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
   }
 
   setTokensForSale = async () => {
