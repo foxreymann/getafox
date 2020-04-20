@@ -27,7 +27,7 @@ const Fox = ({ genes }) => {
   const ears = '#' + ColorMixer.mix(outer, inner)
 
   return (
-    <div className="fox-wrapper">
+    <div className="fox-wrapper mb-3">
       <div className="fox">
         <div className="head" style={{ background: inner }}>
           <div className="eye"></div>

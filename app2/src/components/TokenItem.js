@@ -5,7 +5,7 @@ import TokenModal from './TokenModal'
 import { inject, observer } from "mobx-react";
 import { Button } from 'react-bootstrap';
 
-const TokenItem = ({ token }) => {
+const TokenItem = ({ token, web3Store: { web3User, auctionInstance }  }) => {
   const [modalShow, setModalShow] = React.useState(false);
   token = token.token
 
@@ -13,8 +13,9 @@ const TokenItem = ({ token }) => {
   return (
     <>
       <Button variant="light" onClick={() => setModalShow(true)}>
-        <Fox genes={token.genes} />
-        <div className="btn btn-info">Sell</div>
+        <Fox genes={token.genes} className="mb-3" />
+        { web3User === token.owner && <div className="btn btn-info">Sell</div> }
+        { token.owner === auctionInstance.address && <div className="btn btn-success">Buy</div> }
       </Button>
 
       <TokenModal
@@ -26,5 +27,4 @@ const TokenItem = ({ token }) => {
   )
 }
 
-// todo: do we need this inject?
 export default inject("web3Store")(observer(TokenItem));
