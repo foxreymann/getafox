@@ -2,17 +2,13 @@ import React, { useState } from 'react';
 import Web3 from "web3";
 import Fox from './Fox'
 import TokenModal from './TokenModal'
+import Price from './Price'
 import { inject, observer } from "mobx-react";
 import { Button, Alert, Badge } from 'react-bootstrap';
 
 const TokenItem = ({ token, web3Store: { web3User, auctionInstance }  }) => {
   const [modalShow, setModalShow] = React.useState(false);
   token = token.token
-  let price
-  if (token.price) {
-    price = Web3.utils.fromWei(token.price)
-  }
-
 
   return (
     <>
@@ -21,10 +17,7 @@ const TokenItem = ({ token, web3Store: { web3User, auctionInstance }  }) => {
         { web3User === token.owner && <div className="btn btn-info">Sell</div> }
         { token.owner === auctionInstance.address &&
           <>
-          <Alert variant='primary'>
-            Price: { price } ETH
-            { price < 0.01 && <Badge className="ml-1" variant="warning">Bargain</Badge> }
-          </Alert>
+          <Price price={token.price} />
           <div class="btn btn-info">Buy</div>
           </>
         }

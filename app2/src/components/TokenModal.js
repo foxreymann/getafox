@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Web3 from "web3";
 import Fox from './Fox'
+import Price from './Price'
 import { inject, observer } from "mobx-react";
 import { Button, Modal, Container, Row, Col, InputGroup, FormControl, Form } from 'react-bootstrap';
 
@@ -62,6 +63,7 @@ const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction, 
           <Container>
             <Row>
               <Col>
+                <Price price={token.price} />
                 <Button variant='info' onClick={async () => {
                   await buy({tokenId: token.tokenId})
                   onHide()
