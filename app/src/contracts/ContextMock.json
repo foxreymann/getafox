@@ -1,0 +1,1824 @@
+{
+  "contractName": "ContextMock",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "integerValue",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "stringValue",
+          "type": "string"
+        }
+      ],
+      "name": "Data",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "Sender",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "msgSender",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "integerValue",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "stringValue",
+          "type": "string"
+        }
+      ],
+      "name": "msgData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.4+commit.1dca32f3\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"integerValue\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"stringValue\",\"type\":\"string\"}],\"name\":\"Data\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"Sender\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"integerValue\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"stringValue\",\"type\":\"string\"}],\"name\":\"msgData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"msgSender\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/user/code/foxreymann/truffle-kittens/contracts/openzeppelin-contracts/contracts/mocks/ContextMock.sol\":\"ContextMock\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/user/code/foxreymann/truffle-kittens/contracts/openzeppelin-contracts/contracts/GSN/Context.sol\":{\"keccak256\":\"0x0de74dfa6b37943c1b834cbd8fb7a8d052e5ff80c7adb33692102dd6cd2985e9\",\"urls\":[\"bzz-raw://9d2d827fcf4a838f5821732c0acd6a40d21c2a5a2cfe2563feec91465f47bb60\",\"dweb:/ipfs/Qmex3wMKf5Sghbfvr288RUg1kP2uAyTMf11w83WbMbpQQc\"]},\"/home/user/code/foxreymann/truffle-kittens/contracts/openzeppelin-contracts/contracts/mocks/ContextMock.sol\":{\"keccak256\":\"0xdd1170a71f173c19030d383bffbadab34a8e8f71043e3327027bdacbb89ebd4f\",\"urls\":[\"bzz-raw://05bc8e7060b4cfe8c393990e440742c7d501865391cd8b9925542df5c3737dde\",\"dweb:/ipfs/QmUu4PiGtFwQsoNyaTPCgDBgLgeff9HpG1ZxTzKgJzkVoi\"]}},\"version\":1}",
+  "bytecode": "0x608060405261031d806100136000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c8063376bf2621461003b578063d737d0c714610100575b600080fd5b6100fe6004803603604081101561005157600080fd5b81019080803590602001909291908035906020019064010000000081111561007857600080fd5b82018360208201111561008a57600080fd5b803590602001918460018302840111640100000000831117156100ac57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061010a565b005b610108610226565b005b7faf235354a0a47c91ee171961326335cb2d1a8e55b8a89859b0e61eb049e50ea0610133610292565b8383604051808060200184815260200180602001838103835286818151815260200191508051906020019080838360005b8381101561017f578082015181840152602081019050610164565b50505050905090810190601f1680156101ac5780820380516001836020036101000a031916815260200191505b50838103825284818151815260200191508051906020019080838360005b838110156101e55780820151818401526020810190506101ca565b50505050905090810190601f1680156102125780820380516001836020036101000a031916815260200191505b509550505050505060405180910390a15050565b7fd6558c3ed910d959271054471fd1c326679d9fece99c5091b00ed89627cf2bfc61024f6102df565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390a1565b60606000368080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050905090565b60003390509056fea2646970667358221220a67ec756b878b41d96d43908a5a03f26bc9efdec200b8fe9ca89ce08a3a7b13364736f6c63430006040033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c8063376bf2621461003b578063d737d0c714610100575b600080fd5b6100fe6004803603604081101561005157600080fd5b81019080803590602001909291908035906020019064010000000081111561007857600080fd5b82018360208201111561008a57600080fd5b803590602001918460018302840111640100000000831117156100ac57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061010a565b005b610108610226565b005b7faf235354a0a47c91ee171961326335cb2d1a8e55b8a89859b0e61eb049e50ea0610133610292565b8383604051808060200184815260200180602001838103835286818151815260200191508051906020019080838360005b8381101561017f578082015181840152602081019050610164565b50505050905090810190601f1680156101ac5780820380516001836020036101000a031916815260200191505b50838103825284818151815260200191508051906020019080838360005b838110156101e55780820151818401526020810190506101ca565b50505050905090810190601f1680156102125780820380516001836020036101000a031916815260200191505b509550505050505060405180910390a15050565b7fd6558c3ed910d959271054471fd1c326679d9fece99c5091b00ed89627cf2bfc61024f6102df565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390a1565b60606000368080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050905090565b60003390509056fea2646970667358221220a67ec756b878b41d96d43908a5a03f26bc9efdec200b8fe9ca89ce08a3a7b13364736f6c63430006040033",
+  "sourceMap": "55:360:32:-:0;;;;;;;;;",
+  "deployedSourceMap": "55:360:32:-:0;;;;5:9:-1;2:2;;;27:1;24;17:12;2:2;55:360:32;;;;;;;;;;;;;;;;;;;;;12:1:-1;9;2:12;275:138:32;;;;;;15:2:-1;10:3;7:11;4:2;;;31:1;28;21:12;4:2;275:138:32;;;;;;;;;;;;;;;;;;;27:11:-1;14;11:28;8:2;;;52:1;49;42:12;8:2;275:138:32;;41:9:-1;34:4;18:14;14:25;11:40;8:2;;;64:1;61;54:12;8:2;275:138:32;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;275:138:32;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;275:138:32;;;;;;;;;;;;;;;:::i;:::-;;128:70;;;:::i;:::-;;275:138;363:43;368:10;:8;:10::i;:::-;380:12;394:11;363:43;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;363:43:32;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;363:43:32;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;275:138;;:::o;128:70::-;171:20;178:12;:10;:12::i;:::-;171:20;;;;;;;;;;;;;;;;;;;;;;128:70::o;845:230:5:-;896:12;1060:8;;1053:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;1053:15:5;;;;;;;;845:230;:::o;735:104::-;788:15;822:10;815:17;;735:104;:::o",
+  "source": "pragma solidity ^0.6.0;\n\nimport \"../GSN/Context.sol\";\n\ncontract ContextMock is Context {\n    event Sender(address sender);\n\n    function msgSender() public {\n        emit Sender(_msgSender());\n    }\n\n    event Data(bytes data, uint256 integerValue, string stringValue);\n\n    function msgData(uint256 integerValue, string memory stringValue) public {\n        emit Data(_msgData(), integerValue, stringValue);\n    }\n}\n\ncontract ContextMockCaller {\n    function callSender(ContextMock context) public {\n        context.msgSender();\n    }\n\n    function callData(ContextMock context, uint256 integerValue, string memory stringValue) public {\n        context.msgData(integerValue, stringValue);\n    }\n}\n",
+  "sourcePath": "/home/user/code/foxreymann/truffle-kittens/contracts/openzeppelin-contracts/contracts/mocks/ContextMock.sol",
+  "ast": {
+    "absolutePath": "/home/user/code/foxreymann/truffle-kittens/contracts/openzeppelin-contracts/contracts/mocks/ContextMock.sol",
+    "exportedSymbols": {
+      "ContextMock": [
+        3698
+      ],
+      "ContextMockCaller": [
+        3727
+      ]
+    },
+    "id": 3728,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3658,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:32"
+      },
+      {
+        "absolutePath": "/home/user/code/foxreymann/truffle-kittens/contracts/openzeppelin-contracts/contracts/GSN/Context.sol",
+        "file": "../GSN/Context.sol",
+        "id": 3659,
+        "nodeType": "ImportDirective",
+        "scope": 3728,
+        "sourceUnit": 260,
+        "src": "25:28:32",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3660,
+              "name": "Context",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 259,
+              "src": "79:7:32",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Context_$259",
+                "typeString": "contract Context"
+              }
+            },
+            "id": 3661,
+            "nodeType": "InheritanceSpecifier",
+            "src": "79:7:32"
+          }
+        ],
+        "contractDependencies": [
+          259
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3698,
+        "linearizedBaseContracts": [
+          3698,
+          259
+        ],
+        "name": "ContextMock",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 3665,
+            "name": "Sender",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 3664,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3663,
+                  "indexed": false,
+                  "name": "sender",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3665,
+                  "src": "106:14:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 3662,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "106:7:32",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "105:16:32"
+            },
+            "src": "93:29:32"
+          },
+          {
+            "body": {
+              "id": 3673,
+              "nodeType": "Block",
+              "src": "156:42:32",
+              "statements": [
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 3669,
+                          "name": "_msgSender",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 247,
+                          "src": "178:10:32",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$__$returns$_t_address_payable_$",
+                            "typeString": "function () view returns (address payable)"
+                          }
+                        },
+                        "id": 3670,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "178:12:32",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 3668,
+                      "name": "Sender",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3665,
+                      "src": "171:6:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 3671,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "171:20:32",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3672,
+                  "nodeType": "EmitStatement",
+                  "src": "166:25:32"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "d737d0c7",
+            "id": 3674,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "msgSender",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3666,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "146:2:32"
+            },
+            "returnParameters": {
+              "id": 3667,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "156:0:32"
+            },
+            "scope": 3698,
+            "src": "128:70:32",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 3682,
+            "name": "Data",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 3681,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3676,
+                  "indexed": false,
+                  "name": "data",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3682,
+                  "src": "215:10:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 3675,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "215:5:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3678,
+                  "indexed": false,
+                  "name": "integerValue",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3682,
+                  "src": "227:20:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3677,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "227:7:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3680,
+                  "indexed": false,
+                  "name": "stringValue",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3682,
+                  "src": "249:18:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 3679,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "249:6:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "214:54:32"
+            },
+            "src": "204:65:32"
+          },
+          {
+            "body": {
+              "id": 3696,
+              "nodeType": "Block",
+              "src": "348:65:32",
+              "statements": [
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 3690,
+                          "name": "_msgData",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 258,
+                          "src": "368:8:32",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$__$returns$_t_bytes_memory_ptr_$",
+                            "typeString": "function () view returns (bytes memory)"
+                          }
+                        },
+                        "id": 3691,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "368:10:32",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3692,
+                        "name": "integerValue",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3684,
+                        "src": "380:12:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3693,
+                        "name": "stringValue",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3686,
+                        "src": "394:11:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "id": 3689,
+                      "name": "Data",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3682,
+                      "src": "363:4:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_bytes_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bytes memory,uint256,string memory)"
+                      }
+                    },
+                    "id": 3694,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "363:43:32",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3695,
+                  "nodeType": "EmitStatement",
+                  "src": "358:48:32"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "376bf262",
+            "id": 3697,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "msgData",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3687,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3684,
+                  "name": "integerValue",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3697,
+                  "src": "292:20:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3683,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "292:7:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3686,
+                  "name": "stringValue",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3697,
+                  "src": "314:25:32",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 3685,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "314:6:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "291:49:32"
+            },
+            "returnParameters": {
+              "id": 3688,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "348:0:32"
+            },
+            "scope": 3698,
+            "src": "275:138:32",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3728,
+        "src": "55:360:32"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3727,
+        "linearizedBaseContracts": [
+          3727
+        ],
+        "name": "ContextMockCaller",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 3708,
+              "nodeType": "Block",
+              "src": "498:36:32",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 3703,
+                        "name": "context",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3700,
+                        "src": "508:7:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ContextMock_$3698",
+                          "typeString": "contract ContextMock"
+                        }
+                      },
+                      "id": 3705,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "msgSender",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3674,
+                      "src": "508:17:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                        "typeString": "function () external"
+                      }
+                    },
+                    "id": 3706,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "508:19:32",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3707,
+                  "nodeType": "ExpressionStatement",
+                  "src": "508:19:32"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "3207ad96",
+            "id": 3709,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "callSender",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3701,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3700,
+                  "name": "context",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3709,
+                  "src": "470:19:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ContextMock_$3698",
+                    "typeString": "contract ContextMock"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 3699,
+                    "name": "ContextMock",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3698,
+                    "src": "470:11:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ContextMock_$3698",
+                      "typeString": "contract ContextMock"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "469:21:32"
+            },
+            "returnParameters": {
+              "id": 3702,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "498:0:32"
+            },
+            "scope": 3727,
+            "src": "450:84:32",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 3725,
+              "nodeType": "Block",
+              "src": "635:59:32",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 3721,
+                        "name": "integerValue",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3713,
+                        "src": "661:12:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3722,
+                        "name": "stringValue",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3715,
+                        "src": "675:11:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 3718,
+                        "name": "context",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3711,
+                        "src": "645:7:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ContextMock_$3698",
+                          "typeString": "contract ContextMock"
+                        }
+                      },
+                      "id": 3720,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "msgData",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3697,
+                      "src": "645:15:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (uint256,string memory) external"
+                      }
+                    },
+                    "id": 3723,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "645:42:32",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3724,
+                  "nodeType": "ExpressionStatement",
+                  "src": "645:42:32"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "00860459",
+            "id": 3726,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "callData",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3716,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3711,
+                  "name": "context",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3726,
+                  "src": "558:19:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ContextMock_$3698",
+                    "typeString": "contract ContextMock"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 3710,
+                    "name": "ContextMock",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3698,
+                    "src": "558:11:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ContextMock_$3698",
+                      "typeString": "contract ContextMock"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3713,
+                  "name": "integerValue",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3726,
+                  "src": "579:20:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3712,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "579:7:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3715,
+                  "name": "stringValue",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3726,
+                  "src": "601:25:32",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 3714,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "601:6:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "557:70:32"
+            },
+            "returnParameters": {
+              "id": 3717,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "635:0:32"
+            },
+            "scope": 3727,
+            "src": "540:154:32",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3728,
+        "src": "417:279:32"
+      }
+    ],
+    "src": "0:697:32"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/user/code/foxreymann/truffle-kittens/contracts/openzeppelin-contracts/contracts/mocks/ContextMock.sol",
+    "exportedSymbols": {
+      "ContextMock": [
+        3698
+      ],
+      "ContextMockCaller": [
+        3727
+      ]
+    },
+    "id": 3728,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3658,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:32"
+      },
+      {
+        "absolutePath": "/home/user/code/foxreymann/truffle-kittens/contracts/openzeppelin-contracts/contracts/GSN/Context.sol",
+        "file": "../GSN/Context.sol",
+        "id": 3659,
+        "nodeType": "ImportDirective",
+        "scope": 3728,
+        "sourceUnit": 260,
+        "src": "25:28:32",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 3660,
+              "name": "Context",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 259,
+              "src": "79:7:32",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Context_$259",
+                "typeString": "contract Context"
+              }
+            },
+            "id": 3661,
+            "nodeType": "InheritanceSpecifier",
+            "src": "79:7:32"
+          }
+        ],
+        "contractDependencies": [
+          259
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3698,
+        "linearizedBaseContracts": [
+          3698,
+          259
+        ],
+        "name": "ContextMock",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 3665,
+            "name": "Sender",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 3664,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3663,
+                  "indexed": false,
+                  "name": "sender",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3665,
+                  "src": "106:14:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 3662,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "106:7:32",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "105:16:32"
+            },
+            "src": "93:29:32"
+          },
+          {
+            "body": {
+              "id": 3673,
+              "nodeType": "Block",
+              "src": "156:42:32",
+              "statements": [
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 3669,
+                          "name": "_msgSender",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 247,
+                          "src": "178:10:32",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$__$returns$_t_address_payable_$",
+                            "typeString": "function () view returns (address payable)"
+                          }
+                        },
+                        "id": 3670,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "178:12:32",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 3668,
+                      "name": "Sender",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3665,
+                      "src": "171:6:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 3671,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "171:20:32",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3672,
+                  "nodeType": "EmitStatement",
+                  "src": "166:25:32"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "d737d0c7",
+            "id": 3674,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "msgSender",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3666,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "146:2:32"
+            },
+            "returnParameters": {
+              "id": 3667,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "156:0:32"
+            },
+            "scope": 3698,
+            "src": "128:70:32",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 3682,
+            "name": "Data",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 3681,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3676,
+                  "indexed": false,
+                  "name": "data",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3682,
+                  "src": "215:10:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 3675,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "215:5:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3678,
+                  "indexed": false,
+                  "name": "integerValue",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3682,
+                  "src": "227:20:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3677,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "227:7:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3680,
+                  "indexed": false,
+                  "name": "stringValue",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3682,
+                  "src": "249:18:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 3679,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "249:6:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "214:54:32"
+            },
+            "src": "204:65:32"
+          },
+          {
+            "body": {
+              "id": 3696,
+              "nodeType": "Block",
+              "src": "348:65:32",
+              "statements": [
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 3690,
+                          "name": "_msgData",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 258,
+                          "src": "368:8:32",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$__$returns$_t_bytes_memory_ptr_$",
+                            "typeString": "function () view returns (bytes memory)"
+                          }
+                        },
+                        "id": 3691,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "368:10:32",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3692,
+                        "name": "integerValue",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3684,
+                        "src": "380:12:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3693,
+                        "name": "stringValue",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3686,
+                        "src": "394:11:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "id": 3689,
+                      "name": "Data",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3682,
+                      "src": "363:4:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_bytes_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bytes memory,uint256,string memory)"
+                      }
+                    },
+                    "id": 3694,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "363:43:32",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3695,
+                  "nodeType": "EmitStatement",
+                  "src": "358:48:32"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "376bf262",
+            "id": 3697,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "msgData",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3687,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3684,
+                  "name": "integerValue",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3697,
+                  "src": "292:20:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3683,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "292:7:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3686,
+                  "name": "stringValue",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3697,
+                  "src": "314:25:32",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 3685,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "314:6:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "291:49:32"
+            },
+            "returnParameters": {
+              "id": 3688,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "348:0:32"
+            },
+            "scope": 3698,
+            "src": "275:138:32",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3728,
+        "src": "55:360:32"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3727,
+        "linearizedBaseContracts": [
+          3727
+        ],
+        "name": "ContextMockCaller",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 3708,
+              "nodeType": "Block",
+              "src": "498:36:32",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 3703,
+                        "name": "context",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3700,
+                        "src": "508:7:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ContextMock_$3698",
+                          "typeString": "contract ContextMock"
+                        }
+                      },
+                      "id": 3705,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "msgSender",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3674,
+                      "src": "508:17:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                        "typeString": "function () external"
+                      }
+                    },
+                    "id": 3706,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "508:19:32",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3707,
+                  "nodeType": "ExpressionStatement",
+                  "src": "508:19:32"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "3207ad96",
+            "id": 3709,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "callSender",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3701,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3700,
+                  "name": "context",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3709,
+                  "src": "470:19:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ContextMock_$3698",
+                    "typeString": "contract ContextMock"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 3699,
+                    "name": "ContextMock",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3698,
+                    "src": "470:11:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ContextMock_$3698",
+                      "typeString": "contract ContextMock"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "469:21:32"
+            },
+            "returnParameters": {
+              "id": 3702,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "498:0:32"
+            },
+            "scope": 3727,
+            "src": "450:84:32",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 3725,
+              "nodeType": "Block",
+              "src": "635:59:32",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 3721,
+                        "name": "integerValue",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3713,
+                        "src": "661:12:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 3722,
+                        "name": "stringValue",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3715,
+                        "src": "675:11:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 3718,
+                        "name": "context",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3711,
+                        "src": "645:7:32",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ContextMock_$3698",
+                          "typeString": "contract ContextMock"
+                        }
+                      },
+                      "id": 3720,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "msgData",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3697,
+                      "src": "645:15:32",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (uint256,string memory) external"
+                      }
+                    },
+                    "id": 3723,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "645:42:32",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 3724,
+                  "nodeType": "ExpressionStatement",
+                  "src": "645:42:32"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "00860459",
+            "id": 3726,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "callData",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 3716,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3711,
+                  "name": "context",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3726,
+                  "src": "558:19:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ContextMock_$3698",
+                    "typeString": "contract ContextMock"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 3710,
+                    "name": "ContextMock",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3698,
+                    "src": "558:11:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ContextMock_$3698",
+                      "typeString": "contract ContextMock"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3713,
+                  "name": "integerValue",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3726,
+                  "src": "579:20:32",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3712,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "579:7:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3715,
+                  "name": "stringValue",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 3726,
+                  "src": "601:25:32",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 3714,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "601:6:32",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "557:70:32"
+            },
+            "returnParameters": {
+              "id": 3717,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "635:0:32"
+            },
+            "scope": 3727,
+            "src": "540:154:32",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3728,
+        "src": "417:279:32"
+      }
+    ],
+    "src": "0:697:32"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.4+commit.1dca32f3.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-03-13T20:12:19.881Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

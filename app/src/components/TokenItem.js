@@ -18,7 +18,7 @@ const TokenItem = ({ token, web3Store: { web3User, auctionInstance }  }) => {
         { token.owner === auctionInstance.address &&
           <>
           <Price price={token.price} />
-          <div class="btn btn-info">Buy</div>
+          <div className="btn btn-info">Buy</div>
           </>
         }
       </Button>
