@@ -4,7 +4,7 @@ import Fox from './Fox'
 import { inject, observer } from "mobx-react";
 import { Button, Modal, Container, Row, Col, InputGroup, FormControl, Form } from 'react-bootstrap';
 
-const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction } }) => {
+const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction, auctionInstance, buy } }) => {
   const [modalShow, setModalShow] = React.useState(false);
 
   let priceInput = React.createRef();
@@ -52,7 +52,20 @@ const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction }
             </Row>
             <Row>
               <Col>
-                <Button onClick={putOnAuctionClick}>Put on auction</Button>
+                <Button vairant='info' onClick={putOnAuctionClick}>Put on auction</Button>
+              </Col>
+            </Row>
+          </Container>
+        }
+
+        { token.owner === auctionInstance.address &&
+          <Container>
+            <Row>
+              <Col>
+                <Button variant='info' onClick={async () => {
+                  await buy({tokenId: token.tokenId})
+                  onHide()
+                }}>Buy</Button>
               </Col>
             </Row>
           </Container>

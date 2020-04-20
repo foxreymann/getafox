@@ -110,6 +110,21 @@ class Web3Store {
     }
   }
 
+  buy = async({ tokenId }) => {
+    try {
+      await this.auctionInstance.bid(tokenId, {
+        from: this.web3User,
+        value: (toJS(this.tokensForSale).filter(token => token.tokenId === tokenId))[0].price
+      });
+
+      // wait for the purchase
+      // await this.fetchTokens();
+      // await this.fetchTokensForSale();
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   setOwner = async () => {
     try {
       this.owner = await this.tokenInstance.owner()
