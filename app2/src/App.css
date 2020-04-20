@@ -8,7 +8,7 @@
   margin: 10px;
 }
 
-.App-box .btn-light {
+.App-box .btn-light, .modal-body {
   background-color: #E7DCD9;
 }
 
