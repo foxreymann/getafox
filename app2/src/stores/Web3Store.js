@@ -69,6 +69,13 @@ class Web3Store {
         await this.setTokenInstance()
         await this.setTokens()
       }
+
+      if(event.returnValues.to === this.web3User) {
+        console.log('token transfered to current user')
+        await this.setTokenInstance()
+        await this.setTokens()
+        await this.setTokensForSale()
+      }
     } catch (err) {
       console.error(err)
       throw err
