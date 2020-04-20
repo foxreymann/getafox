@@ -11,7 +11,7 @@ function App() {
   return (
     <Provider {...stores}>
       <div className="App">
-        <header className="App-header">
+        <header className="App-header my-3">
           <h1>Get A Fox</h1>
         </header>
         <OwnerTools />
