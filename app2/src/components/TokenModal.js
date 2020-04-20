@@ -52,7 +52,7 @@ const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction, 
             </Row>
             <Row>
               <Col>
-                <Button vairant='info' onClick={putOnAuctionClick}>Put on auction</Button>
+                <Button variant='info' onClick={putOnAuctionClick}>Put on auction</Button>
               </Col>
             </Row>
           </Container>

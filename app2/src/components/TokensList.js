@@ -19,12 +19,23 @@ const TokensList = ({ web3Store: { tokens, tokensLoading, tokensForSale, tokensF
   }
 
   if (!tokensLoading && (!tokens || (tokens && tokens.length === 0))) {
-    return (
-      <>
-        <Alert variant='info'>You don't have any Foxes yet.</Alert>
-        <Alert variant='warning'>Why not get some!</Alert>
-      </>
-    )
+
+    if (listType === 'tokens') {
+      return (
+        <>
+          <Alert variant='info'>You don't have any Foxes yet.</Alert>
+          <Alert variant='warning'>Why not get some!</Alert>
+        </>
+      )
+    }
+
+    if (listType === 'tokensForSale') {
+      return (
+        <>
+          <Alert variant='info'>No Foxes on the market</Alert>
+        </>
+      )
+    }
   }
 
   if (!tokensLoading && tokens && tokens.length) {
