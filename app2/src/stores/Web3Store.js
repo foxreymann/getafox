@@ -13,6 +13,7 @@ const config = {
 class Web3Store {
   tokens
   tokensLoading = true
+  tokenPrices = new Map()
 
   tokensForSale
   tokensForSaleLoading = true
@@ -42,9 +43,16 @@ class Web3Store {
 
   tokenInstanceHandleEvents = async () => {
     try {
+      // listening to Transfer
       console.log(this.tokenInstance.Transfer)
       this.tokenInstance.Transfer({}, (error, event) => {
         this.tokenInstanceHandleTransfer(error, event)
+      })
+
+      // listening to Approve
+      console.log(this.tokenInstance.Approve)
+      this.tokenInstance.Approval({}, (error, event) => {
+        this.tokenInstanceHandleApproval(error, event)
       })
     } catch (err) {
       console.error(err)
@@ -61,6 +69,41 @@ class Web3Store {
         await this.setTokenInstance()
         await this.setTokens()
       }
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  }
+
+  tokenInstanceHandleApproval = async (error, event) => {
+    try {
+      console.log(event)
+      if(
+        event.returnValues.approved === this.auctionInstance.address &&
+        event.returnValues.owner === this.web3User
+      ) {
+        await this.setAuctionInstance()
+        await this.auctionInstance.createAuction(event.returnValues.tokenId, this.tokenPrices.get(event.returnValues.tokenId), {
+          from: this.web3User
+        })
+
+        // refetch all tokens
+        await this.setTokens()
+        await this.setTokensForSale()
+      }
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  }
+
+  putOnAuction = async ({ tokenId, price, unit }) => {
+    try {
+      await this.tokenInstance.approve(this.auctionInstance.address, tokenId, {
+        from: this.web3User
+      })
+
+      this.tokenPrices.set(tokenId, this.web3.utils.toWei(price,unit))
     } catch (err) {
       console.error(err)
       throw err

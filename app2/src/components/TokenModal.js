@@ -4,11 +4,20 @@ import Fox from './Fox'
 import { inject, observer } from "mobx-react";
 import { Button, Modal, Container, Row, Col, InputGroup, FormControl, Form } from 'react-bootstrap';
 
-const TokenModal = ({ show, onHide, token, web3Store: { web3User} }) => {
+const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction } }) => {
   const [modalShow, setModalShow] = React.useState(false);
 
   let priceInput = React.createRef();
   let unitEtherRadio = React.createRef();
+
+  async function putOnAuctionClick() {
+    if(!priceInput.current.value) {
+      alert('Enter a price')
+      return
+    }
+    await putOnAuction({ tokenId: token.tokenId, price: priceInput.current.value, unit: unitEtherRadio.current.checked ? 'ether' : 'gwei' })
+    onHide()
+  }
 
   return (
     <Modal
@@ -43,7 +52,7 @@ const TokenModal = ({ show, onHide, token, web3Store: { web3User} }) => {
             </Row>
             <Row>
               <Col>
-                <Button onClick={onHide}>Put on auction</Button>
+                <Button onClick={putOnAuctionClick}>Put on auction</Button>
               </Col>
             </Row>
           </Container>
