@@ -7,3 +7,10 @@
   border-radius: 25px;
   margin: 10px;
 }
+
+@media (min-width: 768px) {
+  .modal-footer .form-check {
+    padding-left: 0;
+    text-align: left;
+  }
+}

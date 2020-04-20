@@ -30,21 +30,24 @@ const TokenModal = ({ show, onHide, token, web3Store: { web3User} }) => {
       <Modal.Footer>
         { token.owner === web3User &&
           <Container>
-            <Row>
-              <Col lg={4}>
+            <Row className='justify-content-md-center'>
+              <Col xs lg={3}>
+              </Col>
+              <Col md='auto'>
                 <FormControl ref={priceInput} placeholder="Type a price..." type="number" className="pull-right"/>
               </Col>
-              <Col lg={4}>
+              <Col xs lg={3}>
                 <Form.Check ref={unitEtherRadio} label='ether' type="radio" name="unit" defaultChecked />
                 <Form.Check type="radio" label="Gwei" name="unit" />
               </Col>
-              <Col lg={4}>
-                button
+            </Row>
+            <Row>
+              <Col>
+                <Button onClick={onHide}>Put on auction</Button>
               </Col>
             </Row>
           </Container>
         }
-        <Button onClick={onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
