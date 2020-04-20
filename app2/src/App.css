@@ -8,6 +8,10 @@
   margin: 10px;
 }
 
+.App-box .btn-light {
+  background-color: #E7DCD9;
+}
+
 @media (min-width: 768px) {
   .modal-footer .form-check {
     padding-left: 0;

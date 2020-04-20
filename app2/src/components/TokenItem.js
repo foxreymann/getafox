@@ -14,8 +14,8 @@ const TokenItem = ({ token, web3Store: { web3User, auctionInstance }  }) => {
     <>
       <Button variant="light" onClick={() => setModalShow(true)}>
         <Fox genes={token.genes} className="mb-3" />
-        { web3User === token.owner && <div className="btn btn-info">Sell</div> }
-        { token.owner === auctionInstance.address && <div className="btn btn-success">Buy</div> }
+        { web3User === token.owner && <div className="btn btn-success">Sell</div> }
+        { token.owner === auctionInstance.address && <div className="btn btn-info">Buy</div> }
       </Button>
 
       <TokenModal
