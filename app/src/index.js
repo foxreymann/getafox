@@ -1,15 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
-import WebFont from "webfontloader";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 
-WebFont.load({
-  google: {
-    families: ["Nunito:300,400,700", "Open Sans:300,400,700", "sans-serif"]
-  }
-});
+ReactDOM.render(<App />, document.getElementById('root'))
 
-ReactDOM.render(<App />, document.getElementById("root"));
-registerServiceWorker();
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

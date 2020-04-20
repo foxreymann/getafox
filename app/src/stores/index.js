@@ -1,16 +1,10 @@
-import ContractsStore from "./ContractsStore";
-import TokenStore from "./TokenStore";
-import ModalStore from "./ModalStore";
+import ModalStore from "./ModalStore"
+import Web3Store from "./Web3Store"
 
-const modalStore = new ModalStore();
-
-const contractsStore = new ContractsStore();
-contractsStore.setup();
-
-const tokenStore = new TokenStore(contractsStore);
+const modalStore = new ModalStore()
+const web3Store = new Web3Store()
 
 export default {
   modalStore,
-  contractsStore,
-  tokenStore
-};
+  web3Store
+}

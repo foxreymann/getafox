@@ -1,23 +1,31 @@
-import React, { Component } from "react";
+import React from 'react';
 import { Provider } from "mobx-react";
-import Modal from "components/Modal";
-import NetworkInfo from "components/NetworkInfo";
-import TokensPage from "./TokensPage";
+import 'mobx-react/batchingForReactDom'
 import stores from "./stores";
-import "./App.css";
+import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <Provider {...stores}>
-        <div className="App">
-          <Modal />
-          <TokensPage />
-          <NetworkInfo />
+import TokensList from './components/TokensList'
+import OwnerTools from './components/OwnerTools'
+
+function App() {
+  return (
+    <Provider {...stores}>
+      <div className="App">
+        <header className="App-header">
+          <h1>Get A Fox</h1>
+        </header>
+        <OwnerTools />
+        <div className="App-box">
+          <h2>Your Foxes</h2>
+          <TokensList listType='tokens' />
         </div>
-      </Provider>
-    );
-  }
+        <div className="App-box">
+          <h2>Foxes For Sale</h2>
+          <TokensList listType='tokensForSale' />
+        </div>
+      </div>
+    </Provider>
+  );
 }
 
 export default App;
