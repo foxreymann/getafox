@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
-import Web3 from "web3";
+import React from 'react';
 import Fox from './Fox'
 import Price from './Price'
 import { inject, observer } from "mobx-react";
-import { Button, Modal, Container, Row, Col, InputGroup, FormControl, Form } from 'react-bootstrap';
+import { Button, Modal, Container, Row, Col, FormControl, Form } from 'react-bootstrap';
 
 const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction, auctionInstance, buy } }) => {
-  const [modalShow, setModalShow] = React.useState(false);
-
   let priceInput = React.createRef();
   let unitEtherRadio = React.createRef();
 

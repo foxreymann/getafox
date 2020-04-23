@@ -34,23 +34,25 @@ class Web3Store {
     when(() => this.contractAddresses, () => this.setTokenInstance())
     when(() => this.contractAddresses, () => this.setAuctionInstance())
     when(() => this.tokenInstance, () => {
-      this.setTokens()
       this.setOwner()
-      this.tokenInstanceHandleEvents()
-    });
+      if(this.web3User) {
+        this.setTokens()
+        this.tokenInstanceHandleEvents()
+      } else {
+        this.tokensLoading = false
+      }
+    })
     when(() => this.tokenInstance && this.auctionInstance, () => this.setTokensForSale());
   }
 
   tokenInstanceHandleEvents = async () => {
     try {
       // listening to Transfer
-      console.log(this.tokenInstance.Transfer)
       this.tokenInstance.Transfer({}, (error, event) => {
         this.tokenInstanceHandleTransfer(error, event)
       })
 
       // listening to Approve
-      console.log(this.tokenInstance.Approve)
       this.tokenInstance.Approval({}, (error, event) => {
         this.tokenInstanceHandleApproval(error, event)
       })
@@ -228,7 +230,7 @@ class Web3Store {
           await this.auctionInstance.tokenIdToAuctionDetails(tokenId)
         ])
         return {
-          genes: await this.getGenes(tokenId),
+          genes,
           tokenId,
           owner: this.auctionInstance.address,
           price: auction.price.toString()
@@ -256,14 +258,5 @@ export default decorate(Web3Store, {
   auctionInstance: observable,
   web3User: observable,
   owner: observable,
-
-/*
-  owner: observable,
-  tokensForSale: observable,
-  tokensForSaleLoading: observable,
-  user: observable,
-  setOwner: action,
-  setTokens: action,
-  setIsLoading: action
-*/
+  mint: action
 });

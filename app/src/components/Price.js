@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Web3 from "web3";
 import { inject, observer } from "mobx-react";
 import { Alert, Badge } from 'react-bootstrap';

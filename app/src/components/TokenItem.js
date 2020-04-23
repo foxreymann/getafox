@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import Web3 from "web3";
+import React from 'react';
 import Fox from './Fox'
 import TokenModal from './TokenModal'
 import Price from './Price'
 import { inject, observer } from "mobx-react";
-import { Button, Alert, Badge } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 const TokenItem = ({ token, web3Store: { web3User, auctionInstance }  }) => {
   const [modalShow, setModalShow] = React.useState(false);
