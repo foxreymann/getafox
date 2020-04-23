@@ -163,8 +163,12 @@ class Web3Store {
           (await window.ethereum.enable())[0]
         )
       } else {
-        const wsProvider = 'ws://localhost:8545'
-        // const wsProvider = 'wss://mainnet.infura.io/ws/v3/a72989064dba446e833e67c44f566420'
+        let wsProvider = 'wss://mainnet.infura.io/ws/v3/a72989064dba446e833e67c44f566420'
+
+        if(window.location.hostname === 'localhost') {
+          wsProvider = 'ws://localhost:8545'
+        }
+
         this.web3 = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
         this.tokensLoading = false
       }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Markmap</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/d3@5"></script><script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.6.0/dist/view.min.js"></script>
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script>markmap.markmap('svg#mindmap',{"t":"root","d":0,"v":"","c":[{"t":"heading","d":1,"v":"web3 wallet detected"},{"t":"heading","d":1,"v":"no web3 wallet detected","c":[{"t":"heading","d":2,"v":"user has Ethereum wallet"},{"t":"heading","d":2,"v":"user doesn't have Ethereum wallet yet","c":[{"t":"heading","d":3,"v":"user clicks Buy A Fox button"},{"t":"heading","d":3,"v":"create a wallet using client side JS"},{"t":"heading","d":3,"v":"show brief explanation of PKI"},{"t":"heading","d":3,"v":"ask user to 'securly' store their mnemonic phrase"},{"t":"heading","d":3,"v":"take credit card payment (Stripe)"},{"t":"heading","d":3,"v":"on the backend (AWS Lambda) transfer Fox to the user"}]}]}]}).fit()</script>
+</body>
+</html>
