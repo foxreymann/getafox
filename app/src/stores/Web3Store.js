@@ -20,7 +20,7 @@ class Web3Store {
 
   web3
   web3User
-  web3NetworkType = null
+  web3NetworkId = null
 
   contractAddresses
   tokenInstance
@@ -30,7 +30,7 @@ class Web3Store {
 
   constructor() {
     this.setWeb3()
-    when(() => this.web3NetworkType, () => this.setAddresses())
+    when(() => this.web3NetworkId, () => this.setAddresses())
     when(() => this.contractAddresses, () => this.setTokenInstance())
     when(() => this.contractAddresses, () => this.setAuctionInstance())
     when(() => this.tokenInstance, () => {
@@ -174,7 +174,8 @@ class Web3Store {
         this.web3 = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
         this.tokensLoading = false
       }
-      this.web3NetworkType = await this.web3.eth.net.getNetworkType()
+      this.web3NetworkId = await this.web3.eth.net.getId()
+console.log(this.web3NetworkId)
     } catch (err) {
       console.error(err)
       throw err
@@ -182,7 +183,8 @@ class Web3Store {
   }
 
   setAddresses = () => {
-    this.contractAddresses = require(`../addresses/addresses.${this.web3NetworkType}`)
+console.log('SET ADDRESSES')
+    this.contractAddresses = require(`../addresses/addresses.${this.web3NetworkId}`)
   }
 
   setTokenInstance = async () => {
@@ -252,7 +254,7 @@ export default decorate(Web3Store, {
   tokensLoading: observable,
   tokensForSale: observable,
   tokensForSaleLoading: observable,
-  web3NetworkType: observable,
+  web3NetworkId: observable,
   contractAddresses: observable,
   tokenInstance: observable,
   auctionInstance: observable,
