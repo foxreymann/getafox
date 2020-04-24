@@ -44,7 +44,7 @@ module.exports = async function(deployer) {
   }
 
   await writeFile(
-    path.join(__dirname, "..", "app", "src", "addresses", addressesFilename),
+    path.join(__dirname, "..", "..", "app", "src", "addresses", addressesFilename),
     JSON.stringify(addresses)
   );
 }
