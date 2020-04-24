@@ -175,7 +175,6 @@ class Web3Store {
         this.tokensLoading = false
       }
       this.web3NetworkId = await this.web3.eth.net.getId()
-console.log(this.web3NetworkId)
     } catch (err) {
       console.error(err)
       throw err
@@ -183,7 +182,6 @@ console.log(this.web3NetworkId)
   }
 
   setAddresses = () => {
-console.log('SET ADDRESSES')
     this.contractAddresses = require(`../addresses/addresses.${this.web3NetworkId}`)
   }
 
