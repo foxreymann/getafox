@@ -27,24 +27,18 @@ module.exports = async function(deployer) {
 
   let addressesFilename
 
-  switch (deployer.network_id) {
-    case 1:
-      if (deployer.network !== 'mainnet') { return }
-      addressesFilename = 'addresses.main.json'
-      break;
-    case 3:
-      if (deployer.network !== 'ropsten') { return }
-      addressesFilename = 'addresses.ropsten.json'
-      break;
-    case 5777:
-      addressesFilename = 'addresses.private.json'
-      break;
-    default:
-      throw 'unknown network'
+console.log(deployer.network_id)
+console.log(deployer.network)
+
+  if(
+    (deployer.network_id === 1 && deployer.network !== 'mainnet') ||
+    (deployer.network_id === 3 && deployer.network !== 'ropsten')
+  ) {
+    return
   }
 
   await writeFile(
-    path.join(__dirname, "..", "..", "app", "src", "addresses", addressesFilename),
+    path.join(__dirname, "..", "..", "app", "src", "addresses", `addresses.${deployer.network_id}.json`),
     JSON.stringify(addresses)
   );
 }
