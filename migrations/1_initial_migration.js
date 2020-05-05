@@ -38,7 +38,7 @@ console.log(deployer.network)
   }
 
   await writeFile(
-    path.join(__dirname, "..", "..", "app", "src", "addresses", `addresses.${deployer.network_id}.json`),
+    path.join(__dirname, "..", "app", "src", "addresses", `addresses.${deployer.network_id}.json`),
     JSON.stringify(addresses)
   );
 }

@@ -8060,12 +8060,12 @@
         }
       },
       "links": {},
-      "address": "0xb7aafD686F2899B78f46d2eAbDFa50AFb062C0E6",
-      "transactionHash": "0x3c9c59a2a661386378572021e2970b37150d41657c83d5865d40f1a47f29ee80"
+      "address": "0xb8614E78411B4788AC7215FeA79c99C08A361791",
+      "transactionHash": "0x0057daa1e682cf337eb41e5eecacfbdd413d39065fbf411c63c458def129b5bf"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-04-24T20:32:04.778Z",
+  "updatedAt": "2020-05-05T18:35:19.942Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {
