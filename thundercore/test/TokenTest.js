@@ -22,17 +22,17 @@ contract("Token", accounts => {
       let receiver = accounts[1];
       await instance.mint(arg);
 console.log({instance})
-      let token = (await instance.tokensOfOwner(owner))[0]
+      let token = await instance.tokenOfOwnerByIndex(owner, 0)
 
       await instance.safeTransferFrom(owner, receiver, token)
 
 
-      let receivedToken = (await instance.tokensOf(receiver))[0];
+      let receivedToken = await instance.tokenOfOwnerByIndex(receiver, 0);
 
 console.log({token})
 console.log({receivedToken})
 
-      assert.equal(token, receivedToken);
+      assert.equal(token.toString(), receivedToken.toString());
     })
   });
 
