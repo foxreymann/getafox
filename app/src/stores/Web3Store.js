@@ -152,14 +152,25 @@ class Web3Store {
 
   buy = async({ tokenId }) => {
     try {
+      const balanceOfUser = (await this.tokenInstance.balanceOf(this.web3User)).toNumber()
+
       await this.auctionInstance.bid(tokenId, {
         from: this.web3User,
         value: (toJS(this.tokensForSale).filter(token => token.tokenId === tokenId))[0].price
       });
 
-      // wait for the purchase
-      // await this.fetchTokens();
-      // await this.fetchTokensForSale();
+      let boughtCheckInterval = setInterval(async() => {
+        console.log(boughtCheckInterval)
+
+        const newBalanceOfUser = (await this.tokenInstance.balanceOf(this.web3User)).toNumber()
+
+        if (newBalanceOfUser > balanceOfUser) {
+          clearInterval(boughtCheckInterval)
+          await this.setTokens()
+          await this.setTokensForSale()
+        }
+
+      }, 2000)
     } catch (err) {
       console.error(err)
     }
