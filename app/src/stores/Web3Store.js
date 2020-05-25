@@ -99,7 +99,7 @@ class Web3Store {
 
         if(this.tokenIdOfLastAuction !== tokenId) {
           this.tokenIdOfLastAuction = tokenId
-          await this.auctionInstance.createAuction(event.returnValues.tokenId, this.tokenPrices.get(tokenId), {
+          await this.auctionInstance.createAuction(tokenId, this.tokenPrices.get(tokenId), {
             from: this.web3User
           })
           await this.setTokens()
