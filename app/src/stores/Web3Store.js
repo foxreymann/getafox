@@ -94,17 +94,25 @@ class Web3Store {
         event.returnValues.owner === this.web3User
       ) {
         await this.setAuctionInstance()
-        // check tokensForSale
-        const tokenId = event.returnValues.tokenId
+        await this.createAuction({tokenId: event.returnValues.tokenId})
+      }
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  }
 
-        if(this.tokenIdOfLastAuction !== tokenId) {
-          this.tokenIdOfLastAuction = tokenId
-          await this.auctionInstance.createAuction(tokenId, this.tokenPrices.get(tokenId), {
-            from: this.web3User
-          })
-          await this.setTokens()
-          await this.setTokensForSale()
-        }
+  createAuction = async ({tokenId}) => {
+    try {
+console.log({tokenId})
+console.log(this.tokenIdOfLastAuction)
+      if(this.tokenIdOfLastAuction !== tokenId) {
+        this.tokenIdOfLastAuction = tokenId
+        await this.auctionInstance.createAuction(tokenId, this.tokenPrices.get(tokenId), {
+          from: this.web3User
+        })
+        await this.setTokens()
+        await this.setTokensForSale()
       }
     } catch (err) {
       console.error(err)
@@ -128,15 +136,7 @@ class Web3Store {
 
         if(approvedFor === this.auctionInstance.address) {
           clearInterval(approvedCheckInterval)
-
-          if(this.tokenIdOfLastAuction !== tokenId) {
-            this.tokenIdOfLastAuction = tokenId
-            await this.auctionInstance.createAuction(tokenId, this.tokenPrices.get(tokenId), {
-              from: this.web3User
-            });
-            await this.setTokens();
-            await this.setTokensForSale();
-          }
+          await this.createAuction({tokenId})
         }
       }, 2000)
 
