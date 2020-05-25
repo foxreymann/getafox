@@ -164,6 +164,10 @@ class Web3Store {
 
         const newBalanceOfUser = (await this.tokenInstance.balanceOf(this.web3User)).toNumber()
 
+        if(toJS(this.tokens).find(token => token.tokenId === tokenId)) {
+          clearInterval(boughtCheckInterval)
+        }
+
         if (newBalanceOfUser > balanceOfUser) {
           clearInterval(boughtCheckInterval)
           await this.setTokens()
