@@ -7,7 +7,7 @@ module.exports = {
   contracts_build_directory: path.join(__dirname, "../app/src/contracts"),
   compilers: {
     solc: {
-      version: "0.6.4",
+      version: "0.5.17",
       settings: {
         // see the solidity docs for advice about optimization and evmversion
         optimizer: {

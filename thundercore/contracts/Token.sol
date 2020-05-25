@@ -1,9 +1,12 @@
-pragma solidity >=0.6.4 <0.7.0;
+pragma solidity >=0.5.17 <0.6.0;
 
-import '@openzeppelin/contracts/access/Ownable.sol';
+import '@openzeppelin/contracts/ownership/Ownable.sol';
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract Token is ERC721('GetAFox', 'GETAFOX'), Ownable {
+contract Token is ERC721, Ownable {
+  string public constant name = "GetAFox";
+  string public constant symbol = "GETAFOX";
+
   uint[] tokens;
 
   function mint(uint _genes) public onlyOwner {

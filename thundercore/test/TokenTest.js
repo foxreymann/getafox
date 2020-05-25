@@ -14,6 +14,28 @@ contract("Token", accounts => {
     assert.equal(owner, accounts[0]);
   });
 
+  describe("allows owner to send promo token", async () => {
+    it("send token 0 to address 1", async () => {
+      const arg = '123456'
+      let instance = await Token.deployed();
+      let owner = await instance.owner();
+      let receiver = accounts[1];
+      await instance.mint(arg);
+console.log({instance})
+      let token = (await instance.tokensOfOwner(owner))[0]
+
+      await instance.safeTransferFrom(owner, receiver, token)
+
+
+      let receivedToken = (await instance.tokensOf(receiver))[0];
+
+console.log({token})
+console.log({receivedToken})
+
+      assert.equal(token, receivedToken);
+    })
+  });
+
   describe("mint", () => {
     it("creates token with specified genes", async () => {
       const arg = '123456'

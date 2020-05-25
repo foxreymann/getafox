@@ -1,8 +1,8 @@
-pragma solidity >=0.6.4 <0.7.0;
+pragma solidity >=0.5.17 <0.6.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
-import '@openzeppelin/contracts/access/Ownable.sol';
+import '@openzeppelin/contracts/ownership/Ownable.sol';
 
 contract Auction is IERC721Receiver, Ownable {
 
@@ -31,7 +31,7 @@ contract Auction is IERC721Receiver, Ownable {
     tokenIds.push(_tokenId);
   }
 
-  function onERC721Received(address, address, uint256, bytes memory) public override returns (bytes4) {
+  function onERC721Received(address, address, uint256, bytes memory) public returns (bytes4) {
     // confirm reception of the token
     return this.onERC721Received.selector;
   }
