@@ -1,12 +1,12 @@
 pragma solidity >=0.5.17 <0.6.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import '@openzeppelin/contracts/ownership/Ownable.sol';
 
 contract Auction is IERC721Receiver, Ownable {
 
-  ERC721 public TokenContract;
+  ERC721Full public TokenContract;
 
   struct AuctionDetails {
     address payable seller;
@@ -18,7 +18,7 @@ contract Auction is IERC721Receiver, Ownable {
   uint256[] public tokenIds;
 
   constructor(address _nftAddress) public {
-    TokenContract = ERC721(_nftAddress);
+    TokenContract = ERC721Full(_nftAddress);
   }
 
   function createAuction( uint256 _tokenId, uint128 _price ) public {
