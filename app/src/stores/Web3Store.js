@@ -28,6 +28,8 @@ class Web3Store {
 
   owner
 
+  tokenIdOfLastAuction
+
   constructor() {
     this.setWeb3()
     when(() => this.web3NetworkId, () => this.setAddresses())
@@ -92,13 +94,17 @@ class Web3Store {
         event.returnValues.owner === this.web3User
       ) {
         await this.setAuctionInstance()
-        await this.auctionInstance.createAuction(event.returnValues.tokenId, this.tokenPrices.get(event.returnValues.tokenId), {
-          from: this.web3User
-        })
+        // check tokensForSale
+        const tokenId = event.returnValues.tokenId
 
-        // refetch all tokens
-        await this.setTokens()
-        await this.setTokensForSale()
+        if(this.tokenIdOfLastAuction !== tokenId) {
+          this.tokenIdOfLastAuction = tokenId
+          await this.auctionInstance.createAuction(event.returnValues.tokenId, this.tokenPrices.get(tokenId), {
+            from: this.web3User
+          })
+          await this.setTokens()
+          await this.setTokensForSale()
+        }
       }
     } catch (err) {
       console.error(err)
@@ -113,6 +119,27 @@ class Web3Store {
       })
 
       this.tokenPrices.set(tokenId, this.web3.utils.toWei(price,unit))
+
+      // interval when event fails
+      let approvedCheckInterval = setInterval(async () => {
+        console.log(approvedCheckInterval)
+
+        let approvedFor = await this.tokenInstance.getApproved(tokenId)
+
+        if(approvedFor === this.auctionInstance.address) {
+          clearInterval(approvedCheckInterval)
+
+          if(this.tokenIdOfLastAuction !== tokenId) {
+            this.tokenIdOfLastAuction = tokenId
+            await this.auctionInstance.createAuction(tokenId, this.tokenPrices.get(tokenId), {
+              from: this.web3User
+            });
+            await this.setTokens();
+            await this.setTokensForSale();
+          }
+        }
+      }, 2000)
+
     } catch (err) {
       console.error(err)
       throw err
