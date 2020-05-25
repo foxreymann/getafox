@@ -51,11 +51,17 @@ class Web3Store {
     try {
       // listening to Transfer
       this.tokenInstance.Transfer({}, (error, event) => {
+        if (error) {
+          throw error
+        }
         this.tokenInstanceHandleTransfer(error, event)
       })
 
       // listening to Approve
       this.tokenInstance.Approval({}, (error, event) => {
+        if (error) {
+          throw error
+        }
         this.tokenInstanceHandleApproval(error, event)
       })
     } catch (err) {
@@ -104,8 +110,6 @@ class Web3Store {
 
   createAuction = async ({tokenId}) => {
     try {
-console.log({tokenId})
-console.log(this.tokenIdOfLastAuction)
       if(this.tokenIdOfLastAuction !== tokenId) {
         this.tokenIdOfLastAuction = tokenId
         await this.auctionInstance.createAuction(tokenId, this.tokenPrices.get(tokenId), {
