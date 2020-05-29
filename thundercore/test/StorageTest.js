@@ -1,5 +1,12 @@
+/*
 const Storage = artifacts.require('Storage')
-const FakeAccessManager = artifacts.require('FakeAccessManager')
+
+const {
+  BN,           // Big Number support
+  constants,    // Common constants, like the zero address and largest integers
+  expectEvent,  // Assertions for emitted events
+  expectRevert, // Assertions for transactions that should fail
+} = require('@openzeppelin/test-helpers');
 
 function bytes32(stringOrNumber) {
 	var zeros = '000000000000000000000000000000000000000000000000000000000000000'
@@ -10,9 +17,9 @@ function bytes32(stringOrNumber) {
 	return '0x' + (zeros + hexNumber).substring(hexNumber.length - 1)
 }
 
-contract("Storage", function(accounts) {
+contract("Storage", accounts => {
 	const owner = accounts[0]
-	const nonowner = accounts[1]
+	const managerContract = ne
 	const allowedCrate = "crate1"
 	const nonallowedCrate = "crate2"
 
@@ -142,3 +149,4 @@ contract("Storage", function(accounts) {
 		})
 	})
 })
+*/
