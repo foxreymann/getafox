@@ -1,10 +1,9 @@
 pragma solidity >=0.5.17 <0.6.0;
 
 import '@openzeppelin/contracts/ownership/Ownable.sol';
+import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
 
-contract Storage is Ownable {
-    // crate[0] - any mappings
-    // crate[string] -> structs
+contract Storage is ERC721Full('GetAFox', 'GETAFOX'), Ownable {
     struct Crate {
       mapping(bytes32 => uint256) uint256s;
       mapping(bytes32 => uint128) uint128s;
