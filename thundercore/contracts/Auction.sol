@@ -21,6 +21,10 @@ contract Auction is IERC721Receiver, Ownable {
     TokenContract = ERC721Full(_nftAddress);
   }
 
+  function setTokenContract(address _nftAddress) public onlyOwner {
+    TokenContract = ERC721Full(_nftAddress);
+  }
+
   function createAuction( uint256 _tokenId, uint128 _price ) public {
     TokenContract.safeTransferFrom(msg.sender, address(this), _tokenId);
     AuctionDetails memory auction = AuctionDetails({

@@ -1,5 +1,4 @@
-const Migrations = artifacts.require("Migrations");
-const Token = artifacts.require("Token");
+const TokenV2 = artifacts.require("TokenV2");
 const Auction = artifacts.require("Auction");
 const Storage = artifacts.require("Storage");
 
@@ -7,35 +6,38 @@ const util = require("util");
 const fs = require("fs");
 const path = require("path");
 const writeFile = util.promisify(fs.writeFile);
+const readFile = util.promisify(fs.readFile);
 
 module.exports = async function(deployer) {
   try {
-    await deployer.deploy(Migrations);
 
-    const storage = await deployer.deploy(Storage);
+    const addressesPath = path.join(__dirname, "..", "..", "app", "src", "addresses", `addresses.${deployer.network_id}.json`)
+
+    let addresses = (JSON.parse(await readFile(addressesPath)))
 
     const token = await deployer.deploy(
-      Token,
-      storage.address
+      TokenV2,
+      addresses.storageAddress
     )
 
-    const auction = await deployer.deploy(
-      Auction,
-      token.address
-    )
+console.log(token.address)
+
+    // import storage from address
+    let storage = await Storage.at(addresses.storageAddress);
 
     // add storage contract managers
     await storage.addManager(token.address);
 
-    const addresses = {
-      tokenAddress: token.address,
-      auctionAddress: auction.address,
-      storageAddress: storage.address
+    // update token contract in auction
+    let auction = await Auction.at(addresses.auctionAddress);
+    await auction.setTokenContract(token.address)
+
+    addresses = {
+      ...addresses,
+      tokenAddress: token.address
     };
 
     console.log(addresses)
-
-    let addressesFilename
 
   console.log(deployer.network_id)
   console.log(deployer.network)
@@ -48,10 +50,9 @@ module.exports = async function(deployer) {
     }
 
     await writeFile(
-      path.join(__dirname, "..", "..", "app", "src", "addresses", `addresses.${deployer.network_id}.json`),
+      addressesPath,
       JSON.stringify(addresses)
     );
-
   } catch (err) {
     console.error(err)
     throw err

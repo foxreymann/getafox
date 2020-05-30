@@ -13,7 +13,7 @@ const getColorFrom8Digits = digits => {
 
 const getOuterInnerFromGenes = genes => {
   const outer = '#' + getColorFrom8Digits(genes.slice(0,8))
-  const inner = '#' + getColorFrom8Digits(genes.slice(1,9))
+  const inner = '#' + getColorFrom8Digits(genes.slice(8,16))
 
   return {
     outer,
