@@ -14,9 +14,9 @@ contract Storage is Ownable {
       mapping(bytes32 => bytes32) bytes32s;
     }
 
-    mapping(bytes32 => Crate) internal crates;
+    mapping(bytes32 => Crate) crates;
 
-    mapping (address => bool) external Managers;
+    mapping (address => bool) Managers;
 
     function addManager(address _manager) external onlyOwner {
         Managers[_manager] = true;
@@ -37,7 +37,7 @@ contract Storage is Ownable {
         return crates[_crate].uint256s[_key];
     }
 
-    function deleteUint256(bytes32 _crate, bytes32 _key, uint256 _value) onlyManager() external {
+    function deleteUint256(bytes32 _crate, bytes32 _key) onlyManager() external {
       delete  crates[_crate].uint256s[_key];
     }
 

@@ -9,9 +9,14 @@ const {
 
 contract("Token", accounts => {
   it("Should make first account an owner", async () => {
-    let instance = await Token.deployed();
-    let owner = await instance.owner();
-    assert.equal(owner, accounts[0]);
+    try {
+        let instance = await Token.deployed();
+        let owner = await instance.owner();
+        assert.equal(owner, accounts[0]);
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
   });
 
   describe("allows owner to send promo token", async () => {
@@ -76,5 +81,4 @@ console.log({receivedToken})
       await expectRevert(instance.mint('22222'), 'Ownable: caller is not the owner -- Reason given: Ownable: caller is not the owner.');
     });
   });
-
 });

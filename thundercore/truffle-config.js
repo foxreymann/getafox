@@ -3,7 +3,7 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 const mnemonic = require('../.mnemonic')
 
 module.exports = {
-  migrations_directory: path.join(__dirname, "../migrations"),
+  migrations_directory: path.join(__dirname, "./migrations"),
   contracts_build_directory: path.join(__dirname, "../app/src/contracts"),
   compilers: {
     solc: {
