@@ -28,6 +28,7 @@
 
 .price-input {
   position: relative;
+  margin-bottom: 10px;
 }
 
 .price-input h5 {

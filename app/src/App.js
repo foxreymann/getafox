@@ -23,6 +23,9 @@ function App() {
           <h2>Foxes For Sale</h2>
           <TokensList listType='tokensForSale' />
         </div>
+        <footer>
+          &copy; {(new Date().getFullYear())} <a target="_blank" href='https://www.ldnfox.com'>Fox Reymann LTD</a> in collaboration with <a target="_blank" href='https://extropy.io/'>Extropy.io</a>
+        </footer>
       </div>
     </Provider>
   );

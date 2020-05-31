@@ -8,8 +8,8 @@ const Price = ({ price }) => {
 
   return (
     <Alert variant='primary'>
-      Price: { price } ETH
-      { price <= 0.01 && <Badge className="ml-1" variant="warning">Bargain</Badge> }
+      Price: { price } TT
+      { price < 5 && <Badge className="ml-1" variant="warning">Bargain</Badge> }
     </Alert>
   )
 }
