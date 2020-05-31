@@ -1,4 +1,4 @@
-var Migrations = artifacts.require("Migrations");
+const Migrations = artifacts.require("Migrations");
 const Token = artifacts.require("Token");
 const Auction = artifacts.require("Auction");
 
@@ -25,7 +25,7 @@ module.exports = async function(deployer) {
 
   console.log(addresses)
 
-  let addressesFilename
+  const addressesPath = path.join(__dirname, "..", "app", "src", "addresses", `addresses.${deployer.network_id}.json`)
 
 console.log(deployer.network_id)
 console.log(deployer.network)
@@ -38,7 +38,7 @@ console.log(deployer.network)
   }
 
   await writeFile(
-    path.join(__dirname, "..", "app", "src", "addresses", `addresses.${deployer.network_id}.json`),
+    addressesPath,
     JSON.stringify(addresses)
   );
 }

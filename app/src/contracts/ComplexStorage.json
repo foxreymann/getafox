@@ -3711,8 +3711,8 @@
       "transactionHash": "0x62e183b0341c53e142bd55fab577dd6f0bdb1a3e18c6ebbcb59fc85c9f9ae54a"
     }
   },
-  "schemaVersion": "3.0.23",
-  "updatedAt": "2020-05-25T20:55:39.593Z",
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-05-31T17:35:04.950Z",
   "devdoc": {
     "methods": {}
   },

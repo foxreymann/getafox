@@ -6,14 +6,13 @@ import { Button, Modal, Container, Row, Col, FormControl, Form } from 'react-boo
 
 const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction, auctionInstance, buy } }) => {
   let priceInput = React.createRef();
-  let unitEtherRadio = React.createRef();
 
   async function putOnAuctionClick() {
     if(!priceInput.current.value) {
       alert('Enter a price')
       return
     }
-    await putOnAuction({ tokenId: token.tokenId, price: priceInput.current.value, unit: unitEtherRadio.current.checked ? 'ether' : 'gwei' })
+    await putOnAuction({ tokenId: token.tokenId, price: priceInput.current.value, unit: 'ether' })
     onHide()
   }
 
@@ -35,6 +34,7 @@ const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction, 
         <Fox genes={token.genes} className="w-100" />
       </Modal.Body>
       <Modal.Footer>
+
         { token.owner === web3User &&
           <Container>
             <Row className='justify-content-md-center'>
@@ -43,10 +43,7 @@ const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction, 
               <Col md='auto'>
                 <FormControl ref={priceInput} placeholder="Type a price..." type="number" className="pull-right"/>
               </Col>
-              <Col xs lg={3}>
-                <Form.Check ref={unitEtherRadio} label='ether' type="radio" name="unit" defaultChecked />
-                <Form.Check type="radio" label="Gwei" name="unit" />
-              </Col>
+              <h5 className="text-lg-left form-label col-form-label col-lg-3 col">TT</h5>
             </Row>
             <Row>
               <Col>

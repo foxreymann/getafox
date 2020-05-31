@@ -88,20 +88,20 @@
                 {
                   "externalReferences": [
                     {
-                      "size": {
-                        "declaration": 2101,
-                        "isOffset": false,
-                        "isSlot": false,
-                        "src": "894:4:17",
-                        "valueSize": 1
-                      }
-                    },
-                    {
                       "account": {
                         "declaration": 2095,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "914:7:17",
+                        "valueSize": 1
+                      }
+                    },
+                    {
+                      "size": {
+                        "declaration": 2101,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "894:4:17",
                         "valueSize": 1
                       }
                     }
@@ -336,20 +336,20 @@
                 {
                   "externalReferences": [
                     {
-                      "size": {
-                        "declaration": 2101,
-                        "isOffset": false,
-                        "isSlot": false,
-                        "src": "894:4:17",
-                        "valueSize": 1
-                      }
-                    },
-                    {
                       "account": {
                         "declaration": 2095,
                         "isOffset": false,
                         "isSlot": false,
                         "src": "914:7:17",
+                        "valueSize": 1
+                      }
+                    },
+                    {
+                      "size": {
+                        "declaration": 2101,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "894:4:17",
                         "valueSize": 1
                       }
                     }
@@ -509,8 +509,8 @@
     "version": "0.5.17+commit.d19bba13.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.23",
-  "updatedAt": "2020-05-25T20:55:39.657Z",
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-05-31T17:35:05.153Z",
   "devdoc": {
     "details": "Collection of functions related to the address type,",
     "methods": {}
