@@ -22,7 +22,9 @@ contract("Token", accounts => {
   describe("allows owner to send promo token", async () => {
     it("send token 0 to address 1", async () => {
       const arg = '123456'
+
       let instance = await Token.deployed();
+
       let owner = await instance.owner();
       let receiver = accounts[1];
       await instance.mint(arg);

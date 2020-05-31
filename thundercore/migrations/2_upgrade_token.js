@@ -9,6 +9,7 @@ const writeFile = util.promisify(fs.writeFile);
 const readFile = util.promisify(fs.readFile);
 
 module.exports = async function(deployer) {
+/*
   try {
 
     const addressesPath = path.join(__dirname, "..", "..", "app", "src", "addresses", `addresses.${deployer.network_id}.json`)
@@ -57,4 +58,5 @@ console.log(token.address)
     console.error(err)
     throw err
   }
+*/
 }

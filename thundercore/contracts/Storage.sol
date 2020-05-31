@@ -28,6 +28,10 @@ contract Storage is ERC721Full('GetAFox', 'GETAFOX'), Ownable {
       _;
     }
 
+    function mint(address to, uint256 tokenId) onlyManager() external {
+      _mint(to, tokenId);
+    }
+
     function setUint256(bytes32 _crate, bytes32 _key, uint256 _value) onlyManager() external {
         crates[_crate].uint256s[_key] = _value;
     }
