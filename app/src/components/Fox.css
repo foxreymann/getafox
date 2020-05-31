@@ -1,7 +1,12 @@
+
 .cover {
   background-color: #e7ecd9;
   width: 450px;
   height: 300px;
+  background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em, radial-gradient(#15ffa5, #00ced1);
+  background-color: mediumspringgreen;
+  background-size: 1.5em 11em, 1.5em 11em, 2.3em 8em, 2.3em 8em, 3.5em 11em, 3.5em 11em, 100% 100%;
+  background-repeat: repeat;
 }
 
 div.cover div.header {
@@ -13,7 +18,18 @@ div.cover div.header {
 
 div.cover div.header h1 {
   font-size: 3.4rem;
+}
 
+div.cover div.header h1:first-child {
+  transform: rotate(-10deg);
+}
+
+div.cover div.header h1:nth-child(2) {
+  transform: rotate(2deg);
+}
+
+div.cover div.header h1:nth-child(3) {
+  transform: rotate(-7deg);
 }
 
 .fox *, .fox *:after, .fox *:before{
@@ -22,6 +38,7 @@ div.cover div.header h1 {
   padding:0;
   -webkit-transition: all 100ms ease-in;
   transition: all 100ms ease-in;
+  filter: drop-shadow(10px 10px 14px #ddd);
 }
 .fox-wrapper {
   width: 215px;
@@ -155,19 +172,19 @@ div.cover div.header h1 {
 }
 
 
-.fox:hover .head, .fox:hover .ear{
+.fox .head, .fox .ear{
   transform: rotate(15deg);
   -moz-transform: rotate(15deg); 
   -webkit-transform: rotate(15deg); 
 }
-.fox:hover .ear:nth-child(odd) {
+.fox .ear:nth-child(odd) {
     left: 48px;
 }
-.fox:hover .ear:nth-child(even) {
+.fox .ear:nth-child(even) {
     right: -3px;
     top: 20px;
 }
-.fox:hover .nose {
+.fox .nose {
     width: 24px;
     height: 24px;
     top: 165px;
