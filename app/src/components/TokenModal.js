@@ -37,13 +37,9 @@ const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction, 
 
         { token.owner === web3User &&
           <Container>
-            <Row className='justify-content-md-center'>
-              <Col xs lg={3}>
-              </Col>
-              <Col md='auto'>
-                <FormControl ref={priceInput} placeholder="Type a price..." type="number" className="pull-right"/>
-              </Col>
-              <h5 className="text-lg-left form-label col-form-label col-lg-3 col">TT</h5>
+            <Row className='justify-content-md-center price-input'>
+              <FormControl ref={priceInput} placeholder="Type a price..." type="number"/>
+              <h5 className="text-lg-left">TT</h5>
             </Row>
             <Row>
               <Col>

@@ -25,3 +25,13 @@
     text-align: left;
   }
 }
+
+.price-input {
+  position: relative;
+}
+
+.price-input h5 {
+  position: absolute;
+  right: 30px;
+  top: 8px;
+}
