@@ -23,8 +23,10 @@ const getOuterInnerFromGenes = genes => {
 
 const Fox = ({ genes }) => {
 
-  const { outer, inner } = getOuterInnerFromGenes(genes)
-  const ears = '#' + ColorMixer.mix(outer, inner)
+//  const { outer, inner } = getOuterInnerFromGenes(genes)
+  const outer = '#C46500'
+  const inner = 'rgb(203,46,132)'
+  const ears = 'rgb(255,72,129)'
 
   return (
     <div className="fox-wrapper mb-3">

@@ -6,6 +6,7 @@ import './App.css';
 
 import TokensList from './components/TokensList'
 import OwnerTools from './components/OwnerTools'
+import Icons from './components/Icons'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <header className="App-header my-3">
           <h1>Get A Fox</h1>
         </header>
+        <Icons />
         <OwnerTools />
         <div className="App-box">
           <h2>Your Foxes</h2>
