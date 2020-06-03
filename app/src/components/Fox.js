@@ -12,16 +12,21 @@ const getColorFrom8Digits = digits => {
 }
 
 const mixWithDefault = (random, defaultCol) => {
-  return random
+  return Color(random).mix(Color(random).mix(Color(defaultCol)))
 }
 
 const getOuterInnerFromGenes = genes => {
-  const defaultOuter = '#ffffff'
-  const defaultInner = '#ffffff'
+  const defaultOuter = +genes.slice(17,1) > 4 ? '#ff7373' : '#ff0073'
+  const defaultInner = +genes.slice(18,1) > 4 ? '#ff7373' : '#ff0073'
 
   let outer = Color('#' + getColorFrom8Digits(genes.slice(0,8)))
   let inner = Color('#' + getColorFrom8Digits(genes.slice(9,16)))
-console.log({outer})
+
+  outer = mixWithDefault(outer, defaultOuter)
+  inner = mixWithDefault(inner, defaultInner)
+
+  outer = outer.lighten(0.1).saturate(0.2)
+  inner = inner.lighten(0.3).saturate(0.3)
 
   outer = outer.hex()
   inner = inner.hex()
