@@ -11,9 +11,16 @@ const getColorFrom8Digits = digits => {
   })
 }
 
+const mixWithDefault = (random, defaultCol) => {
+  return ColorMixer.mix(random, random, random, defaultCol, { result: "rgb" })
+}
+
 const getOuterInnerFromGenes = genes => {
-  const outer = '#' + getColorFrom8Digits(genes.slice(0,8))
-  const inner = '#' + getColorFrom8Digits(genes.slice(8,16))
+  const defaultOuter = 'ff7373'
+  const defaultInner = 'ff7373'
+
+  const outer = '#' + mixWithDefault(getColorFrom8Digits(genes.slice(0,8)), defaultOuter)
+  const inner = '#' + mixWithDefault(getColorFrom8Digits(genes.slice(8,16)), defaultInner)
 
   return {
     outer,
@@ -24,7 +31,7 @@ const getOuterInnerFromGenes = genes => {
 const Fox = ({ genes }) => {
 
   const { outer, inner } = getOuterInnerFromGenes(genes)
-  const ears = '#' + ColorMixer.mix(outer, inner)
+  const ears = '#' + ColorMixer.mix(outer, inner, { result: "rgb" })
 
   return (
     <div className="fox-wrapper mb-3">
