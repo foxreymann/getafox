@@ -1,5 +1,5 @@
 import React from 'react';
-import ColorMixer from 'ryb-color-mixer';
+import Color from 'color';
 import prefillWithZeros from '../utils/prefillWithZeros'
 
 import "./Fox.css";
@@ -12,15 +12,19 @@ const getColorFrom8Digits = digits => {
 }
 
 const mixWithDefault = (random, defaultCol) => {
-  return ColorMixer.mix(random, random, random, defaultCol, { result: "rgb" })
+  return random
 }
 
 const getOuterInnerFromGenes = genes => {
-  const defaultOuter = 'ff7373'
-  const defaultInner = 'ff7373'
+  const defaultOuter = '#ffffff'
+  const defaultInner = '#ffffff'
 
-  const outer = '#' + mixWithDefault(getColorFrom8Digits(genes.slice(0,8)), defaultOuter)
-  const inner = '#' + mixWithDefault(getColorFrom8Digits(genes.slice(8,16)), defaultInner)
+  let outer = Color('#' + getColorFrom8Digits(genes.slice(0,8)))
+  let inner = Color('#' + getColorFrom8Digits(genes.slice(9,16)))
+console.log({outer})
+
+  outer = outer.hex()
+  inner = inner.hex()
 
   return {
     outer,
@@ -31,10 +35,11 @@ const getOuterInnerFromGenes = genes => {
 const Fox = ({ genes }) => {
 
   const { outer, inner } = getOuterInnerFromGenes(genes)
-  const ears = '#' + ColorMixer.mix(outer, inner, { result: "rgb" })
+  const ears = '#f00'
 
   return (
     <div className="fox-wrapper mb-3">
+      <div>{outer} {inner}</div>
       <div className="fox">
         <div className="head" style={{ background: inner }}>
           <div className="eye"></div>
