@@ -37,7 +37,6 @@ const getOuterInnerFromGenes = genes => {
   ears = mixWithDefault(ears, defaultEars)
 
   ears = mix3(ears, outer, inner)
-console.log(ears)
 
   if(!outer.isLight()) {
     outer = outer.lighten(0.1)
@@ -72,7 +71,6 @@ const Fox = ({ genes }) => {
 
   return (
     <div className="fox-wrapper mb-3">
-      <div>{outer} {inner}</div>
       <div className="fox">
         <div className="head" style={{ background: inner }}>
           <div className="eye"></div>
