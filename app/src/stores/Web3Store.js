@@ -10,6 +10,8 @@ const config = {
   genesLength: 77
 }
 
+const wsProvider = (window.location.hostname === 'localhost') ? 'ws://localhost:8545' : 'wss://mainnet-ws.thundercore.com'
+
 class Web3Store {
   tokens
   tokensLoading = true
@@ -21,6 +23,7 @@ class Web3Store {
   web3
   web3User
   web3NetworkId = null
+  web3EventsClient
 
   contractAddresses
   tokenInstance
@@ -39,18 +42,20 @@ class Web3Store {
       this.setOwner()
       if(this.web3User) {
         this.setTokens()
-        this.tokenInstanceHandleEvents()
       } else {
         this.tokensLoading = false
       }
     })
     when(() => this.tokenInstance && this.auctionInstance, () => this.setTokensForSale());
+    when(() => this.tokenEventsInstance, () => {
+      this.handleTokenEvents()
+    })
   }
 
-  tokenInstanceHandleEvents = async () => {
+  handleTokenEvents = async () => {
     try {
       // listening to Transfer
-      this.tokenInstance.Transfer({}, (error, event) => {
+      this.tokenEventsInstance.Transfer({}, (error, event) => {
         if (error) {
           throw error
         }
@@ -58,7 +63,7 @@ class Web3Store {
       })
 
       // listening to Approve
-      this.tokenInstance.Approval({}, (error, event) => {
+      this.tokenEventsInstance.Approval({}, (error, event) => {
         if (error) {
           throw error
         }
@@ -72,20 +77,20 @@ class Web3Store {
 
   tokenInstanceHandleTransfer = async (error, event) => {
     try {
-      console.log(event)
+      console.log({event})
 
       if(event.args.from === '0x0000000000000000000000000000000000000000') {
         console.log('token minted')
-        await this.setTokenInstance()
-        await this.setTokens()
+        return await this.setTokens()
       }
 
       if(event.returnValues.to === this.web3User) {
         console.log('token transfered to current user')
-        await this.setTokenInstance()
         await this.setTokens()
         await this.setTokensForSale()
       }
+
+      // @todo: handle other options
     } catch (err) {
       console.error(err)
       throw err
@@ -191,6 +196,7 @@ class Web3Store {
 
 
   mint = async () => {
+    console.log('minting')
     try {
       const genes = randomGenes()
       await this.tokenInstance.mint(genes, {
@@ -210,13 +216,8 @@ class Web3Store {
         this.web3User = this.web3.utils.toChecksumAddress(
           (await window.ethereum.enable())[0]
         )
+        this.web3EventsClient = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
       } else {
-        let wsProvider = 'wss://mainnet.infura.io/ws/v3/a72989064dba446e833e67c44f566420'
-
-        if(window.location.hostname === 'localhost') {
-          wsProvider = 'ws://localhost:8545'
-        }
-
         this.web3 = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
         this.tokensLoading = false
       }
@@ -233,8 +234,12 @@ class Web3Store {
 
   setTokenInstance = async () => {
     const tokenContract = contract(TokenArtifact);
+
     tokenContract.setProvider(this.web3.currentProvider);
     this.tokenInstance = await tokenContract.at(this.contractAddresses.tokenAddress);
+
+    tokenContract.setProvider(this.web3EventsClient.currentProvider);
+    this.tokenEventsInstance = await tokenContract.at(this.contractAddresses.tokenAddress);
   }
 
   setAuctionInstance = async () => {

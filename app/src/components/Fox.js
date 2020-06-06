@@ -12,7 +12,6 @@ const getColorFrom8Digits = digits => {
 }
 
 const mixWithDefault = (random, defaultCol) => {
-console.log(defaultCol)
   return Color(random).mix(Color(random).mix(Color(defaultCol)))
 }
 
