@@ -81,7 +81,10 @@ const Fox = ({ genes }) => {
         <div className="ear" style={{ background: ears }}></div>
         <div className="nose"></div>
         <div className="body" style={{ background: outer }}></div>
-        <div className="tail" style={{ background: outer }}></div>
+        <div className="tail" style={{ background: outer }}>
+          <div className='before' style={{
+          }}></div>
+        </div>
       </div>
     </div>
   )
