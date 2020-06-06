@@ -125,10 +125,8 @@
     right: 103px;
 }
 .fox:hover .nose {
-  width: 27px;
-  height: 27px;
-  top: 169px;
-  right: 78px;
+  top: 168px;
+  right: 80px;
 }
 
 .fox .body{
