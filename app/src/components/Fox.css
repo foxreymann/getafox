@@ -114,16 +114,23 @@
 }
 
 .fox .nose{
-  width: 27px;
-  height: 27px;
   display: block;
   background: #000;
   border-radius: 50%;
   position: absolute;
   z-index: 3;
+    width: 24px;
+    height: 24px;
+    top: 165px;
+    right: 103px;
+}
+.fox:hover .nose {
+  width: 27px;
+  height: 27px;
   top: 169px;
   right: 78px;
 }
+
 .fox .body{
   width: 107px;
   height: 214px;
@@ -159,21 +166,6 @@
   left: -30px;
 }
 
-
-.fox:hover .nose {
-    width: 24px;
-    height: 24px;
-    top: 165px;
-    right: 103px;
-}
-a.author{
-  font-size: 12px;
-  text-decoration: none;
-  color: #f47c7c;
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-}
 
 @keyframes piscar {
   15% {
