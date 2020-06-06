@@ -123,10 +123,10 @@
   right: 0px;
   overflow: hidden;
 }
-.fox .tail:before{
+.fox .tail .before{
   content: '';
-  width: 57px;
-  height: 57px;
+  width: 90px;
+  height: 90px;
   display: block;
   background: #fff;
   border-radius: 50%;
