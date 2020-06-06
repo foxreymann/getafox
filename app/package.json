@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@truffle/contract": "^4.2.7",
+    "@truffle/contract": "^4.2.0",
     "assert": "^2.0.0",
     "color": "^3.1.2",
     "mobx": "^5.15.4",

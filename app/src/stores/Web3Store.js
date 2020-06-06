@@ -28,6 +28,7 @@ class Web3Store {
   contractAddresses
   tokenInstance
   auctionInstance
+  tokenEventsInstance
 
   owner
 
@@ -306,6 +307,7 @@ export default decorate(Web3Store, {
   web3NetworkId: observable,
   contractAddresses: observable,
   tokenInstance: observable,
+  tokenEventsInstance: observable,
   auctionInstance: observable,
   web3User: observable,
   owner: observable,
