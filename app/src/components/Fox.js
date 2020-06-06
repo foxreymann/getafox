@@ -23,6 +23,11 @@ const mix3 = (ears, outer, inner) => {
   )
 }
 
+const getTailBeforeSize = genes => {
+  let size = 60 + +genes.slice(27,29) % 31
+  return size + 'px'
+}
+
 const getOuterInnerFromGenes = genes => {
   const defaultOuter = +genes.slice(24,25) > 4 ? '#ff7373' : '#ff0073'
   const defaultInner = +genes.slice(25,26) > 4 ? '#ff7373' : '#ff0073'
@@ -69,7 +74,8 @@ const Fox = ({ genes }) => {
 
   const { outer, inner, ears } = getOuterInnerFromGenes(genes)
 
-  const tailBeforeSize = '60px'
+  const tailBeforeSize = getTailBeforeSize(genes)
+console.log(tailBeforeSize)
 
   return (
     <div className="fox-wrapper mb-3">
