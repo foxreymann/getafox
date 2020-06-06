@@ -7,10 +7,10 @@ import prefillWithZeros from "../utils/prefillWithZeros";
 import randomGenes from "../utils/randomGenes";
 
 const config = {
-  genesLength: 77
+  genesLength: 77,
+  wsProvider: 'wss://mainnet-ws.thundercore.com'
 }
 
-const wsProvider = (window.location.hostname === 'localhost') ? 'ws://localhost:8545' : 'wss://mainnet-ws.thundercore.com'
 
 class Web3Store {
   tokens
@@ -217,9 +217,9 @@ class Web3Store {
         this.web3User = this.web3.utils.toChecksumAddress(
           (await window.ethereum.enable())[0]
         )
-        this.web3EventsClient = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
       } else {
-        this.web3 = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
+        this.web3 = new Web3(new Web3.providers.WebsocketProvider(config.wsProvider))
+
         this.tokensLoading = false
       }
       this.web3NetworkId = await this.web3.eth.net.getId()
@@ -227,6 +227,11 @@ class Web3Store {
       console.error(err)
       throw err
     }
+  }
+
+  setWeb3EventsClient = async () => {
+        this.web3EventsClient = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
+
   }
 
   setAddresses = () => {
