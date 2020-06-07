@@ -82,18 +82,21 @@ class Web3Store {
     try {
       console.log({event})
 
-      if(event.args.from === '0x0000000000000000000000000000000000000000') {
-        console.log('token minted')
-        return await this.setTokens()
+      if(
+        event.args.from === this.web3User ||
+        event.args.to === this.web3User
+      ) {
+        console.log('token transfered to or from current user')
+        await this.setTokens()
       }
 
-      if(event.returnValues.to === this.web3User) {
-        console.log('token transfered to current user')
-        await this.setTokens()
+      if(
+        event.args.from === this.auctionInstance.address ||
+        event.args.to === this.auctionInstance.address
+      ) {
+        console.log('token transfered to or from an auction')
         await this.setTokensForSale()
       }
-
-      // @todo: handle other options
     } catch (err) {
       console.error(err)
       throw err
