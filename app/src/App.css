@@ -4,9 +4,35 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
+.App-header {
+  margin: auto;
+  text-align: center;
+}
+
 .App-header h1 {
   font-family: 'Monoton', cursive;
   font-size: 3.5rem;
+  padding: 0 5px;
+}
+
+.App-header h1:first-child {
+  transform: rotate(-3deg);
+  text-align: right;
+}
+
+.App-header h1:nth-child(2) {
+  transform: rotate(-1deg);
+}
+
+.App-header h1:nth-child(3) {
+  transform: rotate(2deg);
+  text-align: left;
+}
+
+.App-header::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 .App-box {

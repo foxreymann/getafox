@@ -12,7 +12,17 @@ function App() {
     <Provider {...stores}>
       <div className="App">
         <header className="App-header my-3">
-          <h1>Get A Fox</h1>
+          <div className="row justify-content-md-center">
+            <h1 className="col-auto">
+              Get
+            </h1>
+            <h1 className="col-auto">
+              A
+            </h1>
+            <h1 className="col-auto">
+              Fox
+            </h1>
+          </div>
         </header>
         <OwnerTools />
         <div className="App-box">
