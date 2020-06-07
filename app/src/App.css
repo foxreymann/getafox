@@ -2,8 +2,11 @@
   text-align: center;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+body {
+  background: url('/leaves.png')
+}
 
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 .App-header {
   margin: auto;
   text-align: center;
@@ -36,13 +39,17 @@
 }
 
 .App-box {
-  border: 10px rgba(255,193,7,.4) solid;
+  border: 5px lightsteelblue solid;
   border-radius: 25px;
   margin: 10px;
 }
 
 .App-box .btn-light, .modal-body {
-  background-color: #E7DCD9;
+  background-color: rgba(176,196,222,0.5);
+}
+
+.App-box .btn-light {
+  padding: 18px 25px 10px;
 }
 
 @media (min-width: 768px) {

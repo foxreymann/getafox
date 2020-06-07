@@ -12,7 +12,7 @@ function App() {
     <Provider {...stores}>
       <div className="App">
         <header className="App-header my-3">
-          <div className="row justify-content-md-center">
+          <div className="row justify-content-center">
             <h1 className="col-auto">
               Get
             </h1>
