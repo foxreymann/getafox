@@ -135,6 +135,16 @@ class Web3Store {
     }
   }
 
+  cancel = async({ tokenId }) => {
+    try {
+      await this.auctionInstance.cancel(tokenId, {
+        from: this.web3User
+      });
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   putOnAuction = async ({ tokenId, price, unit }) => {
     try {
       await this.tokenInstance.approve(this.auctionInstance.address, tokenId, {
@@ -307,7 +317,8 @@ class Web3Store {
           genes,
           tokenId,
           owner: this.auctionInstance.address,
-          price: auction.price.toString()
+          price: auction.price.toString(),
+          seller: auction.seller.toString()
         }
       })
     )
