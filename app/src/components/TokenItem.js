@@ -5,16 +5,9 @@ import Price from './Price'
 import { inject, observer } from "mobx-react";
 import { Button } from 'react-bootstrap';
 
-import { toJS } from "mobx";
-
 const TokenItem = ({ token, web3Store: { web3User, auctionInstance }  }) => {
   const [modalShow, setModalShow] = React.useState(false);
   token = token.token
-
-
-  if(token.owner === auctionInstance.address) {
-console.log(toJS(token))
-  }
 
   return (
     <>
