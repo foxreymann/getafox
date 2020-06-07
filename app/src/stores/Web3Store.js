@@ -242,7 +242,7 @@ class Web3Store {
 
   setWeb3EventsClient = () => {
     try {
-      const wsProvider = this.web3NetworkId === 108 ? this.config.noWalletWsProvider : 'ws://localhost:8545'
+      const wsProvider = this.web3NetworkId === 108 ? config.noWalletWsProvider : 'ws://localhost:8545'
       this.web3EventsClient = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
     } catch (err) {
       console.error(err)
