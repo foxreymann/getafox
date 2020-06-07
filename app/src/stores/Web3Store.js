@@ -8,7 +8,7 @@ import randomGenes from "../utils/randomGenes";
 
 const config = {
   genesLength: 77,
-  wsProvider: 'wss://mainnet-ws.thundercore.com'
+  noWalletWsProvider: 'wss://mainnet-ws.thundercore.com'
 }
 
 
@@ -37,8 +37,10 @@ class Web3Store {
   constructor() {
     this.setWeb3()
     when(() => this.web3NetworkId, () => this.setAddresses())
+    when(() => this.web3NetworkId, () => this.setWeb3EventsClient())
     when(() => this.contractAddresses, () => this.setTokenInstance())
     when(() => this.contractAddresses, () => this.setAuctionInstance())
+    when(() => this.contractAddresses && this.web3EventsClient, () => this.setTokenEventsInstance())
     when(() => this.tokenInstance, () => {
       this.setOwner()
       if(this.web3User) {
@@ -218,8 +220,7 @@ class Web3Store {
           (await window.ethereum.enable())[0]
         )
       } else {
-        this.web3 = new Web3(new Web3.providers.WebsocketProvider(config.wsProvider))
-
+        this.web3 = new Web3(new Web3.providers.WebsocketProvider(config.noWalletWsProvider))
         this.tokensLoading = false
       }
       this.web3NetworkId = await this.web3.eth.net.getId()
@@ -229,21 +230,34 @@ class Web3Store {
     }
   }
 
-  setWeb3EventsClient = async () => {
-        this.web3EventsClient = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
-
-  }
 
   setAddresses = () => {
-    this.contractAddresses = require(`../addresses/addresses.${this.web3NetworkId}`)
+    try {
+      this.contractAddresses = require(`../addresses/addresses.${this.web3NetworkId}`)
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  }
+
+  setWeb3EventsClient = () => {
+    try {
+      const wsProvider = this.web3NetworkId === 108 ? this.config.noWalletWsProvider : 'ws://localhost:8545'
+      this.web3EventsClient = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
   }
 
   setTokenInstance = async () => {
     const tokenContract = contract(TokenArtifact);
-
     tokenContract.setProvider(this.web3.currentProvider);
     this.tokenInstance = await tokenContract.at(this.contractAddresses.tokenAddress);
+  }
 
+  setTokenEventsInstance = async () => {
+    const tokenContract = contract(TokenArtifact);
     tokenContract.setProvider(this.web3EventsClient.currentProvider);
     this.tokenEventsInstance = await tokenContract.at(this.contractAddresses.tokenAddress);
   }
