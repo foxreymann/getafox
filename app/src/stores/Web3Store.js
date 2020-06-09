@@ -7,8 +7,10 @@ import prefillWithZeros from "../utils/prefillWithZeros";
 import randomGenes from "../utils/randomGenes";
 
 const config = {
-  genesLength: 77
+  genesLength: 77,
+  noWalletWsProvider: 'wss://mainnet-ws.thundercore.com'
 }
+
 
 class Web3Store {
   tokens
@@ -21,10 +23,12 @@ class Web3Store {
   web3
   web3User
   web3NetworkId = null
+  web3EventsClient
 
   contractAddresses
   tokenInstance
   auctionInstance
+  tokenEventsInstance
 
   owner
 
@@ -33,24 +37,28 @@ class Web3Store {
   constructor() {
     this.setWeb3()
     when(() => this.web3NetworkId, () => this.setAddresses())
+    when(() => this.web3NetworkId, () => this.setWeb3EventsClient())
     when(() => this.contractAddresses, () => this.setTokenInstance())
     when(() => this.contractAddresses, () => this.setAuctionInstance())
+    when(() => this.contractAddresses && this.web3EventsClient, () => this.setTokenEventsInstance())
     when(() => this.tokenInstance, () => {
       this.setOwner()
       if(this.web3User) {
         this.setTokens()
-        this.tokenInstanceHandleEvents()
       } else {
         this.tokensLoading = false
       }
     })
     when(() => this.tokenInstance && this.auctionInstance, () => this.setTokensForSale());
+    when(() => this.tokenEventsInstance, () => {
+      this.handleTokenEvents()
+    })
   }
 
-  tokenInstanceHandleEvents = async () => {
+  handleTokenEvents = async () => {
     try {
       // listening to Transfer
-      this.tokenInstance.Transfer({}, (error, event) => {
+      this.tokenEventsInstance.Transfer({}, (error, event) => {
         if (error) {
           throw error
         }
@@ -58,7 +66,7 @@ class Web3Store {
       })
 
       // listening to Approve
-      this.tokenInstance.Approval({}, (error, event) => {
+      this.tokenEventsInstance.Approval({}, (error, event) => {
         if (error) {
           throw error
         }
@@ -72,18 +80,21 @@ class Web3Store {
 
   tokenInstanceHandleTransfer = async (error, event) => {
     try {
-      console.log(event)
+      console.log({event})
 
-      if(event.args.from === '0x0000000000000000000000000000000000000000') {
-        console.log('token minted')
-        await this.setTokenInstance()
+      if(
+        event.args.from === this.web3User ||
+        event.args.to === this.web3User
+      ) {
+        console.log('token transfered to or from current user')
         await this.setTokens()
       }
 
-      if(event.returnValues.to === this.web3User) {
-        console.log('token transfered to current user')
-        await this.setTokenInstance()
-        await this.setTokens()
+      if(
+        event.args.from === this.auctionInstance.address ||
+        event.args.to === this.auctionInstance.address
+      ) {
+        console.log('token transfered to or from an auction')
         await this.setTokensForSale()
       }
     } catch (err) {
@@ -121,6 +132,16 @@ class Web3Store {
     } catch (err) {
       console.error(err)
       throw err
+    }
+  }
+
+  cancel = async({ tokenId }) => {
+    try {
+      await this.auctionInstance.cancel(tokenId, {
+        from: this.web3User
+      });
+    } catch (err) {
+      console.error(err)
     }
   }
 
@@ -191,6 +212,7 @@ class Web3Store {
 
 
   mint = async () => {
+    console.log('minting')
     try {
       const genes = randomGenes()
       await this.tokenInstance.mint(genes, {
@@ -211,13 +233,7 @@ class Web3Store {
           (await window.ethereum.enable())[0]
         )
       } else {
-        let wsProvider = 'wss://mainnet.infura.io/ws/v3/a72989064dba446e833e67c44f566420'
-
-        if(window.location.hostname === 'localhost') {
-          wsProvider = 'ws://localhost:8545'
-        }
-
-        this.web3 = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
+        this.web3 = new Web3(new Web3.providers.WebsocketProvider(config.noWalletWsProvider))
         this.tokensLoading = false
       }
       this.web3NetworkId = await this.web3.eth.net.getId()
@@ -227,14 +243,36 @@ class Web3Store {
     }
   }
 
+
   setAddresses = () => {
-    this.contractAddresses = require(`../addresses/addresses.${this.web3NetworkId}`)
+    try {
+      this.contractAddresses = require(`../addresses/addresses.${this.web3NetworkId}`)
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  }
+
+  setWeb3EventsClient = () => {
+    try {
+      const wsProvider = this.web3NetworkId === 108 ? config.noWalletWsProvider : 'ws://localhost:8545'
+      this.web3EventsClient = new Web3(new Web3.providers.WebsocketProvider(wsProvider))
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
   }
 
   setTokenInstance = async () => {
     const tokenContract = contract(TokenArtifact);
     tokenContract.setProvider(this.web3.currentProvider);
     this.tokenInstance = await tokenContract.at(this.contractAddresses.tokenAddress);
+  }
+
+  setTokenEventsInstance = async () => {
+    const tokenContract = contract(TokenArtifact);
+    tokenContract.setProvider(this.web3EventsClient.currentProvider);
+    this.tokenEventsInstance = await tokenContract.at(this.contractAddresses.tokenAddress);
   }
 
   setAuctionInstance = async () => {
@@ -279,7 +317,8 @@ class Web3Store {
           genes,
           tokenId,
           owner: this.auctionInstance.address,
-          price: auction.price.toString()
+          price: auction.price.toString(),
+          seller: auction.seller.toString()
         }
       })
     )
@@ -301,6 +340,7 @@ export default decorate(Web3Store, {
   web3NetworkId: observable,
   contractAddresses: observable,
   tokenInstance: observable,
+  tokenEventsInstance: observable,
   auctionInstance: observable,
   web3User: observable,
   owner: observable,

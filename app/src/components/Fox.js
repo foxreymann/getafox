@@ -24,9 +24,9 @@ const mix3 = (ears, outer, inner) => {
 }
 
 const getOuterInnerFromGenes = genes => {
-  const defaultOuter = +genes.slice(24,25) > 4 ? '#ff7373' : '#ff0073'
-  const defaultInner = +genes.slice(25,26) > 4 ? '#ff7373' : '#ff0073'
-  const defaultEars = +genes.slice(26,27) > 4 ? '#ff7373' : '#ff0073'
+  const defaultOuter = +genes.slice(24,25) > 4 ? '#ff7373' : '#cc00a3'
+  const defaultInner = +genes.slice(25,26) > 4 ? '#ff7373' : '#cc00a3'
+  const defaultEars = +genes.slice(26,27) > 4 ? '#ff7373' : '#cc00a3'
 
   let outer = Color('#' + getColorFrom8Digits(genes.slice(0,8)))
   let inner = Color('#' + getColorFrom8Digits(genes.slice(8,16)))

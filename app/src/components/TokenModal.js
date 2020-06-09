@@ -4,7 +4,7 @@ import Price from './Price'
 import { inject, observer } from "mobx-react";
 import { Button, Modal, Container, Row, Col, FormControl, Form } from 'react-bootstrap';
 
-const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction, auctionInstance, buy } }) => {
+const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction, auctionInstance, buy, cancel } }) => {
   let priceInput = React.createRef();
 
   async function putOnAuctionClick() {
@@ -54,10 +54,21 @@ const TokenModal = ({ show, onHide, token, web3Store: { web3User, putOnAuction, 
             <Row>
               <Col>
                 <Price price={token.price} />
-                <Button variant='info' onClick={async () => {
-                  await buy({tokenId: token.tokenId})
-                  onHide()
-                }}>Buy</Button>
+
+                { token.seller !== web3User &&
+                  <Button variant='success' onClick={async () => {
+                    await buy({tokenId: token.tokenId})
+                    onHide()
+                  }}>Buy</Button>
+                }
+
+                { token.seller === web3User &&
+                  <Button variant='danger' onClick={async () => {
+                    await cancel({tokenId: token.tokenId})
+                    onHide()
+                  }}>Cancel</Button>
+                }
+
               </Col>
             </Row>
           </Container>
