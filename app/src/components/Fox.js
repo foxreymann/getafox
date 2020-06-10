@@ -66,10 +66,15 @@ const getOuterInnerFromGenes = genes => {
 }
 
 const Fox = ({ genes }) => {
+  let outer = '#C46500'
+  let inner = 'rgb(203,46,132)'
+  let ears = 'rgb(255,72,129)'
 
-  const outer = '#C46500'
-  const inner = 'rgb(203,46,132)'
-  const ears = 'rgb(255,72,129)'
+  if(genes === 'left') {
+    outer = 'rgb(247, 179, 27)'
+    inner = 'rgb(106, 176, 244)'
+    ears = 'rgb(181, 139, 109)'
+  }
 
 console.log(genes)
 
