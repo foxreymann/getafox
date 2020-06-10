@@ -71,8 +71,10 @@ const Fox = ({ genes }) => {
   const inner = 'rgb(203,46,132)'
   const ears = 'rgb(255,72,129)'
 
+console.log(genes)
+
   return (
-    <div className="fox-wrapper mb-3">
+    <div className={"fox-wrapper mb-3 " + genes}>
       <div className="fox">
         <div className="head" style={{ background: inner }}>
           <div className="eye"></div>

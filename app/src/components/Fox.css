@@ -1,23 +1,26 @@
 
 .cover {
   background-color: #e7ecd9;
-  width: 450px;
-  height: 300px;
+  width: 594px;
+  height: 216px;
   background: radial-gradient(1.5em 6.28571em at 1.95em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(1.5em 6.28571em at -0.45em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 1.5em 5.5em, radial-gradient(2.3em 4.57143em at 2.99em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(2.3em 4.57143em at -0.69em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 55%) 2.3em 4em, radial-gradient(3.5em 6.28571em at 4.55em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 0 0, radial-gradient(3.5em 6.28571em at -1.05em, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.25) 55%, rgba(255, 255, 255, 0) 55%) 3.5em 5.5em, radial-gradient(#15ffa5, #00ced1);
   background-color: mediumspringgreen;
   background-size: 1.5em 11em, 1.5em 11em, 2.3em 8em, 2.3em 8em, 3.5em 11em, 3.5em 11em, 100% 100%;
   background-repeat: repeat;
+  position: relative;
 }
 
 div.cover div.header {
-  float: left;
   width: 200px;
   text-align: center;
-  margin-top: 30px;
+  position: absolute;
+  left: 210px;
+  top: 19px;
 }
 
 div.cover div.header h1 {
   font-size: 3.4rem;
+  margin: 0 0 -10px;
 }
 
 div.cover div.header h1:first-child {
@@ -29,8 +32,26 @@ div.cover div.header h1:nth-child(2) {
 }
 
 div.cover div.header h1:nth-child(3) {
-  transform: rotate(-7deg);
+  transform: rotate(4deg);
 }
+
+.fox-wrapper {
+  transform: scale(0.7, 0.7);
+  position: absolute;
+}
+
+.left {
+  transform: scale(-0.7, 0.7);
+  left: 11px;
+  top: -38px;
+}
+
+.right {
+  top: -38px;
+  left: 379px;
+}
+
+
 
 .fox *, .fox *:after, .fox *:before{
   box-sizing:border-box;
@@ -50,11 +71,6 @@ div.cover div.header h1:nth-child(3) {
   width: 215px;
   height: 275px;
   display: block;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-          transform: translate(-50%,-50%);
 }
 .fox .head{
   width: 184px;
@@ -72,7 +88,7 @@ div.cover div.header h1:nth-child(3) {
   -webkit-transform: rotate(15deg);
 }
 
-.fox:hover .head, .fox:hover .ear{
+.right .fox .head, .right .fox .ear{
   transform: rotate(0);
   -moz-transform: rotate(0);
   -webkit-transform: rotate(0);
@@ -131,7 +147,7 @@ div.cover div.header h1:nth-child(3) {
   -moz-transform: rotate(15deg);
   -webkit-transform: rotate(15deg);
 }
-.fox:hover .ear:nth-child(odd){
+.right .fox .ear:nth-child(odd){
   left: 31px;
 }
 .fox .ear:nth-child(odd) {
@@ -139,7 +155,7 @@ div.cover div.header h1:nth-child(3) {
   left: 48px;
 }
 
-.fox:hover .ear:nth-child(even){
+.right .fox .ear:nth-child(even){
   right: 0;
   top: 0;
 }
@@ -160,7 +176,7 @@ div.cover div.header h1:nth-child(3) {
     top: 165px;
     right: 103px;
 }
-.fox:hover .nose {
+.right .fox .nose {
   top: 168px;
   right: 80px;
 }
