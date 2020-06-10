@@ -1,9 +1,11 @@
-
 .cover {
-  background-color: #e7ecd9;
   width: 594px;
   height: 216px;
   position: relative;
+  background: rgba(176,196,222,0.6) url('/forest.png');
+  background-size: 100% 80%;
+  background-repeat: no-repeat;
+  background-position-y: bottom;
 }
 
 div.cover div.header {
