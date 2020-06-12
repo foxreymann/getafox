@@ -7,6 +7,7 @@ const Icons = ({ }) => {
   return (
     <div className='icon'>
       <Fox genes="icon-fox"/>
+      <div class='icon-overlay' />
     </div>
   )
 }
