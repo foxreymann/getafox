@@ -16,17 +16,18 @@
   border: 10px solid pink;
   margin-left: 140px;
   position: relative;
-  background: blue;
+  background: #BCDD5A;
 }
 
 .icon-overlay {
   width: 256px;
   height: 256px;
   background: transparent;
-  border: 64px solid yellow;
+  border: 64px solid #fff;
   top: -64px;
   left: -64px;
   position: absolute;
+  border-radius: 50%;
 }
 
 div.cover div.header {
@@ -65,8 +66,8 @@ div.cover div.header h1:nth-child(3) {
 
 .icon-fox {
   transform: scale(0.5,0.5);
-  top: 80px;
-  left: 10px;
+  top: -61px;
+  left: -52px;
 }
 
 .left {
