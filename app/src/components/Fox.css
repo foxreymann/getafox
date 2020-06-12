@@ -1,11 +1,20 @@
 .cover {
+  margin-left: 20px;
   width: 594px;
   height: 216px;
   position: relative;
-  background: rgba(176,196,222,0.6) url('/forest.png');
-  background-size: 100% 80%;
+  background: rgba(176,196,242,0.8) url('/forest.png');
+  background-size: 110% 110%;
   background-repeat: no-repeat;
   background-position-y: bottom;
+}
+
+.icon {
+  width: 148px;
+  height: 148px;
+  background: white;
+  border: 10px solid;
+  margin-left: 50px;
 }
 
 div.cover div.header {
@@ -17,8 +26,11 @@ div.cover div.header {
 }
 
 div.cover div.header h1 {
-  font-size: 3.4rem;
+  font-size: 3.7rem;
   margin: 0 0 -10px;
+  color: darkorchid;
+  letter-spacing: .3rem;
+  text-shadow: 2px 2px 20px #eee;
 }
 
 div.cover div.header h1:first-child {
@@ -33,9 +45,16 @@ div.cover div.header h1:nth-child(3) {
   transform: rotate(4deg);
 }
 
+
 .fox-wrapper {
   transform: scale(0.7, 0.7);
   position: absolute;
+}
+
+.icon-fox {
+  transform: scale(0.5,0.5);
+  top: 80px;
+  left: 10px;
 }
 
 .left {

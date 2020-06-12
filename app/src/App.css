@@ -8,16 +8,18 @@ body {
 */
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 .App-header {
   margin: auto;
   text-align: center;
 }
 
 .App-header h1, .cover .header {
-  font-family: 'Monoton', cursive;
-  font-size: 3.5rem;
+  font-family: 'Russo One', cursive;
+  font-size: 5rem;
   padding: 0 5px;
+  font-weight: bold;
+  color: #eee;
 }
 
 .App-header h1:first-child {
