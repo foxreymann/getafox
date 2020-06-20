@@ -224,6 +224,18 @@ class Web3Store {
     }
   }
 
+  cancelAll = async () => {
+    console.log('canceling all')
+    try {
+      await this.auctionInstance.cancelAll({
+        from: this.owner
+      })
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  }
+
   setWeb3 = async () => {
     try {
       if (window.ethereum) {
@@ -344,5 +356,6 @@ export default decorate(Web3Store, {
   auctionInstance: observable,
   web3User: observable,
   owner: observable,
-  mint: action
+  mint: action,
+  cancelAll: action
 });
