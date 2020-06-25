@@ -3,14 +3,16 @@ import { Provider } from "mobx-react";
 import 'mobx-react/batchingForReactDom'
 import stores from "./stores";
 import './App.css';
+import { Container } from 'react-bootstrap';
 
 import TokensList from './components/TokensList'
 import OwnerTools from './components/OwnerTools'
 
+
 function App() {
   return (
     <Provider {...stores}>
-      <div className="App">
+      <div className="App container">
         <header className="App-header my-3">
           <div className="row justify-content-center">
             <h1 className="col-auto">

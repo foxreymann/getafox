@@ -1,7 +1,7 @@
 import React from "react";
 import TokenItem from './TokenItem'
 import { inject, observer } from "mobx-react";
-import { Alert, Container, Row, Col, Spinner } from 'react-bootstrap';
+import { Alert, Row, Col, Spinner } from 'react-bootstrap';
 
 const TokensList = ({ web3Store: { tokens, tokensLoading, tokensForSale, tokensForSaleLoading }, listType }) => {
 
@@ -40,17 +40,15 @@ const TokensList = ({ web3Store: { tokens, tokensLoading, tokensForSale, tokensF
 
   if (!tokensLoading && tokens && tokens.length) {
     return (
-      <Container>
-        <Row>
-          {tokens.map(token => (
-            <Col key={token.tokenId} xl={3} lg={4} md={6} sm={6} xs={12} className='mb-3 p-2' >
-              <TokenItem
-                token={{token}}
-              />
-            </Col>
-          ))}
-        </Row>
-      </Container>
+      <Row>
+        {tokens.map(token => (
+          <Col key={token.tokenId} xl={3} lg={4} md={6} sm={6} xs={12} className='mb-3 p-2' >
+            <TokenItem
+              token={{token}}
+            />
+          </Col>
+        ))}
+      </Row>
     )
   }
 };

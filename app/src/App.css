@@ -6,6 +6,14 @@ body {
   background: url('/leaves.png')
 }
 
+div.container {
+  padding: 0;
+}
+
+div.row {
+  margin: 0;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 .App-header {
   margin: auto;
