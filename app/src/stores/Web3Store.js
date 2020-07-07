@@ -238,13 +238,16 @@ class Web3Store {
 
   setWeb3 = async () => {
     try {
+      console.log(window.ethereum)
       if (window.ethereum) {
+        console.log('window.ethereum in if')
         window.ethereum.autoRefreshOnNetworkChange = false
         this.web3 = new Web3(window.ethereum)
         this.web3User = this.web3.utils.toChecksumAddress(
           (await window.ethereum.enable())[0]
         )
       } else {
+        console.log('no window ethereum')
         this.web3 = new Web3(new Web3.providers.WebsocketProvider(config.noWalletWsProvider))
         this.tokensLoading = false
       }
