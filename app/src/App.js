@@ -36,7 +36,7 @@ function App() {
           <TokensList listType='tokensForSale' />
         </div>
         <footer>
-          &copy; {(new Date().getFullYear())} <a target="_blank" href='https://www.ldnfox.com'>LdnFox</a> & <a target="_blank" href='https://extropy.io/'>Extropy.io</a>
+          &copy; {(new Date().getFullYear())}
         </footer>
       </div>
     </Provider>
